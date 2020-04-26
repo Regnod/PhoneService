@@ -1,0 +1,76 @@
+﻿@model Data.Models.MobilePhoneCallingPlanAssignment
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-black">Create Mobile Phone Calling Plan Assignment </h2>
+<br />
+
+<form method="post" enctype="multipart/form-data">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="PhoneNumber" class="form-control" />
+            </div>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        @* cambio *@
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="CallingPlanId" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <select asp-for="CallingPlanId" class="form-control" asp-items="ViewBag.CallingPlanId"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="CallingPlanAssignmentDateTime" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="CallingPlanAssignmentDateTime" class="form-control" />
+            </div>
+            <span asp-validation-for="CallingPlanAssignmentDateTime" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="MinutesConsumed" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="MinutesConsumed" class="form-control" />
+            </div>
+            <span asp-validation-for="MinutesConsumed" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="MessagesSent" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="MessagesSent" class="form-control" />
+            </div>
+            <span asp-validation-for="MessagesSent" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <div class="row">
+                    <div class="col-2">
+                        <input type="submit" class="btn btn-info" value="Create" />
+                    </div>
+                    <div class="col-6">
+                        <a asp-action="Index" class="btn btn-success">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

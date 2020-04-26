@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Data.Models.CallingPlan>
+@using MVCPhoneServiceWeb.Utils
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-8">
+            <h2 class="text-black">
+                Calling Plan
+            </h2>
+        </div>
+        <div class="col-4 text-right">
+            @if (User.IsInRole(SD.AdminUser))
+            {
+                <p>
+                    <a asp-action="Create" class="btn btn-outline-dark">
+                        <i class="fa fa-plus"></i>
+                        &nbsp; Create New
+                    </a>
+                </p>
+            }
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <form class="col-12 text-right" asp-controller="TotalCost" asp-action="CostCenterExpenseMobile">
+            <div class=" row">
+                <div class="col-11">
+                    @*<label value="PhoneNumber" class="col-form-label">Phone Number</label>
+                        <input type="text" class="rounded" name="PhoneNumber" />
+
+                        <label value="Pin" class="col-form-label">Pin</label>
+                        <input type="text" class="rounded" name="Pin" />
+
+                        <label value="Puk" class="col-form-label">Puk</label>
+                        <input type="text" class="rounded" name="Puk" />*@
+                </div>
+                <div class="col-1">
+                    @*<input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />*@
+                </div>
+            </div>
+        </form>
+    </div>
+    <br />
+
+    <table class="table table-striped border">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CallingPlanId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Minutes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CallingPlanId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Minutes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Messages)
+        </td>   
+        @if (User.IsInRole(SD.AdminUser))
+        {
+            <td style="width:150px">
+                <div class="btn-group" role="group">
+
+                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.CallingPlanId">
+                        <i class="fas fa-edit"></i>
+                    </a>
+
+                    <a class="btn btn-dark" asp-action="Details" asp-route-id="@item.CallingPlanId">
+                        <i class="fas fa-list"></i>
+                    </a>
+
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CallingPlanId">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
+            </td>
+        }
+    </tr>
+        }
+    </table>
+    <div class="row">
+        <div class="col-12 text-right">
+            <a class=" btn btn-success text-white">
+                <i class="fas fa-trash-"></i>
+                Export
+            </a>
+        </div>
+    </div>
+</div>

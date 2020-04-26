@@ -1,0 +1,5 @@
+C:\Users\Richard\source\repos\MVCPhoneService\PDFReader\bin\Debug\netcoreapp3.0\PDFReader.deps.json
+C:\Users\Richard\source\repos\MVCPhoneService\PDFReader\bin\Debug\netcoreapp3.0\PDFReader.dll
+C:\Users\Richard\source\repos\MVCPhoneService\PDFReader\obj\Debug\netcoreapp3.0\PDFReader.csprojAssemblyReference.cache
+C:\Users\Richard\source\repos\MVCPhoneService\PDFReader\obj\Debug\netcoreapp3.0\PDFReader.AssemblyInfoInputs.cache
+C:\Users\Richard\source\repos\MVCPhoneService\PDFReader\obj\Debug\netcoreapp3.0\PDFReader.AssemblyInfo.cs

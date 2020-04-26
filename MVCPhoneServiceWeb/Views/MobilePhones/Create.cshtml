@@ -1,0 +1,49 @@
+﻿@model Data.Models.MobilePhone
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="text-black">Create Mobile Phone </h2>
+<br />
+
+<form method="post" enctype="multipart/form-data">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="IMEI" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="IMEI" class="form-control" />
+            </div>
+            <span asp-validation-for="IMEI" class="text-danger"></span>
+        </div>
+        @* cambio *@
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Modelo" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="Modelo" class="form-control" />
+            </div>
+            <span asp-validation-for="Modelo" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <div class="row">
+                    <div class="col-2">
+                        <input type="submit" class="btn btn-info" value="Create" />
+                    </div>
+                    <div class="col-6">
+                        <a asp-action="Index" class="btn btn-success">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,85 @@
+﻿@model Data.Models.LandlinePhoneCall
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-black">Create Landline Phone Call</h2>
+<br />
+
+<form method="post" enctype="multipart/form-data">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Extension" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="Extension" class="form-control" />
+            </div>
+            <span asp-validation-for="Extension" class="text-danger"></span>
+        </div>
+        @* cambio *@
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="EmployeeId" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <select asp-for="EmployeeId" class="form-control" asp-items="ViewBag.EmployeeId"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="LandlinePhoneCallDateTime" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="LandlinePhoneCallDateTime" class="form-control" />
+            </div>
+            <span asp-validation-for="LandlinePhoneCallDateTime" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="LandlinePhoneCallDuration" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="LandlinePhoneCallDuration" class="form-control" />
+            </div>
+            <span asp-validation-for="LandlinePhoneCallDuration" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="LandlinePhoneCallAddressee" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="LandlinePhoneCallAddressee" class="form-control" />
+            </div>
+            <span asp-validation-for="LandlinePhoneCallAddressee" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="LandlinePhoneCallCost" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="LandlinePhoneCallCost" class="form-control" />
+            </div>
+            <span asp-validation-for="LandlinePhoneCallCost" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <div class="row">
+                    <div class="col-2">
+                        <input type="submit" class="btn btn-info" value="Create" />
+                    </div>
+                    <div class="col-6">
+                        <a asp-action="Index" class="btn btn-success">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

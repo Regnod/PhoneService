@@ -1,0 +1,95 @@
+@model IEnumerable<Data.ViewModels.UserExceededDataPlan>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* <head> *@
+@* <link rel="stylesheet" href="~/css/table.css"> *@
+@* </head> *@
+
+
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-black">
+                Users who have exceeded Data plans
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <form class="col-12 offset-8 text-right" asp-controller="TotalCost" asp-action="CostCenterExpenseMobile">
+            <div class=" row">
+                <div class="col-11">
+                    <label value="Month" class="col-form-label">Month</label>
+                    <input type="text" class="rounded" name="month" />
+
+                    <label value="Year" class="col-form-label">Year</label>
+                    <input type="text" class="rounded" name="year" />
+                </div>
+                <div class="col-1">
+                    <input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <br />
+
+    <table class="table table-striped border">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPlanId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostCenter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NationalDataExceeded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InternationalDataExceeded)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataPlanId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CostCenter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NationalDataExceeded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InternationalDataExceeded)
+                </td>
+                @* <td> *@
+                @*     <a asp-action="Edit" asp-route-id="@item.PhoneNumber">Edit</a> | *@
+                @*     <a asp-action="Details" asp-route-id="@item.PhoneNumber">Details</a> | *@
+                @*     <a asp-action="Delete" asp-route-id="@item.PhoneNumber">Delete</a> *@
+                @* </td> *@
+            </tr>
+        }
+    </table>
+</div>

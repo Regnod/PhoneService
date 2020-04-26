@@ -1,0 +1,44 @@
+﻿@model Data.Models.MobilePhone
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-black">Details Mobile Phone</h2>
+<br />
+<div class="backgroundWhiteBorder row">
+    <div class="col-8">
+        <fieldset disabled style="background-color:white;">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="IMEI" class="custom-label"></label>
+                    @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PhoneNumber)*@
+                    <input type="text" asp-for="IMEI" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Modelo" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="Modelo" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="col-12"></div>
+    <div class="col-8">
+        <div class="col-8 offset-3">
+            @*<partial name="_addCartDetailsAndBactkToList" model="Model.Announce.AnnounceID" />*@
+            <a asp-action="Edit" class="btn btn-info" asp-route-id="@Model.IMEI">Edit</a>
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
+</div>

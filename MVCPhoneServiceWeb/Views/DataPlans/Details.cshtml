@@ -1,0 +1,52 @@
+﻿@model Data.Models.DataPlan
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-black">Details Data Plan</h2>
+<br />
+<div class="backgroundWhiteBorder row">
+    <div class="col-8">
+        <fieldset disabled style="background-color:white;">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="DataPlanId" class="custom-label"></label>
+                    @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PhoneNumber)*@
+                    <input type="text" asp-for="DataPlanId" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="NationalData" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="NationalData" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="InternationalData" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    <input type="text" asp-for="InternationalData" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="col-12"></div>
+    <div class="col-8">
+        <div class="col-8 offset-3">
+            @*<partial name="_addCartDetailsAndBactkToList" model="Model.Announce.AnnounceID" />*@
+            <a asp-action="Edit" class="btn btn-info" asp-route-id="@Model.DataPlanId">Edit</a>
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
+</div>

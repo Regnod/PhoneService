@@ -1,0 +1,69 @@
+@model IEnumerable<Data.ViewModels.TotalCostViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-black">
+                Cost Center Expenses
+            </h2>
+        </div>
+        <div class="row">
+            <form class="col-12 offset-8 text-right" asp-controller="TotalCost" asp-action="CostCenterExpenseMobile">
+                <div class=" row">
+                    <div class="col-11">
+                        <label value="Month" class="col-form-label">Month</label>
+                        <input type="text" class="rounded" name="month" />
+
+                        <label value="Year" class="col-form-label">Year</label>
+                        <input type="text" class="rounded" name="year" />
+                    </div>
+                    <div class="col-1">
+                        <input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+
+    <table class="table table-striped border">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CostCenter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expense)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CostCenter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Expense)
+                </td>
+                @* <td> *@
+                @*     <a asp-action="Edit" asp-route-id="@item.PhoneNumber">Edit</a> | *@
+                @*     <a asp-action="Details" asp-route-id="@item.PhoneNumber">Details</a> | *@
+                @*     <a asp-action="Delete" asp-route-id="@item.PhoneNumber">Delete</a> *@
+                @* </td> *@
+            </tr>
+        }
+    </table>
+<div class="row">
+    <div class="col-11 offset-10">
+        <a class=" btn btn-success text-white">
+            <i class="fas fa-trash-"></i>
+            Export
+        </a>
+    </div>
+    <div class="col-1"></div>
+</div>
+</div>

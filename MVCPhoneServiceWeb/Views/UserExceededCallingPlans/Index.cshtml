@@ -1,0 +1,71 @@
+@model IEnumerable<Data.ViewModels.UserExceededCallingPlan>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* <head> *@
+@* <link rel="stylesheet" href="~/css/table.css"> *@
+@* </head> *@
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-black">
+                Users who have exceeded calling plans
+            </h2>
+        </div>
+    </div>
+    <br />
+
+    <table class="table table-striped border">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlanId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinutesExceeded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MessagesExceeded)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlanId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MinutesExceeded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MessagesExceeded)
+                </td>
+                @* <td> *@
+                @*     <a asp-action="Edit" asp-route-id="@item.PhoneNumber">Edit</a> | *@
+                @*     <a asp-action="Details" asp-route-id="@item.PhoneNumber">Details</a> | *@
+                @*     <a asp-action="Delete" asp-route-id="@item.PhoneNumber">Delete</a> *@
+                @* </td> *@
+            </tr>
+        }
+    </table>
+</div>

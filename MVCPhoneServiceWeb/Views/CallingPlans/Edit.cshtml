@@ -1,0 +1,68 @@
+﻿@model Data.Models.CallingPlan
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-black">Edit Calling Plan</h2>
+<br />
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+    <div class="border backgroundWhite row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @*<input type="hidden" asp-for="CallingPlanId" />*@
+        <div class="col-4 ">
+            <div class="form-group row">
+                <div class="col-4 ">
+
+                    <label asp-for="CallingPlanId" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="CallingPlanId" readonly style="background-color:white;" type="text" class="form-control text-center" />
+                </div>
+                <span asp-validation-for="CallingPlanId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4 ">
+
+                    <label asp-for="Minutes" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Minutes" class="form-control text-center" />
+                </div>
+                <span asp-validation-for="Minutes" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4 ">
+
+                    <label asp-for="Messages" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Messages" class="form-control text-center" />
+                </div>
+                <span asp-validation-for="Messages" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-8 text-left">
+            <div class="col-8 offset-2">
+                <div class="row">
+                    <div class="col-2">
+                        <input type="submit" value="Save" class="btn btn-info" />
+                    </div>
+                    <div class="col-4 ">
+                        <a asp-action="Index" class="btn btn-success ">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

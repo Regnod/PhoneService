@@ -1,0 +1,105 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/media/adrian/02BEB1B2BEB19F1B/MVCPhoneService/MVCPhoneServiceWeb/MVCPhoneServiceWeb.csproj",
+    "projectName": "MVCPhoneServiceWeb",
+    "projectPath": "/media/adrian/02BEB1B2BEB19F1B/MVCPhoneService/MVCPhoneServiceWeb/MVCPhoneServiceWeb.csproj",
+    "outputPath": "/media/adrian/02BEB1B2BEB19F1B/MVCPhoneService/MVCPhoneServiceWeb/obj/",
+    "projectStyle": "PackageReference",
+    "originalTargetFrameworks": [
+      "netcoreapp3.0"
+    ],
+    "sources": {
+      "https://api.nuget.org/v3/index.json": {}
+    },
+    "frameworks": {
+      "netcoreapp3.0": {
+        "projectReferences": {
+          "/media/adrian/02BEB1B2BEB19F1B/MVCPhoneService/Repo/Repo.csproj": {
+            "projectPath": "/media/adrian/02BEB1B2BEB19F1B/MVCPhoneService/Repo/Repo.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp3.0": {
+      "dependencies": {
+        "Chart.Mvc.Core": {
+          "target": "Package",
+          "version": "[1.1.0, )"
+        },
+        "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+          "target": "Package",
+          "version": "[3.0.0, )"
+        },
+        "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+          "target": "Package",
+          "version": "[3.0.0, )"
+        },
+        "Microsoft.AspNetCore.Identity.UI": {
+          "target": "Package",
+          "version": "[3.0.0, )"
+        },
+        "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+          "target": "Package",
+          "version": "[3.0.0, )"
+        },
+        "Microsoft.AspNetCore.Mvc.Razor.ViewCompilation": {
+          "target": "Package",
+          "version": "[2.2.0, )"
+        },
+        "Microsoft.EntityFrameworkCore": {
+          "target": "Package",
+          "version": "[3.1.2, )"
+        },
+        "Microsoft.EntityFrameworkCore.SqlServer": {
+          "target": "Package",
+          "version": "[3.0.0, )"
+        },
+        "Microsoft.EntityFrameworkCore.Tools": {
+          "target": "Package",
+          "version": "[3.0.0, )"
+        },
+        "Microsoft.Extensions.Logging.Debug": {
+          "target": "Package",
+          "version": "[3.0.0, )"
+        },
+        "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+          "target": "Package",
+          "version": "[3.0.0, )"
+        }
+      },
+      "imports": [
+        "net461",
+        "net462",
+        "net47",
+        "net471",
+        "net472",
+        "net48"
+      ],
+      "assetTargetFallback": true,
+      "warn": true,
+      "downloadDependencies": [
+        {
+          "name": "Microsoft.NETCore.App.Ref",
+          "version": "[3.0.0, 3.0.0]"
+        }
+      ],
+      "frameworkReferences": {
+        "Microsoft.AspNetCore.App": {
+          "privateAssets": "none"
+        },
+        "Microsoft.NETCore.App": {
+          "privateAssets": "all"
+        }
+      },
+      "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.0.103/RuntimeIdentifierGraph.json"
+    }
+  }
+}

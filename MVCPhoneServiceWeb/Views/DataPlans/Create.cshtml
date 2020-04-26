@@ -1,0 +1,50 @@
+﻿@model Data.Models.DataPlan
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-black">Create Data Plan</h2>
+<br />
+
+<form method="post" enctype="multipart/form-data">
+    <div class="border backgroundWhite">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="NationalData" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="NationalData" class="form-control" />
+            </div>
+            <span asp-validation-for="NationalData" class="text-danger"></span>
+        </div>
+        @* cambio *@
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="InternationalData" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="InternationalData" class="form-control" />
+            </div>
+            <span asp-validation-for="InternationalData" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <div class="row">
+                    <div class="col-2">
+                        <input type="submit" class="btn btn-info" value="Create" />
+                    </div>
+                    <div class="col-6">
+                        <a asp-action="Index" class="btn btn-success">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
