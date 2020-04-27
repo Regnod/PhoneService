@@ -3310,7 +3310,10 @@
         },
         "runtime": {
           "bin/placeholder/Data.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "Repo/1.0.0": {
         "type": "project",
@@ -3332,7 +3335,10 @@
         },
         "runtime": {
           "bin/placeholder/Repo.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -9975,11 +9981,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService\\MVCPhoneServiceWeb\\MVCPhoneServiceWeb.csproj",
+      "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\MVCPhoneServiceWeb\\MVCPhoneServiceWeb.csproj",
       "projectName": "MVCPhoneServiceWeb",
-      "projectPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService\\MVCPhoneServiceWeb\\MVCPhoneServiceWeb.csproj",
+      "projectPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\MVCPhoneServiceWeb\\MVCPhoneServiceWeb.csproj",
       "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService\\MVCPhoneServiceWeb\\obj\\",
+      "outputPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\MVCPhoneServiceWeb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9995,8 +10001,8 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
-            "C:\\Users\\Richard\\source\\repos\\MVCPhoneService\\Repo\\Repo.csproj": {
-              "projectPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService\\Repo\\Repo.csproj"
+            "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\Repo\\Repo.csproj": {
+              "projectPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\Repo\\Repo.csproj"
             }
           }
         }
