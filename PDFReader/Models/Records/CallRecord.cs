@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PDFReader.Models.REcords
+namespace PDFReader.Models.Records
 {
     public class CallRecord
     {

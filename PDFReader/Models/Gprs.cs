@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PDFReader.Models
 {
-    class Gprs
+    public class Gprs
     {
         public int No { get; set; }
         public bool RoamingGprs { get; set; }
