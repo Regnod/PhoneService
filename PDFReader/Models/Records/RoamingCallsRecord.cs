@@ -14,8 +14,8 @@ namespace PDFReader.Models.Records
         public float OriginadasCost { get; set; }
         public float TotalCost { get; set; }
 
-        public Duration RecibidasDuration { get; set; }
-        public Duration OriginadasDuration { get; set; }
-        public Duration TotalDuration { get; set; }
+        public float RecibidasDuration { get; set; }
+        public float OriginadasDuration { get; set; }
+        public float TotalDuration { get; set; }
     }
 }

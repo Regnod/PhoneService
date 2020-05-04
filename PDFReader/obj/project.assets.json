@@ -5356,11 +5356,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\PDFReader\\PDFReader.csproj",
+      "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\PDFReader.csproj",
       "projectName": "PDFReader",
-      "projectPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\PDFReader\\PDFReader.csproj",
+      "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\PDFReader.csproj",
       "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\PDFReader\\obj\\",
+      "outputPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",

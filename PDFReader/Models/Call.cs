@@ -8,6 +8,8 @@ namespace PDFReader.Models
     {
         public int No { get; set; }
         public bool RoamingCall { get; set; }
+        //only for roaming
+        public string Lugar_Destino { get; set; }
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
         public string E_R { get; set; }

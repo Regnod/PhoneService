@@ -8991,11 +8991,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\Data\\Data.csproj",
+      "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\Data\\Data.csproj",
+      "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj",
       "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\Data\\obj\\",
+      "outputPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",

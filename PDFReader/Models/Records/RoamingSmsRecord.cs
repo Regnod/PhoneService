@@ -11,7 +11,7 @@ namespace PDFReader.Models.Records
         public int TotalSms { get; set; }
 
         public float RecibidasCost { get; set; }
-        public float HorasNoPicoCost { get; set; }
+        public float OriginadasCost { get; set; }
         public float TotalCost { get; set; }
     }
 }

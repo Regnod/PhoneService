@@ -9020,11 +9020,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\Repo\\Repo.csproj",
+      "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\Repo.csproj",
       "projectName": "Repo",
-      "projectPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\Repo\\Repo.csproj",
+      "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\Repo.csproj",
       "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\Repo\\obj\\",
+      "outputPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9040,8 +9040,8 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
-            "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\Data\\Data.csproj": {
-              "projectPath": "C:\\Users\\Richard\\source\\repos\\MVCPhoneService old\\Data\\Data.csproj"
+            "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj"
             }
           }
         }

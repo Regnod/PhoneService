@@ -18,10 +18,10 @@ namespace PDFReader.Models.Records
         public float HorasNoPicoCost { get; set; }
         public float TotalCost { get; set; }
 
-        public Duration ReciveDuration { get; set; }
-        public Duration MadeDuration { get; set; }
-        public Duration HorasPicoDuration { get; set; }
-        public Duration HorasNoPicoDuration { get; set; }
-        public Duration TotalDuration { get; set; }
+        public float ReciveDuration { get; set; }
+        public float MadeDuration { get; set; }
+        public float HorasPicoDuration { get; set; }
+        public float HorasNoPicoDuration { get; set; }
+        public float TotalDuration { get; set; }
     }
 }

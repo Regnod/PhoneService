@@ -5,11 +5,9 @@ using Data;
 using Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Office.Interop.Excel;
+//using Microsoft.Office.Interop.Excel;
 
 
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
 
 namespace MVCPhoneServiceWeb.Controllers
 {

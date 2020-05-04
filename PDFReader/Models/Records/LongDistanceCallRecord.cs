@@ -14,8 +14,8 @@ namespace PDFReader.Models.Records
         public float NacionalCost { get; set; }
         public float TotalCost { get; set; }
 
-        public Duration InternacionalDuration { get; set; }
-        public Duration NacionalDuration { get; set; }
-        public Duration TotalDuration { get; set; }
+        public float InternacionalDuration { get; set; }
+        public float NacionalDuration { get; set; }
+        public float TotalDuration { get; set; }
     }
 }
