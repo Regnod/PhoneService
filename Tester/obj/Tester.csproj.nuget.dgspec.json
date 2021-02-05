@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Richard\\source\\repos\\PhoneService\\Tester\\Tester.csproj": {}
+    "C:\\PhoneService\\PhoneService\\Tester\\Tester.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj": {
+    "C:\\PhoneService\\PhoneService\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\PhoneService\\PhoneService\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj",
-        "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\obj\\",
+        "projectPath": "C:\\PhoneService\\PhoneService\\Data\\Data.csproj",
+        "packagesPath": "C:\\Users\\Andy Castaneda\\.nuget\\packages\\",
+        "outputPath": "C:\\PhoneService\\PhoneService\\Data\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Andy Castaneda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -103,22 +99,18 @@
         }
       }
     },
-    "C:\\Users\\Richard\\source\\repos\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj": {
+    "C:\\PhoneService\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj",
+        "projectUniqueName": "C:\\PhoneService\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj",
         "projectName": "InvoiceStorer",
-        "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj",
-        "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\InvoiceStorer\\obj\\",
+        "projectPath": "C:\\PhoneService\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj",
+        "packagesPath": "C:\\Users\\Andy Castaneda\\.nuget\\packages\\",
+        "outputPath": "C:\\PhoneService\\PhoneService\\InvoiceStorer\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Andy Castaneda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -130,11 +122,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\PDFReader.csproj": {
-                "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\PDFReader.csproj"
+              "C:\\PhoneService\\PhoneService\\PDFReader\\PDFReader.csproj": {
+                "projectPath": "C:\\PhoneService\\PhoneService\\PDFReader\\PDFReader.csproj"
               },
-              "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\Repo.csproj": {
-                "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\Repo.csproj"
+              "C:\\PhoneService\\PhoneService\\Repo\\Repo.csproj": {
+                "projectPath": "C:\\PhoneService\\PhoneService\\Repo\\Repo.csproj"
               }
             }
           }
@@ -175,22 +167,18 @@
         }
       }
     },
-    "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\PDFReader.csproj": {
+    "C:\\PhoneService\\PhoneService\\PDFReader\\PDFReader.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\PDFReader.csproj",
+        "projectUniqueName": "C:\\PhoneService\\PhoneService\\PDFReader\\PDFReader.csproj",
         "projectName": "PDFReader",
-        "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\PDFReader.csproj",
-        "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\obj\\",
+        "projectPath": "C:\\PhoneService\\PhoneService\\PDFReader\\PDFReader.csproj",
+        "packagesPath": "C:\\Users\\Andy Castaneda\\.nuget\\packages\\",
+        "outputPath": "C:\\PhoneService\\PhoneService\\PDFReader\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Andy Castaneda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -237,22 +225,18 @@
         }
       }
     },
-    "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\Repo.csproj": {
+    "C:\\PhoneService\\PhoneService\\Repo\\Repo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\Repo.csproj",
+        "projectUniqueName": "C:\\PhoneService\\PhoneService\\Repo\\Repo.csproj",
         "projectName": "Repo",
-        "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\Repo.csproj",
-        "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\obj\\",
+        "projectPath": "C:\\PhoneService\\PhoneService\\Repo\\Repo.csproj",
+        "packagesPath": "C:\\Users\\Andy Castaneda\\.nuget\\packages\\",
+        "outputPath": "C:\\PhoneService\\PhoneService\\Repo\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Andy Castaneda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -264,8 +248,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj": {
-                "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj"
+              "C:\\PhoneService\\PhoneService\\Data\\Data.csproj": {
+                "projectPath": "C:\\PhoneService\\PhoneService\\Data\\Data.csproj"
               }
             }
           }
@@ -338,22 +322,18 @@
         }
       }
     },
-    "C:\\Users\\Richard\\source\\repos\\PhoneService\\Tester\\Tester.csproj": {
+    "C:\\PhoneService\\PhoneService\\Tester\\Tester.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Tester\\Tester.csproj",
+        "projectUniqueName": "C:\\PhoneService\\PhoneService\\Tester\\Tester.csproj",
         "projectName": "Tester",
-        "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Tester\\Tester.csproj",
-        "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Tester\\obj\\",
+        "projectPath": "C:\\PhoneService\\PhoneService\\Tester\\Tester.csproj",
+        "packagesPath": "C:\\Users\\Andy Castaneda\\.nuget\\packages\\",
+        "outputPath": "C:\\PhoneService\\PhoneService\\Tester\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Andy Castaneda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -365,17 +345,17 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj": {
-                "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj"
+              "C:\\PhoneService\\PhoneService\\Data\\Data.csproj": {
+                "projectPath": "C:\\PhoneService\\PhoneService\\Data\\Data.csproj"
               },
-              "C:\\Users\\Richard\\source\\repos\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj": {
-                "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj"
+              "C:\\PhoneService\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj": {
+                "projectPath": "C:\\PhoneService\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj"
               },
-              "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\PDFReader.csproj": {
-                "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\PDFReader.csproj"
+              "C:\\PhoneService\\PhoneService\\PDFReader\\PDFReader.csproj": {
+                "projectPath": "C:\\PhoneService\\PhoneService\\PDFReader\\PDFReader.csproj"
               },
-              "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\Repo.csproj": {
-                "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\Repo.csproj"
+              "C:\\PhoneService\\PhoneService\\Repo\\Repo.csproj": {
+                "projectPath": "C:\\PhoneService\\PhoneService\\Repo\\Repo.csproj"
               }
             }
           }
