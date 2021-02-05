@@ -1,78 +1,174 @@
 ﻿@model IEnumerable<Data.Models.DataPlan>
-    @using MVCPhoneServiceWeb.Utils
+@using MVCPhoneServiceWeb.Utils
 
-    @{
-        ViewData["Title"] = "Index";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-    <div class="border backgroundWhite">
-        <div class="row">
-            <div class="col-8">
-                <h2 class="text-black">
-                    Data Plan
-                </h2>   
-            </div>
-            <div class="col-4 text-right">
-                @if (User.IsInRole(SD.AdminUser))
-                {
-                    <p>
-                        <a asp-action="Create" class="btn btn-outline-dark">
-                            <i class="fa fa-plus"></i>
-                            &nbsp; Create New
-                        </a>
-                    </p>
-                }
-            </div>
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-8">
+            <h2 class="text-black">
+                Data Plan
+            </h2>
         </div>
-        <br />
-        <div class="row">
-            <form class="col-12 text-right" asp-controller="TotalCost" asp-action="CostCenterExpenseMobile">
-                <div class=" row">
-                    <div class="col-11">
-                        @*<label value="PhoneNumber" class="col-form-label">Phone Number</label>
-                            <input type="text" class="rounded" name="PhoneNumber" />
-
-                            <label value="Pin" class="col-form-label">Pin</label>
-                            <input type="text" class="rounded" name="Pin" />
-
-                            <label value="Puk" class="col-form-label">Puk</label>
-                            <input type="text" class="rounded" name="Puk" />*@
-                    </div>
-                    <div class="col-1">
-                        @*<input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />*@
-                    </div>
-                </div>
-            </form>
+        <div class="col-4 text-right">
+            @if (User.IsInRole(SD.AdminUser))
+            {
+                <p>
+                    <a asp-action="Create" class="btn btn-outline-dark">
+                        <i class="fa fa-plus"></i>
+                        &nbsp; Create New
+                    </a>
+                </p>
+            }
         </div>
+    </div>
+    <br />
+    <form method="post" asp-action="Index" enctype="multipart/form-data">
+        @{
+            Tuple<bool, string>[] show = (Tuple<bool, string>[])ViewData["columns"];
+        }
+        <input type="hidden" name="cpage" value="@ViewData["page"]" />
+        <a class="btn btn-outline-dark dropdown-toggle" href="#" id="navbarDropDownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Columns
+        </a>
+        <div id="checklist" name="CheckList" class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+            @if (show[0].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="dPCheck" />  @Html.DisplayNameFor(model => model.DataPlanId)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="dPCheck" />  @Html.DisplayNameFor(model => model.DataPlanId)</li>
+            }
+            @if (show[1].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="dataCheck" />  @Html.DisplayNameFor(model => model.Data)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="dataCheck" />  @Html.DisplayNameFor(model => model.Data)</li>
+            }
+            @if (show[2].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="dataCheck" />  @Html.DisplayNameFor(model => model.Cost)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="dataCheck" />  @Html.DisplayNameFor(model => model.Cost)</li>
+            }
+        </div>
+        <input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />
         <br />
-
+        <br />
         <table class="table table-striped border">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataPlanId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NationalData)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.InternationalData)
-                </th>
-                <th></th>
+            <tr class="text-center">
+                @if (show[0].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataPlanId)
+                    </th>
+                }
+                @if (show[1].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Data)
+                    </th>
+                }
+                @if (show[2].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Data)
+                    </th>
+                }
+                @if (show[0].Item1 || show[1].Item1 || show[2].Item1)
+                {
+                    <th></th>
+                }
+            </tr>
+            <tr class="text-center">
+                @if (show[0].Item1)
+                {
+                    if (show[0].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="@show[0].Item2" name="dataPlanId" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control" name="dataPlanId" />
+                        </th>
+                    }
+                }
+                @if (show[1].Item1)
+                {
+                    if (show[1].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="@show[1].Item2" name="data" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control" name="data" />
+                        </th>
+                    }
+                }
+                @if (show[2].Item1)
+                {
+                    <th>
+                        <div class="input-group">
+                            @if (show[2].Item2 != null)
+                            {
+                                <input class="border rounded form-control" value="@show[2].Item2" name="minCost" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control" name="minCost" />
+                            }
+                            @if (show[3].Item2 != null)
+                            {
+                                <input class="border rounded form-control" value="@show[3].Item2" name="maxCost" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control" name="maxCost" />
+                            }
+                        </div>
+                    </th>
+                }
+                @if (show[0].Item1 || show[1].Item1 || show[1].Item1)
+                {
+                    <th></th>
+                }
             </tr>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataPlanId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NationalData)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InternationalData)
-                    </td>
-                    @if (User.IsInRole(SD.AdminUser))
+                    @if (show[0].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataPlanId)
+                        </td>
+                    }
+                    @if (show[1].Item1)
+                    {
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Data)
+                        </td>
+                    }
+                    @if (show[2].Item1)
+                    {
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Cost)
+                        </td>
+                    }
+                    @if (User.IsInRole(SD.AdminUser) && (show[0].Item1 || show[1].Item1 || show[2].Item1))
                     {
                         <td style="width:150px">
                             <div class="btn-group" role="group">
@@ -91,9 +187,32 @@
                             </div>
                         </td>
                     }
+                    else
+                    {
+                        <td></td>
+                    }
                 </tr>
             }
         </table>
+        <div class="row">
+            <nav aria-label="Page navigation example">
+                Page @((int)ViewData["page"] + 1)
+                <ul class="pagination">
+                    <li class="page-item">
+                        <input class="btn btn-outline-dark col-form-label" type="submit" value="Previous" name="previous" />
+                    </li>
+                    @for (int i = (20 * (int)ViewData["mult"]) + 1; i <= ((int)ViewData["mult"] * 20 + (int)ViewData["top"]); i++)//(int)ViewData["count"]; i++)
+                    {
+                        <li class="page-item">
+                            <input class="btn btn-outline-dark col-form-label" type="submit" value="@i" name="page" />
+                        </li>
+                    }
+                    <li class="page-item">
+                        <input class="btn btn-outline-dark col-form-label" type="submit" value="Next" name="next" />
+                    </li>
+                </ul>
+            </nav>
+        </div>
         <div class="row">
             <div class="col-12 text-right">
                 <a class=" btn btn-success text-white">
@@ -102,4 +221,5 @@
                 </a>
             </div>
         </div>
-    </div>
+    </form>
+</div>

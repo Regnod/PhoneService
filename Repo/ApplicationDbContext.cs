@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System;
 using System.IO;
-using Data;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -9,17 +7,19 @@ using Microsoft.Extensions.Configuration;
 
 namespace Repo
 {
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext> 
-    { 
-        public ApplicationDbContext CreateDbContext(string[] args) 
-        { 
-            IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(@Directory.GetCurrentDirectory() + "/../MVCPhoneServiceWeb/appsettings.json").Build(); 
-            var builder = new DbContextOptionsBuilder<ApplicationDbContext>(); 
-            var connectionString = configuration.GetConnectionString("DefaultConnection"); 
-            builder.UseSqlServer(connectionString); 
-            return new ApplicationDbContext(builder.Options); 
-        } 
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+    {
+        public ApplicationDbContext CreateDbContext(string[] args)
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile(@Directory.GetCurrentDirectory() + "/../MVCPhoneServiceWeb/appsettings.json").Build();
+            var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            builder.UseSqlServer(connectionString);
+            return new ApplicationDbContext(builder.Options);
+        }
     }
+
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<MobilePhone> MobilePhones { get; set; }
@@ -30,17 +30,54 @@ namespace Repo
         public DbSet<MobilePhoneEmployee> MobilePhoneEmployees { get; set; }
         public DbSet<PhoneLineEmployee> PhoneLineEmployees { get; set; }
         public DbSet<MobilePhoneCall> MobilePhoneCalls { get; set; }
-        public DbSet<MobilePhoneDataPlanAssignment> MobilePhoneDataPlanAssignments { get; set; }
-        public DbSet<MobilePhoneCallingPlanAssignment> MobilePhoneCallingPlanAssignments { get; set; }
+        public DbSet<DataPlanAssignment> DataPlanAssignments { get; set; }
+        public DbSet<CallingPlanAssignment> CallingPlanAssignments { get; set; }
         public DbSet<LandlinePhoneCall> LandLinePhoneCalls { get; set; }
-        
+        public DbSet<CostCenter> CostCenters { get; set; }
+        public DbSet<GPRS> GPRSs { get; set; }
+        public DbSet<SMS> SMS { get; set; }
+        public DbSet<PhoneLineSummary> PhoneLineSummaries { get; set; }
+        public DbSet<SMSPlan> SmsPlans { get; set; }
+        public DbSet<SMSPlanAssignment> SmsPlanAssignments { get; set; }
+        public DbSet<Management> Managements { get; set; }
+
+        public DbSet<Bill> Bills { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-             base.OnModelCreating(builder);
+            base.OnModelCreating(builder);
+            builder.Entity<SMSPlan>().HasKey(m => m.SMSPlanId);
+            builder.Entity<SMSPlan>().Property(m => m.SMSPlanId).ValueGeneratedNever();
+            builder.Entity<Bill>().Property(m => m.Number).ValueGeneratedNever();
+            //builder.Entity<Management>().HasKey(m => m.ManagementId);
+            //builder.Entity<Management>().Property(m => m.ManagementId).ValueGeneratedNever();
+            builder.Entity<MobilePhone>().HasKey(m => m.IMEI);
+            builder.Entity<MobilePhone>().Property(m => m.IMEI).ValueGeneratedNever();
+            builder.Entity<PhoneLine>().HasKey(m => m.PhoneNumber);
+            builder.Entity<PhoneLine>().Property(m => m.PhoneNumber).ValueGeneratedNever();
+            builder.Entity<CostCenter>().HasKey(a => a.Code);
+            builder.Entity<CostCenter>().Property(m => m.Code).ValueGeneratedNever();
+
+
+            builder.Entity<PhoneLineSummary>().HasKey(a => new { a.PhoneNumber, a.Month, a.Year });
+            builder.Entity<PhoneLineSummary>().HasOne(a => a.PhoneLine).WithMany(a => a.PhoneLineSummaries)
+                .HasForeignKey(a => a.PhoneNumber);
+
+
+            builder.Entity<SMS>().HasKey(m => m.SMSId);
+            builder.Entity<SMS>().HasOne(a => a.PhoneLine).WithMany(a => a.SMSs).HasForeignKey(a => a.PhoneNumber);
+
+            builder.Entity<CostCenter>().HasOne(a => a.Management).WithMany(a => a.CostCenters);
+
+            builder.Entity<Employee>().HasKey(a => a.EmployeeId);
+            builder.Entity<Employee>().HasOne(a => a.CostCenter).WithMany(a => a.Employees)
+                .HasForeignKey(a => a.CostCenterCode);
+
             builder.Entity<MobilePhoneEmployee>()
                 .HasKey(a => a.IMEI);
             builder.Entity<MobilePhoneEmployee>()
@@ -48,10 +85,10 @@ namespace Repo
                 .WithMany(a => a.MobilePhoneEmployee)
                 .HasForeignKey(b => b.IMEI);
             builder.Entity<MobilePhoneEmployee>()
-            .HasOne(a => a.Employee)
-            .WithMany(a => a.MobilePhoneEmployees)
-            .HasForeignKey(a => a.EmployeeId);
-        
+                .HasOne(a => a.Employee)
+                .WithMany(a => a.MobilePhoneEmployees)
+                .HasForeignKey(a => a.EmployeeId);
+
             builder.Entity<PhoneLineEmployee>()
                 .HasKey(a => a.PhoneNumber);
             builder.Entity<PhoneLineEmployee>()
@@ -62,48 +99,54 @@ namespace Repo
                 .HasOne(a => a.Employee)
                 .WithMany(a => a.PhoneLineEmployees)
                 .HasForeignKey(a => a.EmployeeId);
-        
+
             builder.Entity<MobilePhoneCall>()
-                .HasKey(a => new {a.PhoneNumber, a.IMEI, a.DateTime});
+                .HasKey(a => a.MobilePhoneCallId);
             builder.Entity<MobilePhoneCall>()
                 .HasOne(a => a.PhoneLine)
                 .WithMany(a => a.MobilePhoneCalls)
                 .HasForeignKey(a => a.PhoneNumber);
-            builder.Entity<MobilePhoneCall>()
-                .HasOne(a => a.MobilePhone)
-                .WithMany(a => a.MobilePhoneCalls)
-                .HasForeignKey(a => a.IMEI);
-        
-            builder.Entity<MobilePhoneDataPlanAssignment>()
-                .HasKey(a => new {a.PhoneNumber, a.DataPlanAssignmentDateTime, a.DataPlanId});
-            builder.Entity<MobilePhoneDataPlanAssignment>()
+
+
+            builder.Entity<SMSPlanAssignment>()
+                .HasKey(a => new { a.PhoneNumber, a.Year, a.Month });
+            builder.Entity<SMSPlanAssignment>()
                 .HasOne(a => a.PhoneLine)
-                .WithMany(a => a.MobilePhoneDataPlanAssignments)
+                .WithMany(a => a.SmsPlanAssignments)
                 .HasForeignKey(a => a.PhoneNumber);
-            builder.Entity<MobilePhoneDataPlanAssignment>()
+            builder.Entity<SMSPlanAssignment>()
+                .HasOne(a => a.SmsPlan)
+                .WithMany(a => a.SmsPlanAssignments)
+                .HasForeignKey(a => a.SMSPlanId);
+
+            builder.Entity<DataPlanAssignment>()
+                .HasKey(a => new { a.PhoneNumber, a.Year, a.Month, a.DataPlanId });
+            builder.Entity<DataPlanAssignment>()
+                .HasOne(a => a.PhoneLine)
+                .WithMany(a => a.DataPlanAssignments)
+                .HasForeignKey(a => a.PhoneNumber);
+            builder.Entity<DataPlanAssignment>()
                 .HasOne(a => a.DataPlan)
-                .WithMany(a => a.MobilePhoneDataPlanAssignments)
+                .WithMany(a => a.DataPlanAssignments)
                 .HasForeignKey(a => a.DataPlanId);
 
-            builder.Entity<MobilePhoneCallingPlanAssignment>()
-                .HasKey(a => new {a.PhoneNumber, a.CallingPlanAssignmentDateTime, a.CallingPlanId});
-            builder.Entity<MobilePhoneCallingPlanAssignment>()
+            builder.Entity<CallingPlanAssignment>()
+                .HasKey(a => new { a.PhoneNumber, a.Year, a.Month, a.CallingPlanId });
+            builder.Entity<CallingPlanAssignment>()
                 .HasOne(a => a.PhoneLine)
-                .WithMany(a => a.MobilePhoneCallingPlanAssignments)
+                .WithMany(a => a.CallingPlanAssignments)
                 .HasForeignKey(a => a.PhoneNumber);
-            builder.Entity<MobilePhoneCallingPlanAssignment>()
+            builder.Entity<CallingPlanAssignment>()
                 .HasOne(a => a.CallingPlan)
-                .WithMany(a => a.MobilePhoneCallingPlanAssignments)
+                .WithMany(a => a.CallingPlanAssignments)
                 .HasForeignKey(a => a.CallingPlanId);
 
             builder.Entity<LandlinePhoneCall>()
-                .HasKey(a => new {a.Extension, a.LandlinePhoneCallDateTime, a.EmployeeId});
+                .HasKey(a => new { a.Extension, LandlinePhoneCallDateTime = a.DateTime, a.EmployeeId });
             builder.Entity<LandlinePhoneCall>()
                 .HasOne(a => a.Employee)
                 .WithMany(a => a.LandlinePhoneCalls)
                 .HasForeignKey(a => a.EmployeeId);
-            
-            
         }
     }
 }

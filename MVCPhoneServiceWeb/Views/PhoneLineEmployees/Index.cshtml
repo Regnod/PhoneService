@@ -26,83 +26,151 @@
         </div>
     </div>
     <br />
-    <div class="row">
-        <form class="col-12 text-right" asp-controller="TotalCost" asp-action="CostCenterExpenseMobile">
-            <div class=" row">
-                <div class="col-11">
-                    @*<label value="PhoneNumber" class="col-form-label">Phone Number</label>
-                        <input type="text" class="rounded" name="PhoneNumber" />
-
-                        <label value="Pin" class="col-form-label">Pin</label>
-                        <input type="text" class="rounded" name="Pin" />
-
-                        <label value="Puk" class="col-form-label">Puk</label>
-                        <input type="text" class="rounded" name="Puk" />*@
-                </div>
-                <div class="col-1">
-                    @*<input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />*@
-                </div>
-            </div>
-        </form>
-    </div>
     <br />
-
-    <table class="table table-striped border">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneLine.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee.EmployeeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee.EmployeeName)
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
+    <form method="post" asp-action="Index" enctype="multipart/form-data">
+        @{
+            Tuple<bool, string>[] show = (Tuple<bool, string>[])ViewData["columns"];
+        }
+        <input type="hidden" name="cpage" value="@ViewData["page"]" />
+        <a class="btn btn-outline-dark dropdown-toggle" href="#" id="navbarDropDownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Columns
+        </a>
+        <div id="checklist" class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+            @if (show[0].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="phoneNumberCheck" />  @Html.DisplayNameFor(model => model.PhoneNumber)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="phoneNumberCheck" />  @Html.DisplayNameFor(model => model.PhoneNumber)</li>
+            }
+            @if (show[1].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="employeeNameCheck" />  @Html.DisplayNameFor(model => model.Employee.Name)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="employeeNameCheck" />  @Html.DisplayNameFor(model => model.Employee.Name)</li>
+            }
+        </div>
+        <input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />
+        <br />
+        <br />
+        <table class="table table-striped border text-center">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneLine.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Employee.EmployeeId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
-                </td>
-                @if (User.IsInRole(SD.AdminUser))
+                @if (show[0].Item1)
                 {
-                    <td style="width:150px">
-                        <div class="btn-group" role="group">
-                            <a class=" btn btn-info text-white" asp-action="Edit" asp-route-id="@item.PhoneNumber">
-                                <i class="fas fa-edit"></i>
-                                @*Edit*@
-                                @*<span class="glyphicon glyphicon-search" aria-hidden="true"></span>*@
-                            </a>
-
-                            <a class=" btn btn-dark text-white" asp-action="Details" asp-route-id="@item.PhoneNumber">
-                                <i class="fas fa-list"></i>
-                                @*Details*@
-                            </a>
-
-                            <a class=" btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.PhoneNumber">
-                                <i class="fas fa-trash-alt"></i>
-                                @*Delete*@
-                            </a>
-                        </div>
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </th>
+                }
+                @if (show[1].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Employee.Name)
+                    </th>
+                }
+                @if (show[0].Item1 || show[1].Item1)
+                {
+                    <th></th>
                 }
             </tr>
-        }
-    </table>
-    <div class="row">
-        <div class="col-12 text-right">
-            <a class=" btn btn-success text-white">
-                <i class="fas fa-trash-"></i>
-                Export
-            </a>
+            <tr>
+                @if (show[0].Item1)
+                {
+                    if (show[0].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="@show[0].Item2" name="PhoneNumber" />
+                        </th>
+                    }
+                    <th>
+                        <input class="border rounded form-control" name="PhoneNumber" />
+                    </th>
+                }
+                @if (show[1].Item1)
+                {
+                    if (show[1].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="@show[1].Item2" name="name" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control" name="name" />
+                        </th>
+                    }
+                }
+                @if (show[0].Item1 || show[1].Item1)
+                {
+                    <th></th>
+                }
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @if (show[0].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                    }
+                    @if (show[1].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Employee.Name)
+                        </td>
+                    }
+                    @if (User.IsInRole(SD.AdminUser) && (show[0].Item1 || show[1].Item1))
+                    {
+                        <td style="width:150px">
+                            <div class="btn-group" role="group">
+
+                                <a class=" btn btn-info text-white" asp-action="Edit" asp-route-id="@item.PhoneNumber">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+
+                                <a class=" btn btn-dark text-white" asp-action="Details" asp-route-id="@item.PhoneNumber">
+                                    <i class="fas fa-list"></i>
+                                </a>
+
+                                <a class=" btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.PhoneNumber">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+        <div class="row">
+            <nav aria-label="Page navigation example">
+                Page @((int)ViewData["page"] + 1)
+                <ul class="pagination">
+                    <li class="page-item">
+                        <input class="btn btn-outline-dark col-form-label" type="submit" value="Previous" name="previous" />
+                    </li>
+                    @for (int i = (20 * (int)ViewData["mult"]) + 1; i <= ((int)ViewData["mult"] * 20 + (int)ViewData["top"]); i++)//(int)ViewData["count"]; i++)
+                    {
+                        <li class="page-item">
+                            <input class="btn btn-outline-dark col-form-label" type="submit" value="@i" name="page" />
+                        </li>
+                    }
+                    <li class="page-item">
+                        <input class="btn btn-outline-dark col-form-label" type="submit" value="Next" name="next" />
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-12 text-right">
+                <a class=" btn btn-success text-white">
+                    <i class="fas fa-trash-"></i>
+                    Export
+                </a>
+            </div>
+        </div>
+    </form>
 </div>

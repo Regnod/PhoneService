@@ -1,0 +1,158 @@
+﻿@model Data.Models.SMS
+@using MVCPhoneServiceWeb.Utils;
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-black">Details Message</h2>
+<br />
+<div class="backgroundWhiteBorder row">
+    <div class="col-8">
+        <fieldset disabled style="background-color:white;">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="PhoneNumber" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    <input type="text" asp-for="PhoneNumber" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="DateTime" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    <input type="text" asp-for="DateTime" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="E_R" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    <input type="text" asp-for="E_R" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Total" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    <input type="text" asp-for="Total" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Location" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    <input type="text" asp-for="Location" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Destination" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    <input type="text" asp-for="Destination" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Roaming" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    <input type="checkbox" asp-for="Roaming" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="col-12"></div>
+    <div class="col-8">
+        <div class="col-8 offset-3">
+            <a asp-action="Edit" class="btn btn-info" asp-route-imei="" asp-route-id="@Model.SMSId">Edit</a>
+            <a asp-action="Index" asp-all-route-data="@SD.Sms_params" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
+</div>
+@*<h1>Details</h1>
+
+<div>
+    <h4>SMS</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneLine)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneLine.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.E_R)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.E_R)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Destination)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Destination)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LD)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LD)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Charge)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Charge)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Roaming)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Roaming)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SMSId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@

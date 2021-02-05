@@ -1,5 +1,5 @@
 ﻿@model Data.Models.MobilePhoneCall
-
+@using MVCPhoneServiceWeb.Utils;
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,9 +11,8 @@
 <form method="post" asp-action="Edit" enctype="multipart/form-data">
     <div class="border backgroundWhite row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @*<input type="hidden" asp-for="PhoneNumber" />
-            <input type="hidden" asp-for="IMEI" />
-            <input type="hidden" asp-for="DateTime" />*@
+            <input type="hidden" asp-for="PhoneNumber" />
+            <input type="hidden" asp-for="DateTime" />
         <div class="col-5 ">
             <div class="form-group row">
                 <div class="col-4 ">
@@ -23,16 +22,6 @@
                     <input type="text" asp-for="PhoneNumber" readonly style="background-color:white;" class="form-control text-center" />
                 </div>
             </div>
-
-            <div class="form-group row">
-                <div class="col-4 ">
-                    <label asp-for="IMEI" class="control-label"></label>
-                </div>
-                <div class="col-8">
-                    <input type="text" asp-for="IMEI" readonly style="background-color:white;" class="form-control text-center" />
-                </div>
-            </div>
-
             <div class="form-group row">
                 <div class="col-4 ">
                     <label asp-for="DateTime" class="control-label"></label>
@@ -44,32 +33,32 @@
 
             <div class="form-group row">
                 <div class="col-4 ">
-                    <label asp-for="MobilePhoneCallAddressee" class="control-label"></label>
+                    <label asp-for="Addressee" class="control-label"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="MobilePhoneCallAddressee" class="form-control text-center" />
+                    <input asp-for="Addressee" class="form-control text-center" />
                 </div>
-                <span asp-validation-for="MobilePhoneCallAddressee" class="text-danger"></span>
+                <span asp-validation-for="Addressee" class="text-danger"></span>
             </div>
 
             <div class="form-group row">
                 <div class="col-4 ">
 
-                    <label asp-for="MobilePhoneCallDuration" class="control-label"></label>
+                    <label asp-for="Duration" class="control-label"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="MobilePhoneCallDuration" class="form-control text-center" />
+                    <input asp-for="Duration" class="form-control text-center" />
                 </div>
-                <span asp-validation-for="MobilePhoneCallDuration" class="text-danger"></span>
+                <span asp-validation-for="Duration" class="text-danger"></span>
             </div>
             <div class="form-group row">
                 <div class="col-4 ">
-                    <label asp-for="MobilePhoneCallCost" class="control-label"></label>
+                    <label asp-for="TotalCost" class="control-label"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="MobilePhoneCallCost" class="form-control text-center" />
+                    <input asp-for="TotalCost" class="form-control text-center" />
                 </div>
-                <span asp-validation-for="MobilePhoneCallCost" class="text-danger"></span>
+                <span asp-validation-for="TotalCost" class="text-danger"></span>
             </div>
         </div>
         <div class="col-4">
@@ -81,7 +70,7 @@
                         <input type="submit" value="Save" class="btn btn-info" />
                     </div>
                     <div class="col-4 ">
-                        <a asp-action="Index" class="btn btn-success ">Back to List</a>
+                        <a asp-action="Index" asp-all-route-data="@SD.MobilePhoneCalls_params" class="btn btn-success ">Back to List</a>
                     </div>
                 </div>
             </div>

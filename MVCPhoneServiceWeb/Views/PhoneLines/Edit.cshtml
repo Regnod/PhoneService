@@ -1,5 +1,5 @@
 ﻿@model Data.Models.PhoneLine
-
+@using MVCPhoneServiceWeb.Utils;
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,17 +13,12 @@
 <form method="post" asp-action="Edit" enctype="multipart/form-data">
     <div class="border backgroundWhite row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-        @*<input type="hidden" asp-for="PhoneNumber" />*@
-
         <div class="col-4 ">
             <div class="form-group row">
                 <div class="col-4">
                     <label asp-for="PhoneNumber" class="custom-label"></label>
-                    @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
                 </div>
                 <div class="col-8">
-                    @*@Html.DisplayFor(model => model.PhoneNumber)*@
                     <input asp-for="PhoneNumber" style="background-color:white;" class="form-control text-center" />
                 </div>
             </div>
@@ -55,7 +50,7 @@
                         <input type="submit" value="Save" class="btn btn-info" />
                     </div>
                     <div class="col-4 ">
-                        <a asp-action="Index" class="btn btn-success ">Back to List</a>
+                        <a asp-action="Index" asp-all-route-data="@SD.PhoneLines_params" class="btn btn-success ">Back to List</a>
                     </div>
                 </div>
             </div>

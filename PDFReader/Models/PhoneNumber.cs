@@ -17,9 +17,12 @@ namespace PDFReader.Models
         
         public string Number { get; set; }
         public bool HasDetails { get; set; }
+        public long MvcApnUses { get; set; }
+        public long MvcApnBytes { get; set; }
         public List<Call> Calls { get; set; }
         public List<Sms> Sms { get; set; }
         public List<Gprs> Gprs { get; set; }
+        public List<string> InternationalSmsNumbers { get; set; }
 
         // data
         public string Contract { get; set; }

@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\InvoiceStorer\InvoiceStorer.csproj" />
     <ProjectReference Include="..\PDFReader\PDFReader.csproj" />
+    <ProjectReference Include="..\Repo\Repo.csproj" />
   </ItemGroup>
 
 </Project>

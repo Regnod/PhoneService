@@ -9,6 +9,8 @@ using Data.ViewModels;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.EntityFrameworkCore;
+using MVCPhoneServiceWeb.Utils;
+using Repo;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
@@ -23,105 +25,113 @@ namespace MVCPhoneServiceWeb.Controllers
 
         public async Task<IActionResult> CostCenterExpenseLandline(string month, string year)
         {
-            int _month = Utils.Utils.IntTryParse(month);
-            int _year = Utils.Utils.IntTryParse(year);
-            var join =await  _context.Employees.Join(
-                _context.LandLinePhoneCalls,
-                a => a.EmployeeId,
-                b => b.EmployeeId,
-                (a, b) => new
-                {
-                    CostCenter = a.CostCenter,
-                    Expense = b.LandlinePhoneCallCost,
-                    Date = b.LandlinePhoneCallDateTime
-                }).ToListAsync();
-            
-            if (_month != -1 && _year != 1)
+            // int _month = Utils.Utils.IntTryParse(month);
+            // int _year = Utils.Utils.IntTryParse(year);
+            // var join =await  _context.Employees.Join(
+            //     _context.LandLinePhoneCalls,
+            //     a => a.EmployeeId,
+            //     b => b.EmployeeId,
+            //     (a, b) => new
+            //     {
+            //         CostCenter = a.CostCenter,
+            //         Expense = b.LandlinePhoneCallCost,
+            //         Date = b.LandlinePhoneCallDateTime
+            //     }).ToListAsync();
+            //
+            // if (_month != -1 && _year != 1)
+            // {
+            //     join = join.Where(a => a.Date.Year == _year && a.Date.Month == _month).ToList();
+            // }
+            try
             {
-                join = join.Where(a => a.Date.Year == _year && a.Date.Month == _month).ToList();
+                Seed.PopulateDatabase(_context);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                throw;
             }
             List<TotalCostViewModel> viewModel = new List<TotalCostViewModel>();
-            if (!join.Any()) return View(viewModel);
-            
-            Dictionary<string,int> costCenterExpenses = new Dictionary<string, int>();
-            foreach (var item in join)
-            {
-                int expenses;
-                if (costCenterExpenses.TryGetValue(item.CostCenter, out expenses))
-                {
-                    costCenterExpenses[item.CostCenter] = expenses + item.Expense;
-                }
-                else
-                {
-                    costCenterExpenses.Add(item.CostCenter, item.Expense);
-                }
-            }
-
-            foreach (var (key, value) in costCenterExpenses)
-            {
-                viewModel.Add(new TotalCostViewModel(){CostCenter = key,Expense = value});
-            }
-
+            // if (!join.Any()) return View(viewModel);
+            //
+            // Dictionary<string,int> costCenterExpenses = new Dictionary<string, int>();
+            // foreach (var item in join)
+            // {
+            //     int expenses;
+            //     if (costCenterExpenses.TryGetValue(item.CostCenterCode, out expenses))
+            //     {
+            //         costCenterExpenses[item.CostCenter] = expenses + item.Expense;
+            //     }
+            //     else
+            //     {
+            //         costCenterExpenses.Add(item.CostCenter, item.Expense);
+            //     }
+            // }
+            //
+            // foreach (var (key, value) in costCenterExpenses)
+            // {
+            //     viewModel.Add(new TotalCostViewModel(){CostCenter = key,Expense = value});
+            // }
             return View(viewModel);
         }
 
-        public async  Task<IActionResult> CostCenterExpenseMobile(string month, string year)
+        public async Task<IActionResult> CostCenterExpenseMobile(string month, string year)
         {
-            int _month = Utils.Utils.IntTryParse(month);
-            int _year = Utils.Utils.IntTryParse(year);
-
-            var join =await _context.MobilePhoneCalls.Join(
-                _context.PhoneLineEmployees,
-                a => a.PhoneNumber,
-                b => b.PhoneNumber,
-                (a, b) => new
-                {
-                    EmployeeId = b.EmployeeId,
-                    MobilePhoneCallCost = a.MobilePhoneCallCost,
-                    Date = a.DateTime
-                }).ToListAsync();
-            
-            var join2 =  join.Join(
-                await _context.Employees.ToListAsync(),
-                a => a.EmployeeId,
-                b => b.EmployeeId,
-                (a, b) => new
-                {
-                    CostCenter = b.CostCenter,
-                    Expense = a.MobilePhoneCallCost,
-                    Date = a.Date
-                });
-            
-            if (_month != -1)
-            {
-                join2 = join2.Where(a => a.Date.Month == _month);
-            }
-            if (_year != -1)
-            {
-                join2 = join2.Where(a => a.Date.Year == _year);
-            }
-            
+            // int _month = Utils.Utils.IntTryParse(month);
+            // int _year = Utils.Utils.IntTryParse(year);
+            //
+            // var join =await _context.MobilePhoneCalls.Join(
+            //     _context.PhoneLineEmployees,
+            //     a => a.PhoneNumber,
+            //     b => b.PhoneNumber,
+            //     (a, b) => new
+            //     {
+            //         EmployeeId = b.EmployeeId,
+            //         Cost = a.Cost,
+            //         Date = a.DateTime
+            //     }).ToListAsync();
+            //
+            // var join2 =  join.Join(
+            //     await _context.Employees.ToListAsync(),
+            //     a => a.EmployeeId,
+            //     b => b.EmployeeId,
+            //     (a, b) => new
+            //     {
+            //         CostCenter = b.CostCenter,
+            //         Expense = a.Cost,
+            //         Date = a.Date
+            //     });
+            //
+            // if (_month != -1)
+            // {
+            //     join2 = join2.Where(a => a.Date.Month == _month);
+            // }
+            // if (_year != -1)
+            // {
+            //     join2 = join2.Where(a => a.Date.Year == _year);
+            // }
+            //
             List<TotalCostViewModel> viewModel = new List<TotalCostViewModel>();
-            if (!join2.Any()) return View(viewModel);
-            
-            Dictionary<string,int> costCenterExpenses = new Dictionary<string, int>();
-            foreach (var item in join2)
-            {
-                int expenses;
-                if (costCenterExpenses.TryGetValue(item.CostCenter, out expenses))
-                {
-                    costCenterExpenses[item.CostCenter] = expenses + item.Expense;
-                }
-                else
-                {
-                    costCenterExpenses.Add(item.CostCenter, item.Expense);
-                }
-            }
-
-            foreach (var (key, value) in costCenterExpenses)
-            {
-                viewModel.Add(new TotalCostViewModel(){CostCenter = key,Expense = value});
-            }
+            // if (!join2.Any()) return View(viewModel);
+            //
+            // Dictionary<string,int> costCenterExpenses = new Dictionary<string, int>();
+            // foreach (var item in join2)
+            // {
+            //     int expenses;
+            //     if (costCenterExpenses.TryGetValue(item.CostCenter, out expenses))
+            //     {
+            //         costCenterExpenses[item.CostCenter] = expenses + item.Expense;
+            //     }
+            //     else
+            //     {
+            //         costCenterExpenses.Add(item.CostCenter, item.Expense);
+            //     }
+            // }
+            //
+            // foreach (var (key, value) in costCenterExpenses)
+            // {
+            //     viewModel.Add(new TotalCostViewModel(){CostCenter = key,Expense = value});
+            // }
             return View(viewModel);
         }
     }

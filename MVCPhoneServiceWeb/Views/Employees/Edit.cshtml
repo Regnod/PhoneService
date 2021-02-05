@@ -1,6 +1,5 @@
 ﻿@model Data.Models.Employee
-
-
+@using MVCPhoneServiceWeb.Utils;
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,38 +14,25 @@
     <div class="border backgroundWhite row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="EmployeeId" />
-
         <div class="col-5 ">
-            @*<div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="EmployeeId" class="control-label"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="EmployeeId" class="form-control text-center" />
-                </div>
-                <span asp-validation-for="EmployeeId" class="text-danger"></span>
-            </div>*@
-            
             <div class="form-group row">
                 <div class="col-4">
-                    <label asp-for="EmployeeName" class="control-label"></label>
+                    <label asp-for="Name" class="control-label"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="EmployeeName" class="form-control text-center" />
+                    <input asp-for="Name" class="form-control text-center" />
                 </div>
-                <span asp-validation-for="EmployeeName" class="text-danger"></span>
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-
             <div class="form-group row">
                 <div class="col-4 ">
-                    <label asp-for="CostCenter" class="control-label"></label>
+                    <label asp-for="CostCenterCode" class="control-label"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="CostCenter" class="form-control text-center" />
+                    <input asp-for="CostCenterCode" class="form-control text-center" />
                 </div>
-                <span asp-validation-for="CostCenter" class="text-danger"></span>
+                <span asp-validation-for="CostCenterCode" class="text-danger"></span>
             </div>
-
             <div class="form-group row">
                 <div class="col-4">
                     <label asp-for="PersonalCode" class="control-label"></label>
@@ -66,7 +52,7 @@
                         <input type="submit" value="Save" class="btn btn-info" />
                     </div>
                     <div class="col-4 ">
-                        <a asp-action="Index" class="btn btn-success ">Back to List</a>
+                        <a asp-action="Index" asp-all-route-data="@SD.Employee_params" class="btn btn-success ">Back to List</a>
                     </div>
                 </div>
             </div>
@@ -76,3 +62,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+ @* TODO En esta vista no sale el centro de costo *@

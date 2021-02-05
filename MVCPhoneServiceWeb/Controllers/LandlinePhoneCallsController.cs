@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Data.Models;
+using Repo;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
@@ -22,16 +22,16 @@ namespace MVCPhoneServiceWeb.Controllers
         // GET: LandlinePhoneCalls
         public async Task<IActionResult> Index(string extension,string employeesId,string day,string month,string year,string hour,string minute,string destination,string cost,string duration,string addressee)
         {
-            var _extension = Utils.Utils.IntTryParse(extension);
-            var _employeeId = Utils.Utils.IntTryParse(employeesId);
-            var _day = Utils.Utils.IntTryParse(day);
-            var _month = Utils.Utils.IntTryParse(month);
-            var _year = Utils.Utils.IntTryParse(year);
-            var _hour = Utils.Utils.IntTryParse(hour);
-            var _minute = Utils.Utils.IntTryParse(minute);
-            var _cost = Utils.Utils.IntTryParse(cost);
-            var _duration = Utils.Utils.IntTryParse(duration);
-            var _addressee = Utils.Utils.IntTryParse(addressee);
+            var _extension = Utils.Parse.IntTryParse(extension);
+            var _employeeId = Utils.Parse.IntTryParse(employeesId);
+            var _day = Utils.Parse.IntTryParse(day);
+            var _month = Utils.Parse.IntTryParse(month);
+            var _year = Utils.Parse.IntTryParse(year);
+            var _hour = Utils.Parse.IntTryParse(hour);
+            var _minute = Utils.Parse.IntTryParse(minute);
+            var _cost = Utils.Parse.IntTryParse(cost);
+            var _duration = Utils.Parse.IntTryParse(duration);
+            var _addressee = Utils.Parse.IntTryParse(addressee);
 
             var applicationDbContext = _context.LandLinePhoneCalls.Include(l => l.Employee);
             IEnumerable<LandlinePhoneCall> landlinePhoneCalls =await applicationDbContext.ToListAsync();
@@ -46,23 +46,23 @@ namespace MVCPhoneServiceWeb.Controllers
             }
             if (_day != -1)
             {
-                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.LandlinePhoneCallDateTime.Day == _day);
+                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.DateTime.Day == _day);
             }
             if (_month != -1)
             {
-                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.LandlinePhoneCallDateTime.Month == _month);
+                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.DateTime.Month == _month);
             }
             if (_year != -1)
             {
-                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.LandlinePhoneCallDateTime.Year == _year);
+                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.DateTime.Year == _year);
             }
             if (_hour != -1)
             {
-                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.LandlinePhoneCallDateTime.Hour == _hour);
+                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.DateTime.Hour == _hour);
             }
             if (_minute != -1)
             {
-                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.LandlinePhoneCallDateTime.Minute == _minute);
+                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.DateTime.Minute == _minute);
             }
             if (destination != null)
             {
@@ -70,21 +70,21 @@ namespace MVCPhoneServiceWeb.Controllers
             }
             if (_cost != -1)
             {
-                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.LandlinePhoneCallCost == _cost);
+                landlinePhoneCalls = landlinePhoneCalls.Where(a => Math.Abs(a.Cost - _cost) < 0.01);
             }
             if (_duration != -1)
             {
-                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.LandlinePhoneCallDuration == _duration);
+                landlinePhoneCalls = landlinePhoneCalls.Where(a => Math.Abs(a.Duration - _duration) < 0.01);
             }
             if (_addressee != -1)
             {
-                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.LandlinePhoneCallAddressee == _addressee);
+                landlinePhoneCalls = landlinePhoneCalls.Where(a => a.Addressee == addressee);
             }
             return View(landlinePhoneCalls);
         }
 
         // GET: LandlinePhoneCalls/Details/5
-        public async Task<IActionResult> Details(int? extension,DateTime? dateTime,int? employeeId )
+        public async Task<IActionResult> Details(int? extension,DateTime? dateTime,int employeeId )
         {
             if (extension == null || dateTime==null || employeeId==null)
             {
@@ -93,7 +93,7 @@ namespace MVCPhoneServiceWeb.Controllers
 
             var landlinePhoneCall = await _context.LandLinePhoneCalls
                 .Include(l => l.Employee)
-                .FirstOrDefaultAsync(m => m.Extension == extension && m.LandlinePhoneCallDateTime==dateTime && m.EmployeeId==employeeId);
+                .FirstOrDefaultAsync(m => m.Extension == extension && m.DateTime==dateTime && m.EmployeeId==employeeId);
             if (landlinePhoneCall == null)
             {
                 return NotFound();
@@ -152,10 +152,10 @@ namespace MVCPhoneServiceWeb.Controllers
         {
             var landlinePhoneCallFromDb = await _context.LandLinePhoneCalls
                 .Include(l => l.Employee)
-                .FirstOrDefaultAsync(m => m.Extension == landlinePhoneCall.Extension && m.LandlinePhoneCallDateTime == landlinePhoneCall.LandlinePhoneCallDateTime && m.EmployeeId == landlinePhoneCall.EmployeeId);
+                .FirstOrDefaultAsync(m => m.Extension == landlinePhoneCall.Extension && m.DateTime == landlinePhoneCall.DateTime && m.EmployeeId == landlinePhoneCall.EmployeeId);
             landlinePhoneCallFromDb.Destination = landlinePhoneCall.Destination;
-            landlinePhoneCallFromDb.LandlinePhoneCallDuration = landlinePhoneCall.LandlinePhoneCallDuration;
-            landlinePhoneCallFromDb.LandlinePhoneCallAddressee = landlinePhoneCall.LandlinePhoneCallAddressee;
+            landlinePhoneCallFromDb.Duration = landlinePhoneCall.Duration;
+            landlinePhoneCallFromDb.Addressee = landlinePhoneCall.Addressee;
             if (ModelState.IsValid)
             {
                 await _context.SaveChangesAsync();
@@ -166,7 +166,7 @@ namespace MVCPhoneServiceWeb.Controllers
         }
 
         // GET: LandlinePhoneCalls/Delete/5
-        public async Task<IActionResult> Delete(int? extension,DateTime? dateTime,int? employeeId)
+        public async Task<IActionResult> Delete(int? extension,DateTime? dateTime,int employeeId)
         {
             if (extension == null || dateTime==null || employeeId==null)
             {
@@ -175,7 +175,7 @@ namespace MVCPhoneServiceWeb.Controllers
 
             var landlinePhoneCall = await _context.LandLinePhoneCalls
                 .Include(l => l.Employee)
-                .FirstOrDefaultAsync(m => m.Extension == extension && m.LandlinePhoneCallDateTime==dateTime && m.EmployeeId==employeeId);
+                .FirstOrDefaultAsync(m => m.Extension == extension && m.DateTime==dateTime && m.EmployeeId==employeeId);
             if (landlinePhoneCall == null)
             {
                 return NotFound();
@@ -189,7 +189,7 @@ namespace MVCPhoneServiceWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed([Bind("Extension,LandlinePhoneCallDateTime,EmployeeId,Destination,LandlinePhoneCallDuration,LandlinePhoneCallAddressee")] LandlinePhoneCall landlinePhoneCall)
         {
-            var _landlinePhoneCall = await _context.LandLinePhoneCalls.FindAsync(landlinePhoneCall.Extension,landlinePhoneCall.LandlinePhoneCallDateTime,landlinePhoneCall.EmployeeId);
+            var _landlinePhoneCall = await _context.LandLinePhoneCalls.FindAsync(landlinePhoneCall.Extension,landlinePhoneCall.DateTime,landlinePhoneCall.EmployeeId);
             _context.LandLinePhoneCalls.Remove(_landlinePhoneCall);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -200,10 +200,10 @@ namespace MVCPhoneServiceWeb.Controllers
             return _context.LandLinePhoneCalls.Any(e => e.Extension == l.Extension && 
                                                         e.Destination==l.Destination && 
                                                         l.Employee==e.Employee && 
-                                                        l.LandlinePhoneCallAddressee==e.LandlinePhoneCallAddressee && 
-                                                        l.LandlinePhoneCallCost==e.LandlinePhoneCallCost && 
-                                                        l.LandlinePhoneCallDuration==e.LandlinePhoneCallDuration && 
-                                                        l.LandlinePhoneCallDateTime==e.LandlinePhoneCallDateTime);
+                                                        l.Addressee==e.Addressee && 
+                                                        Math.Abs(l.Cost - e.Cost) < 0.01 && 
+                                                        Math.Abs(l.Duration - e.Duration) < 0.01 && 
+                                                        l.DateTime==e.DateTime);
         }
     }
 }

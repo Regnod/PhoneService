@@ -26,102 +26,288 @@
         </div>
     </div>
     <br />
-    <div class="row">
-        <form class="col-12 text-right" asp-controller="TotalCost" asp-action="CostCenterExpenseMobile">
-            <div class=" row">
-                <div class="col-11">
-                    @*<label value="PhoneNumber" class="col-form-label">Phone Number</label>
-                        <input type="text" class="rounded" name="PhoneNumber" />
-
-                        <label value="Pin" class="col-form-label">Pin</label>
-                        <input type="text" class="rounded" name="Pin" />
-
-                        <label value="Puk" class="col-form-label">Puk</label>
-                        <input type="text" class="rounded" name="Puk" />*@
-                </div>
-                <div class="col-1">
-                    @*<input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />*@
-                </div>
-            </div>
-        </form>
-    </div>
-    <br />
-
-    <table class="table table-striped border">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneLine.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MobilePhone.IMEI)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MobilePhoneCallAddressee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MobilePhoneCallDuration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MobilePhoneCallCost)
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneLine.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MobilePhone.IMEI)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MobilePhoneCallAddressee)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MobilePhoneCallDuration)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MobilePhoneCallCost)
-                </td>
-                @if (User.IsInRole(SD.AdminUser))
+    <form method="post" asp-action="Index" enctype="multipart/form-data">
+        <input type="hidden" name="cpage" value="@ViewData["page"]" />
+        @{
+            Tuple<bool, string>[] show = (Tuple<bool, string>[])ViewData["columns"];
+        }
+        <a class="btn btn-outline-dark dropdown-toggle" href="#" id="navbarDropDownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Columns
+        </a>
+        <div id="checklist" class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+            @if (show[0].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="phoneNumberCheck" />  @Html.DisplayNameFor(model => model.PhoneNumber)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="phoneNumberCheck" />  @Html.DisplayNameFor(model => model.PhoneNumber)</li>
+            }
+            @if (show[1].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="dateTimeCheck" />  @Html.DisplayNameFor(model => model.DateTime)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="dateTimeCheck" />  @Html.DisplayNameFor(model => model.DateTime)</li>
+            }
+            @if (show[4].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="addressCheck" />  @Html.DisplayNameFor(model => model.Addressee) </li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="addressCheck" />  @Html.DisplayNameFor(model => model.Addressee) </li>
+            }
+            @if (show[5].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="totalCostCheck" />  @Html.DisplayNameFor(model => model.TotalCost) </li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="totalCostCheck" />  @Html.DisplayNameFor(model => model.TotalCost) </li>
+            }
+            @if (show[7].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="roamingCheck" />  @Html.DisplayNameFor(model => model.RoamingCall) </li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="roamingCheck" />  @Html.DisplayNameFor(model => model.RoamingCall) </li>
+            }
+        </div>
+        <input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />
+        <br />
+        <br />
+        <table class="table table-striped border">
+            @* Filters   *@
+            <tr class="text-center">
+                @if (show[0].Item1)
                 {
-                    <td style="width:150px">
-                        <div class="btn-group" role="group">
-                            <a class=" btn btn-info text-white" asp-action="Edit" asp-route-phoneNumber="@item.PhoneNumber" asp-route-imei="@item.IMEI" asp-route-dateTime="@item.DateTime">
-                                <i class="fas fa-edit"></i>
-                                @*Edit*@
-                            </a>
-
-                            <a class=" btn btn-dark text-white" asp-action="Details" asp-route-phoneNumber="@item.PhoneNumber" asp-route-imei="@item.IMEI" asp-route-dateTime="@item.DateTime">
-                                <i class="fas fa-list"></i>
-                                @*Details*@
-                            </a>
-
-                            <a class=" btn btn-danger text-white" asp-action="Delete" asp-route-phoneNumber="@item.PhoneNumber" asp-route-imei="@item.IMEI" asp-route-dateTime="@item.DateTime">
-                                <i class="fas fa-trash-alt"></i>
-                                @*Delete*@
-                            </a>
-                        </div>
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </th>
+                }
+                @if (show[1].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateTime)
+                    </th>
+                }
+                @if (show[4].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Addressee)
+                    </th>
+                }
+                @if (show[5].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalCost)
+                    </th>
+                }
+                @if (show[7].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoamingCall)
+                    </th>
+                }
+                @if (show[0].Item1 || show[1].Item1 || show[4].Item1 || show[5].Item1 || show[7].Item1)
+                {
+                    <th></th>
                 }
             </tr>
-        }
-    </table>
-    <div class="row">
-        <div class="col-12 text-right">
-            <a class=" btn btn-success text-white">
-                <i class="fas fa-trash-"></i>
-                Export
-            </a>
+            @* Headers   *@
+            <tr class="text-center">
+                @if (show[0].Item1)
+                {
+                    if (show[0].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control text-center" value="@show[0].Item2" name="phoneNumber" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control text-center" name="phoneNumber" />
+                        </th>
+                    }
+                }
+                @if (show[1].Item1)
+                {
+                    <th>
+                        <div class="input-group">
+                            @if (show[1].Item2 != null)
+                            {
+                                <input class="border rounded form-control text-center" value="@show[1].Item2" name="day" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control text-center" value="Day" name="day" />
+                            }
+                            @if (show[2].Item2 != null)
+                            {
+                                <input class="border rounded form-control text-center" value="@show[2].Item2" name="month" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control text-center" value="Month" name="month" />
+                            }
+                            @if (show[3].Item2 != null)
+                            {
+                                <input class="border rounded form-control text-center" value="@show[3].Item2" name="year" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control text-center" value="Year" name="year" />
+                            }
+                        </div>
+                    </th>
+                }
+                @if (show[4].Item1)
+                {
+                    if (show[4].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control text-center" value="@show[4].Item2" name="address" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control text-center" name="address" />
+                        </th>
+                    }
+                }
+                @if (show[5].Item1)
+                {
+                    <th>
+                        <div class="input-group">
+                            @if (show[5].Item2 != null)
+                            {
+
+                                <input class="border rounded form-control text-center" value="@show[5].Item2" name="min" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control text-center" value="Min" name="min" />
+                            }
+                            @if (show[6].Item2 != null)
+                            {
+
+                                <input class="border rounded form-control text-center" value="@show[6].Item2" name="max" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control text-center" value="Max" name="max" />
+                            }
+                        </div>
+                    </th>
+                }
+                @if (show[7].Item1)
+                {
+                    if (show[7].Item2 != null)
+                    {
+                        <th>
+                            <input type="checkbox" class="border rounded form-control text-center" checked name="roaming" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input type="checkbox" class="border rounded form-control text-center" name="roaming" />
+                        </th>
+                    }
+                }
+                @if (show[0].Item1 || show[1].Item1 || show[4].Item1 || show[5].Item1 || show[7].Item1)
+                {
+                    <th></th>
+                }
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    @if (show[0].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                    }
+                    @if (show[1].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateTime)
+                        </td>
+                    }
+                    @if (show[4].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Addressee)
+                        </td>
+                    }
+                    @if (show[5].Item1)
+                    {
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.TotalCost)
+                        </td>
+                    }
+                    @if (show[7].Item1)
+                    {
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.RoamingCall)
+                        </td>
+                    }
+                    @if (User.IsInRole(SD.AdminUser) && (show[0].Item1 || show[1].Item1 || show[4].Item1 || show[5].Item1 || show[7].Item1))
+                    {
+                        <td style="width:150px">
+                            <div class="btn-group" role="group">
+                                <a class=" btn btn-info text-white" asp-action="Edit" asp-route-id="@item.MobilePhoneCallId">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+
+                                <a class=" btn btn-dark text-white" asp-action="Details" asp-route-id="@item.MobilePhoneCallId">
+                                    <i class="fas fa-list"></i>
+                                </a>
+
+                                <a class=" btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.MobilePhoneCallId">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+
+        <div class="row">
+            <nav aria-label="Page navigation example">
+                Page @((int)ViewData["page"] + 1)
+                <ul class="pagination">
+                    <li class="page-item">
+                        <input class="btn btn-outline-dark col-form-label" type="submit" value="Previous" name="previous" />
+                    </li>
+                    @for (int i = (20 * (int)ViewData["mult"]) + 1; i <= ((int)ViewData["mult"] * 20 + (int)ViewData["top"]); i++)//(int)ViewData["count"]; i++)
+                    {
+                        <li class="page-item">
+                            <input class="btn btn-outline-dark col-form-label" type="submit" value="@i" name="page" />
+                        </li>
+                    }
+                    <li class="page-item">
+                        <input class="btn btn-outline-dark col-form-label" type="submit" value="Next" name="next" />
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-12 text-right">
+                <a class=" btn btn-success text-white">
+                    <i class="fas fa-trash-"></i>
+                    Export
+                </a>
+            </div>
+        </div>
+    </form>
 </div>
 
 

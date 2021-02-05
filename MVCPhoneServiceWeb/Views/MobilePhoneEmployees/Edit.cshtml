@@ -1,5 +1,5 @@
 ﻿@model Data.Models.MobilePhoneEmployee
-
+@using MVCPhoneServiceWeb.Utils;
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,7 +12,6 @@
 <form method="post" asp-action="Edit" enctype="multipart/form-data">
     <div class="border backgroundWhite row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @*<input type="hidden" asp-for="IMEI" />*@
         <div class="col-4 ">
             <div class="form-group row">
                 <div class="col-4 ">
@@ -23,7 +22,6 @@
                 </div>
                 <span asp-validation-for="IMEI" class="text-danger"></span>
             </div>
-
             <div class="form-group row">
                 <div class="col-4 ">
                     <label asp-for="EmployeeId" class="control-label"></label>
@@ -32,6 +30,14 @@
                     <select asp-for="EmployeeId" class="form-control text-center" asp-items="ViewBag.EmployeeId"></select>
                 </div>
                 <span asp-validation-for="EmployeeId" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Employee.Name" class="control-label"></label>
+                </div>
+                <div class="col-3">
+                    <label name="EmployeeName" id="EmployeeName" class="control-label text-center"></label>
+                </div>
             </div>
         </div>
         <div class="col-4">
@@ -43,14 +49,37 @@
                         <input type="submit" value="Save" class="btn btn-info" />
                     </div>
                     <div class="col-4 ">
-                        <a asp-action="Index" class="btn btn-success ">Back to List</a>
+                        <a asp-action="Index" asp-all-route-data="@SD.MobilePhoneEmployees_params" class="btn btn-success ">Back to List</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
+@section Scripts{
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getProduct();
+            $('#EmployeeId').change(function () {
+                getProduct();
+            });
+        });
+
+        function getProduct() {
+            var url = '@Url.Content("~/")' + "Employees/GetName";
+            var ddlsource = '#EmployeeId';
+            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
+                var items = '';
+                $('#EmployeeName').empty();
+                $.each(data, function (i, employee) {
+                    items += "<input disable class='form-control text-center' value='" + employee + "'>";@* + employee.text + "</a>";*@
+                });
+
+                $('#EmployeeName').html(items);
+            })
+        }
+    </script>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
 }

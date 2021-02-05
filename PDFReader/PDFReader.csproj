@@ -5,10 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="itext7" Version="7.1.11" />
     <PackageReference Include="iTextSharp" Version="5.5.13.1" />
-    <PackageReference Include="itextsharp.pdfa" Version="5.5.13.1" />
-    <PackageReference Include="itextsharp.xmlworker" Version="5.5.13.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <HintPath>..\..\..\..\..\..\..\..\home\adrian\Downloads\Telegram Desktop\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.pdfa, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <HintPath>..\..\..\..\..\..\..\..\home\adrian\Downloads\Telegram Desktop\itextsharp.pdfa.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+ 
+
+  
 
 </Project>

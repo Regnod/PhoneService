@@ -1,0 +1,54 @@
+﻿@model Data.Models.CostCenter
+@using MVCPhoneServiceWeb.Utils;
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1 class="text-black">Delete Cost Center</h1>
+<h3>Are you sure you want to delete this?</h3>
+<br />
+<form method="post" asp-action="Delete" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Code" />
+    <input type="hidden" asp-for="Name" />
+    <input type="hidden" asp-for="ManagementId" />
+    <div class="backgroundWhiteBorder row">
+        <div class="col-8">
+            <fieldset disabled style="background-color:white;">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Code" class="custom-label"></label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" asp-for="Code" style="background-color:white;" class="form-control text-center" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Name" class="custom-label"></label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" asp-for="Name" style="background-color:white;" class="form-control text-center" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="ManagementId" class="custom-label"></label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" asp-for="ManagementId" style="background-color:white;" class="form-control text-center" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+        </div>
+        <div class="col-12"></div>
+        <div class="col-8">
+            <div class="col-8 offset-3">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                <a asp-action="Index" asp-all-route-data="@SD.CostCenters_params" class="btn btn-success">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>

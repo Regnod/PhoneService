@@ -14,28 +14,17 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MVCPhoneServiceWeb.Utils;
+using Repo;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IEmailSender _emailSender;
-        public HomeController(ILogger<HomeController> logger,
-            UserManager<IdentityUser> userMana,
-            ApplicationDbContext context,
-            IEmailSender emailSender, 
-            RoleManager<IdentityRole> roleManager,  
-            SignInManager<IdentityUser> signInManager)
+        public HomeController(ApplicationDbContext context, 
+            RoleManager<IdentityRole> roleManager)
         {
-            _logger = logger;
-            _emailSender = emailSender;
-            _signInManager = signInManager;
-            _userManager = userMana;
             _context = context;
             _roleManager = roleManager;
         }

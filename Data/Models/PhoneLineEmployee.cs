@@ -5,7 +5,7 @@ namespace Data.Models
     public class PhoneLineEmployee
     {
         [Display(Name = "Phone Number")]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public  PhoneLine PhoneLine { get; set; }
 
         [Display(Name = "Employee Id")]

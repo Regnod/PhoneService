@@ -1,10 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Data;
 using Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MVCPhoneServiceWeb.Utils;
+using Repo;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
@@ -18,14 +22,37 @@ namespace MVCPhoneServiceWeb.Controllers
         }
 
         // GET: PhoneLineEmployees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int cpage, string phoneNumber, string name, 
+            string phoneNumberCheck, string employeeNameCheck, 
+            string page, string next, string previous)
         {
-            var applicationDbContext = _context.PhoneLineEmployees.Include(p => p.Employee).Include(p => p.PhoneLine);
-            return View(await applicationDbContext.ToListAsync());
+            // 
+            Tuple<bool, string>[] show = SD.Show(new List<string>() { phoneNumberCheck, employeeNameCheck }, new List<string>() { phoneNumber, name });
+            ViewData["columns"] = show;
+            //
+            IEnumerable<PhoneLineEmployee> phoneLineEmployees = await _context.PhoneLineEmployees.Include(p => p.Employee).Include(p => p.PhoneLine).ToListAsync();
+            List<PhoneLineEmployee> _phoneLineEmployees = phoneLineEmployees.ToList();
+            List<PhoneLineEmployee> final_result = new List<PhoneLineEmployee>();
+
+            var phoneNumberList = (phoneNumber != null) ? phoneNumber.Split(", ").ToList() : new List<string>();
+            _phoneLineEmployees = DataFilter<PhoneLineEmployee>.Filter(phoneNumberList, (m) => m.PhoneNumber, _phoneLineEmployees).ToList();
+
+            var employeeIdList = (name != null) ? name.Split(", ").ToList() : new List<string>();
+            _phoneLineEmployees = DataFilter<PhoneLineEmployee>.Filter(employeeIdList, (m) => m.Employee.Name, _phoneLineEmployees, true).ToList();
+
+            //Separar en paginas
+            _phoneLineEmployees = _phoneLineEmployees.OrderBy(m => m.Employee.Name).ToList();
+            var result = Paging<PhoneLineEmployee>.Pages(_phoneLineEmployees, page, cpage, (next != null), (previous != null));
+
+            ViewData["top"] = result.Item2;
+            ViewData["mult"] = result.Item3;
+            ViewData["page"] = result.Item4;
+
+            return View(result.Item1);
         }
 
         // GET: PhoneLineEmployees/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -63,7 +90,7 @@ namespace MVCPhoneServiceWeb.Controllers
             {
                 _context.Add(phoneLineEmployee);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { phoneNumberCheck = "On", employeeIdCheck = "On" });
             }
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", phoneLineEmployee.EmployeeId);
             ViewData["PhoneNumber"] = new SelectList(_context.PhoneLines, "PhoneNumber", "PhoneNumber", phoneLineEmployee.PhoneNumber);
@@ -71,21 +98,23 @@ namespace MVCPhoneServiceWeb.Controllers
         }
 
         // GET: PhoneLineEmployees/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var phoneLineEmployee = await _context.PhoneLineEmployees.FindAsync(id);
+            var phoneLineEmployee = await _context.PhoneLineEmployees
+                .Include(p => p.Employee)
+                .Include(p => p.PhoneLine)
+                .FirstOrDefaultAsync(m => m.PhoneNumber == id);
             if (phoneLineEmployee == null)
             {
                 return NotFound();
             }
             ViewData["EmployeeName"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeName");
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId");
-            //ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "Name", phoneLineEmployee.EmployeeId);
             ViewData["PhoneNumber"] = new SelectList(_context.PhoneLines, "PhoneNumber", "PhoneNumber", phoneLineEmployee.PhoneNumber);
             return View(phoneLineEmployee);
         }
@@ -95,7 +124,7 @@ namespace MVCPhoneServiceWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PhoneNumber,EmployeeId")] PhoneLineEmployee phoneLineEmployee)
+        public async Task<IActionResult> Edit(string id, [Bind("PhoneNumber,EmployeeId")] PhoneLineEmployee phoneLineEmployee)
         {
             if (id != phoneLineEmployee.PhoneNumber)
             {
@@ -120,7 +149,7 @@ namespace MVCPhoneServiceWeb.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { phoneNumberCheck = "On", employeeIdCheck = "On" });
             }
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "EmployeeId", "EmployeeId", phoneLineEmployee.EmployeeId);
             ViewData["PhoneNumber"] = new SelectList(_context.PhoneLines, "PhoneNumber", "PhoneNumber", phoneLineEmployee.PhoneNumber);
@@ -128,7 +157,7 @@ namespace MVCPhoneServiceWeb.Controllers
         }
 
         // GET: PhoneLineEmployees/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -150,15 +179,18 @@ namespace MVCPhoneServiceWeb.Controllers
         // POST: PhoneLineEmployees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var phoneLineEmployee = await _context.PhoneLineEmployees.FindAsync(id);
+            var phoneLineEmployee = await _context.PhoneLineEmployees
+                .Include(p => p.Employee)
+                .Include(p => p.PhoneLine)
+                .FirstOrDefaultAsync(m => m.PhoneNumber == id);
             _context.PhoneLineEmployees.Remove(phoneLineEmployee);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { phoneNumberCheck = "On", employeeIdCheck = "On" });
         }
 
-        private bool PhoneLineEmployeeExists(int id)
+        private bool PhoneLineEmployeeExists(string id)
         {
             return _context.PhoneLineEmployees.Any(e => e.PhoneNumber == id);
         }

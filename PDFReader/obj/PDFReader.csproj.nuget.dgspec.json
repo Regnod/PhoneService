@@ -13,9 +13,13 @@
         "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\PDFReader\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
           "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -39,18 +43,6 @@
         "netcoreapp3.0": {
           "dependencies": {
             "iTextSharp": {
-              "target": "Package",
-              "version": "[5.5.13.1, )"
-            },
-            "itext7": {
-              "target": "Package",
-              "version": "[7.1.11, )"
-            },
-            "itextsharp.pdfa": {
-              "target": "Package",
-              "version": "[5.5.13.1, )"
-            },
-            "itextsharp.xmlworker": {
               "target": "Package",
               "version": "[5.5.13.1, )"
             }

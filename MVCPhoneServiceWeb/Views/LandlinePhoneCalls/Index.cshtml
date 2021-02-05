@@ -56,22 +56,22 @@
                 @Html.DisplayNameFor(model => model.Employee.EmployeeId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Employee.EmployeeName)
+                @Html.DisplayNameFor(model => model.Employee.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LandlinePhoneCallDateTime)
+                @Html.DisplayNameFor(model => model.DateTime)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Destination)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LandlinePhoneCallDuration)
+                @Html.DisplayNameFor(model => model.Duration)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LandlinePhoneCallAddressee)
+                @Html.DisplayNameFor(model => model.Addressee)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LandlinePhoneCallCost)
+                @Html.DisplayNameFor(model => model.Cost)
             </th>
             <th></th>
         </tr>
@@ -85,38 +85,38 @@
             @Html.DisplayFor(modelItem => item.Employee.EmployeeId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
+            @Html.DisplayFor(modelItem => item.Employee.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LandlinePhoneCallDateTime)
+            @Html.DisplayFor(modelItem => item.DateTime)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Destination)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LandlinePhoneCallDuration)
+            @Html.DisplayFor(modelItem => item.Duration)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LandlinePhoneCallAddressee)
+            @Html.DisplayFor(modelItem => item.Addressee)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LandlinePhoneCallCost)
+            @Html.DisplayFor(modelItem => item.Cost)
         </td>
         @if (User.IsInRole(SD.AdminUser))
         {
             <td style="width:150px">
                 <div class="btn-group" role="group">
-                    <a class=" btn btn-info text-white" asp-action="Edit" asp-route-extension="@item.Extension" asp-route-dateTime="@item.LandlinePhoneCallDateTime" asp-route-employeeId="@item.EmployeeId">
+                    <a class=" btn btn-info text-white" asp-action="Edit" asp-route-extension="@item.Extension" asp-route-dateTime="@item.DateTime" asp-route-employeeId="@item.EmployeeId">
                         <i class="fas fa-edit"></i>
                         @*Edit*@
                     </a>
 
-                    <a class=" btn btn-dark text-white" asp-action="Details" asp-route-extension="@item.Extension" asp-route-dateTime="@item.LandlinePhoneCallDateTime" asp-route-employeeId="@item.EmployeeId">
+                    <a class=" btn btn-dark text-white" asp-action="Details" asp-route-extension="@item.Extension" asp-route-dateTime="@item.DateTime" asp-route-employeeId="@item.EmployeeId">
                         <i class="fas fa-list"></i>
                         @*Details*@
                     </a>
 
-                    <a class=" btn btn-danger text-white" asp-action="Delete" asp-route-extension="@item.Extension" asp-route-dateTime="@item.LandlinePhoneCallDateTime" asp-route-employeeId="@item.EmployeeId">
+                    <a class=" btn btn-danger text-white" asp-action="Delete" asp-route-extension="@item.Extension" asp-route-dateTime="@item.DateTime" asp-route-employeeId="@item.EmployeeId">
                         <i class="fas fa-trash-alt"></i>
                         @*Delete*@
                     </a>

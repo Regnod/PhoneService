@@ -1,0 +1,76 @@
+﻿@model Data.Models.SMSPlan
+@using MVCPhoneServiceWeb.Utils;
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-black">Details Sms Plan</h2>
+<br />
+<form method="post" asp-action="Delete" enctype="multipart/form-data">
+    <div class="backgroundWhiteBorder row">
+        <div class="col-8">
+            <fieldset disabled style="background-color:white;">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="SMSPlanId" class="custom-label"></label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" asp-for="SMSPlanId" style="background-color:white;" class="form-control text-center" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Messages" class="custom-label"></label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" asp-for="Messages" style="background-color:white;" class="form-control text-center" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Cost" class="custom-label"></label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" asp-for="Cost" style="background-color:white;" class="form-control text-center" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="col-12"></div>
+        <div class="col-8">
+            <div class="col-8 offset-3">
+                <a asp-action="Edit" class="btn btn-info" asp-route-id="@Model.SMSPlanId">Edit</a>
+                <a asp-action="Index" asp-all-route-data="@SD.SmsPlans_params" class="btn btn-success">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@*<h1>Details</h1>
+
+<div>
+    <h4>SMSPlan</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Messages)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Messages)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SMSPlanId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@

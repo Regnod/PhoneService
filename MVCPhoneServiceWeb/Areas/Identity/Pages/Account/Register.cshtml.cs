@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MVCPhoneServiceWeb.Utils;
+using Repo;
 
 namespace MVCPhoneServiceWeb.Areas.Identity.Pages.Account
 {
@@ -74,7 +75,7 @@ namespace MVCPhoneServiceWeb.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            
+
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -85,7 +86,7 @@ namespace MVCPhoneServiceWeb.Areas.Identity.Pages.Account
             {
 
 
-                
+
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -93,12 +94,13 @@ namespace MVCPhoneServiceWeb.Areas.Identity.Pages.Account
 
                     var lista = await _context.Users.ToListAsync();
                     var userFromDb = await _context.Users.FirstOrDefaultAsync(m => m.Email == Input.Email);
-                    if(lista.Count == 1)
+                    if (lista.Count == 1)
                     {
                         if (!await _userManager.IsInRoleAsync(userFromDb, SD.AdminUser))
                         {
                             await _userManager.AddToRoleAsync(userFromDb, SD.AdminUser);
                             await _context.SaveChangesAsync();
+                            await _signInManager.SignInAsync(userFromDb, isPersistent: false);
                         }
                     }
                     else
@@ -107,9 +109,9 @@ namespace MVCPhoneServiceWeb.Areas.Identity.Pages.Account
                         {
                             await _userManager.AddToRoleAsync(userFromDb, SD.VisitorUser);
                             await _context.SaveChangesAsync();
+                            await _signInManager.SignInAsync(userFromDb, isPersistent: false);
                         }
                     }
-
                     _logger.LogInformation("User created a new account with password.");
 
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -120,18 +122,7 @@ namespace MVCPhoneServiceWeb.Areas.Identity.Pages.Account
                     //    values: new { area = "Identity", userId = user.Id, code = code },
                     //    protocol: Request.Scheme);
 
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
-                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+                    return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
                 }
                 foreach (var error in result.Errors)
                 {
