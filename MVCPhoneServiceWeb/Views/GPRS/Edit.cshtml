@@ -1,0 +1,133 @@
+﻿@model Data.Models.GPRS
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-black">Edit GPRS</h2>
+<br />
+
+<form method="post" asp-action="Edit" enctype="multipart/form-data">
+    <div class="border backgroundWhite row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="GPRSId" />
+        @*<input type="hidden" asp-for="DataPlanId" />*@
+    <div class="col-5 ">
+        <div class="form-group row">
+            <div class="col-4 ">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+            </div>
+            <div class="col-8">
+                <select asp-for="PhoneNumber" class="form-control" asp-items="ViewBag.PhoneNumber"></select>
+            </div>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 ">
+                <label asp-for="DateTime" class="control-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="DateTime" class="form-control" />
+            </div>
+            <span asp-validation-for="DateTime" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 ">
+                <label asp-for="Location" class="control-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Location" class="form-control" />
+            </div>
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 ">
+                <label asp-for="APN" class="control-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="APN" class="form-control" />
+            </div>
+            <span asp-validation-for="APN" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 ">
+                <label asp-for="Volume" class="control-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Volume" class="form-control" />
+            </div>
+            <span asp-validation-for="Volume" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 ">
+                <label asp-for="VolFact" class="control-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="VolFact" class="form-control" />
+            </div>
+            <span asp-validation-for="VolFact" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 ">
+                <label asp-for="Amount" class="control-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Amount" class="form-control" />
+            </div>
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 ">
+                <label asp-for="Discount" class="control-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Discount" class="form-control" />
+            </div>
+            <span asp-validation-for="Discount" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 ">
+                <label asp-for="Charge" class="control-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Charge" class="form-control" />
+            </div>
+            <span asp-validation-for="Charge" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-4 ">
+                <label asp-for="Total" class="control-label"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Total" class="form-control" />
+            </div>
+            <span asp-validation-for="Total" class="text-danger"></span>
+        </div>
+        <div class="form-group row form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Roaming" /> @Html.DisplayNameFor(model => model.Roaming)
+            </label>
+        </div>
+    </div>
+        <div class="col-4">
+        </div>
+        <div class="col-8 text-left">
+            <div class="col-8 offset-3">
+                <div class="row">
+                    <div class="col-2">
+                        <input type="submit" value="Save" class="btn btn-info" />
+                    </div>
+                    <div class="col-4 ">
+                        <a asp-action="Index" class="btn btn-success ">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

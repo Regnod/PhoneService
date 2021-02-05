@@ -1,0 +1,46 @@
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/bin/Debug/netcoreapp3.0/InvoiceStorer.deps.json
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/bin/Debug/netcoreapp3.0/InvoiceStorer.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/bin/Debug/netcoreapp3.0/InvoiceStorer.pdb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/bin/Debug/netcoreapp3.0/Data.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/bin/Debug/netcoreapp3.0/PDFReader.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/bin/Debug/netcoreapp3.0/Repo.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/bin/Debug/netcoreapp3.0/itextsharp.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/bin/Debug/netcoreapp3.0/PDFReader.pdb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/bin/Debug/netcoreapp3.0/Repo.pdb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/bin/Debug/netcoreapp3.0/Data.pdb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/obj/Debug/netcoreapp3.0/InvoiceStorer.csprojAssemblyReference.cache
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/obj/Debug/netcoreapp3.0/InvoiceStorer.AssemblyInfoInputs.cache
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/obj/Debug/netcoreapp3.0/InvoiceStorer.AssemblyInfo.cs
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/obj/Debug/netcoreapp3.0/InvoiceStorer.csproj.CopyComplete
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/obj/Debug/netcoreapp3.0/InvoiceStorer.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/InvoiceStorer/obj/Debug/netcoreapp3.0/InvoiceStorer.pdb
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\InvoiceStorer.deps.json
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\InvoiceStorer.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\InvoiceStorer.pdb
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\Data.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\PDFReader.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\Repo.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\PDFReader.pdb
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\Repo.pdb
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\Data.pdb
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.csprojAssemblyReference.cache
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.AssemblyInfoInputs.cache
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.AssemblyInfo.cs
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.csproj.CopyComplete
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.pdb
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\InvoiceStorer.deps.json
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\InvoiceStorer.dll
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\InvoiceStorer.pdb
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\Data.dll
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\PDFReader.dll
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\Repo.dll
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\PDFReader.pdb
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\Repo.pdb
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\bin\Debug\netcoreapp3.0\Data.pdb
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.csprojAssemblyReference.cache
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.AssemblyInfoInputs.cache
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.AssemblyInfo.cs
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.csproj.CopyComplete
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.dll
+C:\Users\Richard\source\repos\PhoneService\InvoiceStorer\obj\Debug\netcoreapp3.0\InvoiceStorer.pdb

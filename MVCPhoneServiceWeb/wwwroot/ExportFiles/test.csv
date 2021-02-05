@@ -1,0 +1,21 @@
+Code,Name,Gerency
+00,No Assignado,Gerencia General
+01,Gerencia General,Gerencia General
+02,Informática,Gerencia General
+04,Servicios Internos,Gerencia de Administración
+05,Gerencia de Administración,Gerencia de Administración
+06,Mantenimiento,Gerencia de Administración
+07,Logística,Gerencia de Administración
+11,Aplicaciones,Gerencia de Ventas
+12,Gerencia de Finanzas,Gerencia de Finanzas
+13,Gerencia de Ventas,Gerencia de Ventas
+14,Off-Highway,Gerencia de PostVenta No Vehícular
+15,Depósitos Aduanal,Gerencia de Ventas
+16,Venta de Vehículos,Gerencia de Ventas
+17,Venta de Motores,Gerencia de Ventas
+18,Relaciones Públicas,Gerencia de Ventas
+19,Postventa MTU,Gerencia de PostVenta No Vehícular
+20,Recambio Vehícular,Gerencia de Recambios
+21,Recambios MTU,Gerencia de PostVenta No Vehícular
+26,Dpt de Operaciones para el Transporte,Gerencia General
+29,Gerencia de PostVenta Vehícular,Gerencia de PostVenta Vehícular

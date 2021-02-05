@@ -5,12 +5,13 @@ namespace Data.Models
 {
     public class DataPlan
     {
-        [Display(Name ="Data Plan Id")]
-        public int DataPlanId { get; set; }
-        [Display(Name ="National Data")]
-        public int NationalData { get; set; }
-        [Display(Name = "International Data")]
-        public int InternationalData { get; set; }
-        public List<MobilePhoneDataPlanAssignment> MobilePhoneDataPlanAssignments { get; set; }
+        [Key]
+        [Display(Name ="Data Plan")]
+        public string DataPlanId { get; set; }
+        [Display(Name ="Data")]
+        public int Data { get; set; }
+        public float Cost { get; set; }
+       
+        public List<DataPlanAssignment> DataPlanAssignments { get; set; }
     }
 }

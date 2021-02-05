@@ -15,6 +15,15 @@
           "lib/netcoreapp2.2/Chart.Mvc.Core.dll": {}
         }
       },
+      "iTextSharp/5.5.13.1": {
+        "type": "package",
+        "compile": {
+          "lib/itextsharp.dll": {}
+        },
+        "runtime": {
+          "lib/itextsharp.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Antiforgery/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -3315,6 +3324,37 @@
           "Microsoft.AspNetCore.App"
         ]
       },
+      "InvoiceStorer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.0",
+        "dependencies": {
+          "PDFReader": "1.0.0",
+          "Repo": "1.0.0",
+          "iTextSharp": "5.5.13.1"
+        },
+        "compile": {
+          "bin/placeholder/InvoiceStorer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/InvoiceStorer.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "PDFReader/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.0",
+        "dependencies": {
+          "iTextSharp": "5.5.13.1"
+        },
+        "compile": {
+          "bin/placeholder/PDFReader.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PDFReader.dll": {}
+        }
+      },
       "Repo/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.0",
@@ -3355,6 +3395,22 @@
         "chart.mvc.core.nuspec",
         "lib/netcoreapp2.2/Chart.Mvc.Core.dll",
         "lib/netcoreapp2.2/Chart.Mvc.Core.runtimeconfig.json"
+      ]
+    },
+    "iTextSharp/5.5.13.1": {
+      "sha512": "xqzsYEYW/nMDjCtAXM5cl9fWil/Ju3HEGbsmoTKtltJc3M/9HNJzg++bCIOHm5uZITvRmZJWMO+S2u1yNG0gQg==",
+      "type": "package",
+      "path": "itextsharp/5.5.13.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "gnu-agpl-v3.0.md",
+        "itextsharp.5.5.13.1.nupkg.sha512",
+        "itextsharp.nuspec",
+        "lib/iTextSharp.xml",
+        "lib/itextsharp.dll",
+        "notice.txt"
       ]
     },
     "Microsoft.AspNetCore.Antiforgery/2.2.0": {
@@ -9953,6 +10009,16 @@
       "path": "../Data/Data.csproj",
       "msbuildProject": "../Data/Data.csproj"
     },
+    "InvoiceStorer/1.0.0": {
+      "type": "project",
+      "path": "../InvoiceStorer/InvoiceStorer.csproj",
+      "msbuildProject": "../InvoiceStorer/InvoiceStorer.csproj"
+    },
+    "PDFReader/1.0.0": {
+      "type": "project",
+      "path": "../PDFReader/PDFReader.csproj",
+      "msbuildProject": "../PDFReader/PDFReader.csproj"
+    },
     "Repo/1.0.0": {
       "type": "project",
       "path": "../Repo/Repo.csproj",
@@ -9962,6 +10028,8 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
       "Chart.Mvc.Core >= 1.1.0",
+      "Data >= 1.0.0",
+      "InvoiceStorer >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 3.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.0.0",
       "Microsoft.AspNetCore.Identity.UI >= 3.0.0",
@@ -9972,11 +10040,13 @@
       "Microsoft.EntityFrameworkCore.Tools >= 3.0.0",
       "Microsoft.Extensions.Logging.Debug >= 3.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.0.0",
-      "Repo >= 1.0.0"
+      "Repo >= 1.0.0",
+      "iTextSharp >= 5.5.13.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Richard\\.nuget\\packages\\": {}
+    "C:\\Users\\Richard\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -9987,9 +10057,13 @@
       "packagesPath": "C:\\Users\\Richard\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\MVCPhoneServiceWeb\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
         "C:\\Users\\Richard\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"
@@ -10001,6 +10075,12 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
+            "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Data\\Data.csproj"
+            },
+            "C:\\Users\\Richard\\source\\repos\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj": {
+              "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\InvoiceStorer\\InvoiceStorer.csproj"
+            },
             "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\Repo.csproj": {
               "projectPath": "C:\\Users\\Richard\\source\\repos\\PhoneService\\Repo\\Repo.csproj"
             }
@@ -10059,6 +10139,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[3.0.0, )"
+          },
+          "iTextSharp": {
+            "target": "Package",
+            "version": "[5.5.13.1, )"
           }
         },
         "imports": [
@@ -10082,5 +10166,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'iTextSharp 5.5.13.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.0'. This package may not be fully compatible with your project.",
+      "libraryId": "iTextSharp",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.0"
+      ]
+    }
+  ]
 }

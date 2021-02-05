@@ -4,7 +4,7 @@ namespace Data.Models
 {
     public class MobilePhoneEmployee
     {
-        public int IMEI { get; set; }
+        public string IMEI { get; set; }
         [Display(Name = "Mobile Phone")]
         public  MobilePhone MobilePhone { get; set; }
         

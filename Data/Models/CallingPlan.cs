@@ -5,10 +5,15 @@ namespace Data.Models
 {
     public class CallingPlan
     {
-        [Display(Name ="Calling Plan Id")]
-        public  int CallingPlanId { get; set; }
-        public int Minutes { get; set; }
-        public int Messages { get; set; }
-        public  List<MobilePhoneCallingPlanAssignment> MobilePhoneCallingPlanAssignments { get; set; }
+        [Display(Name = "Calling Plan")]
+        public string CallingPlanId { get; set; }
+
+        [Display(Name = "Minutes")]
+        public float Minutes { get; set; }
+
+        [Display(Name = "Cost")]
+        public float Cost { get; set; }
+
+        public List<CallingPlanAssignment> CallingPlanAssignments { get; set; }
     }
 }

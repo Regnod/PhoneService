@@ -1,33 +1,28 @@
 ﻿@model Data.Models.MobilePhoneCall
-
+@using MVCPhoneServiceWeb.Utils;
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <h1 class="text-black">Delete Mobile Phone Call</h1>
 <h3>Are you sure you want to delete this?</h3>
 <br />
 <form method="post" asp-action="Delete" enctype="multipart/form-data">
+    <input type="hidden" asp-for="PhoneNumber" />
+    <input type="hidden" asp-for="DateTime" />
+    <input type="hidden" asp-for="Addressee" />
+    <input type="hidden" asp-for="Duration" />
+    <input type="hidden" asp-for="TotalCost" />
     <div class="backgroundWhiteBorder row">
         <div class="col-8">
             <fieldset disabled style="background-color:white;">
                 <div class="form-group row">
                     <div class="col-3">
                         <label asp-for="PhoneNumber" class="custom-label"></label>
-                        @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
                     </div>
                     <div class="col-4">
-                        @*@Html.DisplayFor(model => model.PhoneNumber)*@
                         <input type="text" asp-for="PhoneNumber" style="background-color:white;" class="form-control text-center" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-3">
-                        <label asp-for="IMEI" class="custom-label"></label>
-                    </div>
-                    <div class="col-4">
-                        @*@Html.DisplayFor(model => model.PUK)*@
-                        <input type="text" asp-for="IMEI" style="background-color:white;" class="form-control text-center" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -40,26 +35,26 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="MobilePhoneCallAddressee" class="custom-label"></label>
+                        <label asp-for="Addressee" class="custom-label"></label>
                     </div>
                     <div class="col-4">
-                        <input type="text" asp-for="MobilePhoneCallAddressee" style="background-color:white;" class="form-control text-center" />
+                        <input type="text" asp-for="Addressee" style="background-color:white;" class="form-control text-center" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="MobilePhoneCallDuration" class="custom-label"></label>
+                        <label asp-for="Duration" class="custom-label"></label>
                     </div>
                     <div class="col-4">
-                        <input type="text" asp-for="MobilePhoneCallDuration" style="background-color:white;" class="form-control text-center" />
+                        <input type="text" asp-for="Duration" style="background-color:white;" class="form-control text-center" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-3">
-                        <label asp-for="MobilePhoneCallCost" class="custom-label"></label>
+                        <label asp-for="TotalCost" class="custom-label"></label>
                     </div>
                     <div class="col-4">
-                        <input type="text" asp-for="MobilePhoneCallCost" style="background-color:white;" class="form-control text-center" />
+                        <input type="text" asp-for="TotalCost" style="background-color:white;" class="form-control text-center" />
                     </div>
                 </div>
             </fieldset>
@@ -70,10 +65,8 @@
         <div class="col-12"></div>
         <div class="col-8">
             <div class="col-8 offset-3">
-                @*<partial name="_addCartDetailsAndBactkToList" model="Model.Announce.AnnounceID" />*@
-                @*<input type="hidden" asp-for="PhoneNumber" />*@
                 <input type="submit" value="Delete" class="btn btn-danger" />
-                <a asp-action="Index" class="btn btn-success">Back to List</a>
+                <a asp-action="Index" asp-all-route-data="@SD.MobilePhoneCalls_params" class="btn btn-success">Back to List</a>
             </div>
         </div>
     </div>

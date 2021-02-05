@@ -1,29 +1,344 @@
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/MVCPhoneServiceWeb.Views.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/MVCPhoneServiceWeb.Views.pdb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/appsettings.Development.json
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/appsettings.json
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Properties/launchSettings.json
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/MVCPhoneServiceWeb.StaticWebAssets.xml
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/MVCPhoneServiceWeb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Tester
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Tester.deps.json
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Tester.runtimeconfig.json
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Tester.runtimeconfig.dev.json
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Tester.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Tester.pdb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Chart.Mvc.Core.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Identity.UI.Views.V3.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Identity.UI.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.JsonPatch.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.AspNetCore.Razor.Language.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Bcl.AsyncInterfaces.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Bcl.HashCode.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.CodeAnalysis.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.CodeAnalysis.CSharp.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.CodeAnalysis.Razor.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.CodeAnalysis.Workspaces.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Data.SqlClient.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.EntityFrameworkCore.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.EntityFrameworkCore.Design.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.EntityFrameworkCore.Relational.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Caching.Abstractions.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Caching.Memory.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Configuration.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Configuration.Abstractions.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Configuration.Binder.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.DependencyInjection.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.DependencyModel.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Logging.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Logging.Abstractions.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Options.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Extensions.Primitives.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.Identity.Client.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.VisualStudio.Web.CodeGeneration.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/dotnet-aspnet-codegenerator-design.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Newtonsoft.Json.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Newtonsoft.Json.Bson.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/NuGet.Frameworks.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Collections.Immutable.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.ComponentModel.Annotations.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Composition.AttributedModel.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Composition.Convention.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Composition.Hosting.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Composition.Runtime.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Composition.TypedParts.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Configuration.ConfigurationManager.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Diagnostics.DiagnosticSource.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Runtime.Caching.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Runtime.CompilerServices.Unsafe.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Security.Cryptography.Pkcs.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/System.Security.Cryptography.ProtectedData.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/cs/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/de/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/es/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/fr/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/it/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ja/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ko/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/pl/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/pt-BR/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ru/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/tr/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/de/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/es/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/it/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/runtimes/unix/lib/netcoreapp2.1/Microsoft.Data.SqlClient.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/runtimes/win/lib/netcoreapp2.1/Microsoft.Data.SqlClient.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/runtimes/win-arm64/native/sni.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/runtimes/win-x64/native/sni.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/runtimes/win-x86/native/sni.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/runtimes/unix/lib/netcoreapp2.0/System.Runtime.Caching.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/runtimes/win/lib/netcoreapp2.0/System.Runtime.Caching.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/runtimes/win/lib/netcoreapp2.1/System.Security.Cryptography.Pkcs.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Data.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/InvoiceStorer.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/MVCPhoneServiceWeb.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/PDFReader.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Repo.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/itextsharp.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Data.pdb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/InvoiceStorer.pdb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/MVCPhoneServiceWeb.pdb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/PDFReader.pdb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/bin/Debug/netcoreapp3.0/Repo.pdb
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/obj/Debug/netcoreapp3.0/Tester.csprojAssemblyReference.cache
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/obj/Debug/netcoreapp3.0/Tester.AssemblyInfoInputs.cache
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/obj/Debug/netcoreapp3.0/Tester.AssemblyInfo.cs
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/obj/Debug/netcoreapp3.0/Tester.csproj.CopyComplete
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/obj/Debug/netcoreapp3.0/Tester.dll
+/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/PhoneService/Tester/obj/Debug/netcoreapp3.0/Tester.pdb
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.exe
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.deps.json
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.runtimeconfig.json
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.runtimeconfig.dev.json
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.pdb
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Chart.Mvc.Core.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\itextsharp.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.UI.Views.V3.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Bcl.HashCode.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.CodeAnalysis.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Data.SqlClient.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Logging.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Options.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Identity.Client.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Collections.Immutable.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.ComponentModel.Annotations.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Runtime.Caching.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win-arm64\native\sni.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win-x64\native\sni.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win-x86\native\sni.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Data.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\InvoiceStorer.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\PDFReader.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Repo.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Data.pdb
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\InvoiceStorer.pdb
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\PDFReader.pdb
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\bin\Debug\netcoreapp3.0\Repo.pdb
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\obj\Debug\netcoreapp3.0\Tester.csprojAssemblyReference.cache
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\obj\Debug\netcoreapp3.0\Tester.AssemblyInfoInputs.cache
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\obj\Debug\netcoreapp3.0\Tester.AssemblyInfo.cs
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\obj\Debug\netcoreapp3.0\Tester.csproj.CopyComplete
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\obj\Debug\netcoreapp3.0\Tester.dll
+C:\Users\Richard\source\repos\BDProyecto\PhoneService\Tester\obj\Debug\netcoreapp3.0\Tester.pdb
 C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.exe
 C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.deps.json
 C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.runtimeconfig.json
 C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.runtimeconfig.dev.json
 C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.dll
 C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Tester.pdb
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Common.Logging.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Common.Logging.Core.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itext.barcodes.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itext.forms.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itext.io.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itext.kernel.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itext.layout.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itext.pdfa.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itext.sign.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itext.styledxmlparser.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itext.svg.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Chart.Mvc.Core.dll
 C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itextsharp.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itextsharp.pdfa.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\itextsharp.xmlworker.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.UI.Views.V3.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Bcl.HashCode.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.CodeAnalysis.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Data.SqlClient.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Logging.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Options.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Microsoft.Identity.Client.dll
 C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
-C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\BouncyCastle.Crypto.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Collections.Immutable.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.ComponentModel.Annotations.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Runtime.Caching.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win-arm64\native\sni.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win-x64\native\sni.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win-x86\native\sni.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Data.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\InvoiceStorer.dll
 C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\PDFReader.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Repo.dll
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Data.pdb
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\InvoiceStorer.pdb
 C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\PDFReader.pdb
+C:\Users\Richard\source\repos\PhoneService\Tester\bin\Debug\netcoreapp3.0\Repo.pdb
 C:\Users\Richard\source\repos\PhoneService\Tester\obj\Debug\netcoreapp3.0\Tester.csprojAssemblyReference.cache
 C:\Users\Richard\source\repos\PhoneService\Tester\obj\Debug\netcoreapp3.0\Tester.AssemblyInfoInputs.cache
 C:\Users\Richard\source\repos\PhoneService\Tester\obj\Debug\netcoreapp3.0\Tester.AssemblyInfo.cs

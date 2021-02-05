@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/media/adrian/02BEB1B2BEB19F1B/MVCPhoneService/Repo/Repo.csproj",
+    "projectUniqueName": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Repo/Repo.csproj",
     "projectName": "Repo",
-    "projectPath": "/media/adrian/02BEB1B2BEB19F1B/MVCPhoneService/Repo/Repo.csproj",
-    "outputPath": "/media/adrian/02BEB1B2BEB19F1B/MVCPhoneService/Repo/obj/",
+    "projectPath": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Repo/Repo.csproj",
+    "outputPath": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Repo/obj/",
     "projectStyle": "PackageReference",
     "originalTargetFrameworks": [
       "netcoreapp3.0"
@@ -15,8 +15,8 @@
     "frameworks": {
       "netcoreapp3.0": {
         "projectReferences": {
-          "/media/adrian/02BEB1B2BEB19F1B/MVCPhoneService/Data/Data.csproj": {
-            "projectPath": "/media/adrian/02BEB1B2BEB19F1B/MVCPhoneService/Data/Data.csproj"
+          "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Data/Data.csproj": {
+            "projectPath": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Data/Data.csproj"
           }
         }
       }

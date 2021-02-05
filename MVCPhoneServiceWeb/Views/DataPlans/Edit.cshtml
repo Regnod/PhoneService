@@ -1,5 +1,5 @@
 ﻿@model Data.Models.DataPlan
-
+@using MVCPhoneServiceWeb.Utils;
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,33 +12,23 @@
 <form method="post" asp-action="Edit" enctype="multipart/form-data">
     <div class="border backgroundWhite row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @*<input type="hidden" asp-for="DataPlanId" />*@
         <div class="col-5 ">
             <div class="form-group row">
                 <div class="col-4 ">
                     <label asp-for="DataPlanId" class="control-label"></label>
                 </div>
                 <div class="col-8">
-                    <input type="text" readonly style="background-color:white;" asp-for="DataPlanId" class="form-control text-center" />
+                    <input type="text" style="background-color:white;" asp-for="DataPlanId" class="form-control text-center" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-4 ">
-                    <label asp-for="NationalData" class="control-label"></label>
+                    <label asp-for="Data" class="control-label"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="NationalData" class="form-control text-center" />
+                    <input asp-for="Data" class="form-control text-center" />
                 </div>
-                <span asp-validation-for="NationalData" class="text-danger"></span>
-            </div>
-            <div class="form-group row">
-                <div class="col-4 ">
-                    <label asp-for="InternationalData" class="control-label"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="InternationalData" class="form-control text-center" />
-                </div>
-                <span asp-validation-for="InternationalData" class="text-danger"></span>
+                <span asp-validation-for="Data" class="text-danger"></span>
             </div>
         </div>
         <div class="col-4">
@@ -50,7 +40,7 @@
                         <input type="submit" value="Save" class="btn btn-info" />
                     </div>
                     <div class="col-4 ">
-                        <a asp-action="Index" class="btn btn-success ">Back to List</a>
+                        <a asp-action="Index" asp-all-route-data="@SD.DataPlans_params" class="btn btn-success ">Back to List</a>
                     </div>
                 </div>
             </div>

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Repo;
 
 namespace MVCPhoneServiceWeb.Areas.Identity.Pages.Account
 {
@@ -138,7 +139,7 @@ namespace MVCPhoneServiceWeb.Areas.Identity.Pages.Account
             //    Input.Email,
             //    "Confirm your email",
             //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-            return RedirectToPage("RegisterConfirmation", new { email = user.Email });
+            if (user != null) return RedirectToPage("RegisterConfirmation", new {email = user.Email});
 
             ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
             return Page();

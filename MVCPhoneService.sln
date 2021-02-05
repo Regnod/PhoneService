@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repo", "Repo\Repo.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDFReader", "PDFReader\PDFReader.csproj", "{EE05FF4F-3530-45A2-A8D6-37AA723792FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{FBFF820F-C790-4E0B-9CBF-3C7006B53FD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tester", "Tester\Tester.csproj", "{FBFF820F-C790-4E0B-9CBF-3C7006B53FD2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoiceStorer", "InvoiceStorer\InvoiceStorer.csproj", "{6D1389DA-582B-4603-AECF-37ADDCAA89D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{FBFF820F-C790-4E0B-9CBF-3C7006B53FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBFF820F-C790-4E0B-9CBF-3C7006B53FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBFF820F-C790-4E0B-9CBF-3C7006B53FD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D1389DA-582B-4603-AECF-37ADDCAA89D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D1389DA-582B-4603-AECF-37ADDCAA89D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D1389DA-582B-4603-AECF-37ADDCAA89D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D1389DA-582B-4603-AECF-37ADDCAA89D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

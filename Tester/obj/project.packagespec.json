@@ -1,0 +1,71 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Tester/Tester.csproj",
+    "projectName": "Tester",
+    "projectPath": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Tester/Tester.csproj",
+    "outputPath": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Tester/obj/",
+    "projectStyle": "PackageReference",
+    "originalTargetFrameworks": [
+      "netcoreapp3.0"
+    ],
+    "sources": {
+      "https://api.nuget.org/v3/index.json": {}
+    },
+    "frameworks": {
+      "netcoreapp3.0": {
+        "projectReferences": {
+          "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Data/Data.csproj": {
+            "projectPath": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Data/Data.csproj"
+          },
+          "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/InvoiceStorer/InvoiceStorer.csproj": {
+            "projectPath": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/InvoiceStorer/InvoiceStorer.csproj"
+          },
+          "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/MVCPhoneServiceWeb/MVCPhoneServiceWeb.csproj": {
+            "projectPath": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/MVCPhoneServiceWeb/MVCPhoneServiceWeb.csproj"
+          },
+          "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/PDFReader/PDFReader.csproj": {
+            "projectPath": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/PDFReader/PDFReader.csproj"
+          },
+          "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Repo/Repo.csproj": {
+            "projectPath": "/mnt/69F79531507E7A36/CS/This year's stuff/Base de Datos II/Proyecto/PhoneService/Repo/Repo.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp3.0": {
+      "imports": [
+        "net461",
+        "net462",
+        "net47",
+        "net471",
+        "net472",
+        "net48"
+      ],
+      "assetTargetFallback": true,
+      "warn": true,
+      "downloadDependencies": [
+        {
+          "name": "Microsoft.NETCore.App.Ref",
+          "version": "[3.0.0, 3.0.0]"
+        }
+      ],
+      "frameworkReferences": {
+        "Microsoft.AspNetCore.App": {
+          "privateAssets": "none"
+        },
+        "Microsoft.NETCore.App": {
+          "privateAssets": "all"
+        }
+      },
+      "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.0.103/RuntimeIdentifierGraph.json"
+    }
+  }
+}

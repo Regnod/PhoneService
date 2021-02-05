@@ -1,71 +1,454 @@
 @model IEnumerable<Data.ViewModels.UserExceededCallingPlan>
+@using MVCPhoneServiceWeb.Utils
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@* <head> *@
-@* <link rel="stylesheet" href="~/css/table.css"> *@
-@* </head> *@
+
 <div class="border backgroundWhite">
     <div class="row">
-        <div class="col-12">
+        <div class="col-8">
             <h2 class="text-black">
                 Users who have exceeded calling plans
             </h2>
         </div>
+        <div class="col-4 text-right">
+        </div>
     </div>
     <br />
-
-    <table class="table table-striped border">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EmployeeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmployeeName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PlanId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MinutesExceeded)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MessagesExceeded)
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmployeeId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmployeeName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PlanId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MinutesExceeded)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MessagesExceeded)
-                </td>
-                @* <td> *@
-                @*     <a asp-action="Edit" asp-route-id="@item.PhoneNumber">Edit</a> | *@
-                @*     <a asp-action="Details" asp-route-id="@item.PhoneNumber">Details</a> | *@
-                @*     <a asp-action="Delete" asp-route-id="@item.PhoneNumber">Delete</a> *@
-                @* </td> *@
-            </tr>
+    <form method="post" asp-action="Index" enctype="multipart/form-data">
+        @{
+            Tuple<bool, string>[] show = (Tuple<bool, string>[])ViewData["columns"];
         }
-    </table>
+        <input type="hidden" name="cpage" value="@ViewData["page"]" />
+        <a class="btn btn-outline-dark dropdown-toggle" href="#" id="navbarDropDownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Columns
+        </a>
+        <div id="checklist" name="CheckList" class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+            @if (show[0].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="phoneNumberCheck" />  @Html.DisplayNameFor(model => model.PhoneNumber)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="phoneNumberCheck" />  @Html.DisplayNameFor(model => model.PhoneNumber)</li>
+            }
+            @if (show[1].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="employeeNameCheck" />  @Html.DisplayNameFor(model => model.EmployeeName)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="employeeNameCheck" />  @Html.DisplayNameFor(model => model.EmployeeName)</li>
+            }
+            @if (show[2].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="callingPlanCheck" />  @Html.DisplayNameFor(model => model.CallingPlan)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="callingPlanCheck" />  @Html.DisplayNameFor(model => model.CallingPlan)</li>
+            }
+            @if (show[3].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="smsPlanCheck" />  @Html.DisplayNameFor(model => model.SmsPlan)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="smsPlanCheck" />  @Html.DisplayNameFor(model => model.SmsPlan)</li>
+            }
+            @if (show[4].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="minExcCheck" />  @Html.DisplayNameFor(model => model.MinutesExceeded)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="minExcCheck" />  @Html.DisplayNameFor(model => model.MinutesExceeded)</li>
+            }
+            @if (show[6].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="smsExcCheck" />  @Html.DisplayNameFor(model => model.MessagesExceeded)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="smsExcCheck" />  @Html.DisplayNameFor(model => model.MessagesExceeded)</li>
+            }
+            @if (show[8].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="monthCheck" />  @Html.DisplayNameFor(model => model.Month)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="monthCheck" />  @Html.DisplayNameFor(model => model.Month)</li>
+            }
+            @if (show[9].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="yearCheck" />  @Html.DisplayNameFor(model => model.Year)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="yearCheck" />  @Html.DisplayNameFor(model => model.Year)</li>
+            }
+            @if (show[10].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="minPercentCheck" />  @Html.DisplayNameFor(model => model.PerCentCalls)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="minPercentCheck" />  @Html.DisplayNameFor(model => model.PerCentCalls)</li>
+            }
+            @if (show[12].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="smsPercentCheck" />  @Html.DisplayNameFor(model => model.PerCentSms)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="smsPercentCheck" />  @Html.DisplayNameFor(model => model.PerCentSms)</li>
+            }
+        </div>
+        <input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />
+        <br />
+        <br />
+        <table class="table table-striped border text-center">
+            <tr>
+                @if (show[0].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </th>
+                }
+                @if (show[1].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeName)
+                    </th>
+                }
+                @if (show[2].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.CallingPlan)
+                    </th>
+                }
+                @if (show[3].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.SmsPlan)
+                    </th>
+                }
+                @if (show[4].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.MinutesExceeded)
+                    </th>
+                }
+                @if (show[6].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.MessagesExceeded)
+                    </th>
+                }
+                @if (show[8].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Month)
+                    </th>
+                }
+                @if (show[9].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Year)
+                    </th>
+                }
+                @if (show[10].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.PerCentCalls)
+                    </th>
+                }
+                @if (show[12].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.PerCentSms)
+                    </th>
+                }
+            </tr>
+            <tr>
+                @if (show[0].Item1)
+                {
+                    if (show[0].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="@show[0].Item2" name="phoneNumber" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control" name="phoneNumber" />
+                        </th>
+                    }
+                }
+                @if (show[1].Item1)
+                {
+                    if (show[1].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="@show[1].Item2" name="employeeName" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control" name="employeeName" />
+                        </th>
+                    }
+                }
+                @if (show[2].Item1)
+                {
+                    if (show[2].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="@show[2].Item2" name="callingPlan" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control" name="callingPlan" />
+                        </th>
+                    }
+                }
+                @if (show[3].Item1)
+                {
+                    if (show[3].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="@show[3].Item2" name="smsPlan" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control" name="smsPlan" />
+                        </th>
+                    }
+                }
+                @if (show[4].Item1)
+                {
+                    <th>
+                        <div class="input-group">
+                            @if (show[4].Item2 != null)
+                            {
+                                <input class="border rounded form-control" value="@show[4].Item2" name="minMinExc" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control" name="minMinExc" />
+                            }
+                            @if (show[5].Item2 != null)
+                            {
+                                <input class="border rounded form-control" value="@show[5].Item2" name="maxMinExc" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control" name="maxMinExc" />
+                            }
+                        </div>
+                    </th>
+                }
+                @if (show[6].Item1)
+                {
+                    <th>
+                        <div class="input-group">
+                            @if (show[6].Item2 != null)
+                            {
+                                <input class="border rounded form-control" value="@show[6].Item2" name="minSmsExc" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control" name="minSmsExc" />
+                            }
+                            @if (show[7].Item2 != null)
+                            {
+                                <input class="border rounded form-control" value="@show[7].Item2" name="maxSmsExc" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control" name="maxSmsExc" />
+                            }
+                        </div>
+                    </th>
+                }
+                @if (show[8].Item1)
+                {
+                    if (show[8].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="@show[8].Item2" name="month" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="Month" name="month" />
+                        </th>
+                    }
+                }
+                @if (show[9].Item1)
+                {
+                    if (show[9].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="@show[9].Item2" name="year" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control" value="Year" name="year" />
+                        </th>
+                    }
+                }
+                @if (show[10].Item1)
+                {
+                    <th>
+                        <div class="input-group">
+                            @if (show[10].Item2 != null)
+                            {
+                                <input class="border rounded form-control" value="@show[10].Item2" name="minMinPercent" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control" name="minMinPercent" />
+                            }
+                            @if (show[11].Item2 != null)
+                            {
+                                <input class="border rounded form-control" value="@show[11].Item2" name="maxMinPercent" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control" name="maxMinPercent" />
+                            }
+                        </div>
+                    </th>
+                }
+                @if (show[12].Item1)
+                {
+                    <th>
+                        <div class="input-group">
+                            @if (show[12].Item2 != null)
+                            {
+                                <input class="border rounded form-control" value="@show[12].Item2" name="minSmsPercent" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control" name="minSmsPercent" />
+                            }
+                            @if (show[13].Item2 != null)
+                            {
+                                <input class="border rounded form-control" value="@show[13].Item2" name="maxSmsPercent" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control" name="maxSmsPercent" />
+                            }
+                        </div>
+                    </th>
+                }
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @if (show[0].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                    }
+                    @if (show[1].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeName)
+                        </td>
+                    }
+                    @if (show[2].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CallingPlan)
+                        </td>
+                    }
+                    @if (show[4].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SmsPlan)
+                        </td>
+                    }
+                    @if (show[6].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MinutesExceeded)
+                        </td>
+                    }
+                    @if (show[6].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MessagesExceeded)
+                        </td>
+                    }
+                    @if (show[12].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => SD.Months[item.Month])
+                        </td>
+                    }
+                    @if (show[13].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Year)
+                        </td>
+                    }
+                    @if (show[8].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PerCentCalls)
+                        </td>
+                    }
+                    @if (show[10].Item1)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PerCentSms)
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+        <div class="row">
+            <nav aria-label="Page navigation example">
+                Page @((int)ViewData["page"] + 1)
+                <ul class="pagination">
+                    <li class="page-item">
+                        <input class="btn btn-outline-dark col-form-label" type="submit" value="Previous" name="previous" />
+                    </li>
+                    @for (int i = (20 * (int)ViewData["mult"]) + 1; i <= ((int)ViewData["mult"] * 20 + (int)ViewData["top"]); i++)//(int)ViewData["count"]; i++)
+                    {
+                        <li class="page-item">
+                            <input class="btn btn-outline-dark col-form-label" type="submit" value="@i" name="page" />
+                        </li>
+                    }
+                    <li class="page-item">
+                        <input class="btn btn-outline-dark col-form-label" type="submit" value="Next" name="next" />
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-12 text-right">
+                <a class=" btn btn-success text-white">
+                    <i class="fas fa-trash-"></i>
+                    Export
+                </a>
+            </div>
+        </div>
+    </form>
 </div>

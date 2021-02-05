@@ -21,12 +21,15 @@ namespace PDFReader
             {
                 PdfReader pdfReader = new PdfReader(fileName);
                 PhoneNumber phoneNumber = null;
+                List<string> internationalSmsNumbers = new List<string>();
+                var mvcApnCount = 0;
+                long mvcBytes = 0;
 
                 for (int page = 1; page <= pdfReader.NumberOfPages; page++)
                 {
                     ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
                     string currentText = PdfTextExtractor.GetTextFromPage(pdfReader, page, strategy);
-                    string[] Lines = currentText.Split("\n");
+                    string[] Lines = currentText.Split("\n");           
 
                     if (page == 1)
                     {
@@ -37,6 +40,7 @@ namespace PDFReader
                         {
                             if (Lines[i].Length >= 16 && Lines[i].Substring(0, 16) == "3 TIEMPO DE AIRE")
                             {
+                                string[] split;
                                 string[] split1 = Lines[i].Split(" ");
                                 string[] split2 = Lines[i + 1].Split(" ");
                                 string[] split3 = Lines[i + 2].Split(" ");
@@ -44,16 +48,63 @@ namespace PDFReader
                                 string[] split5 = Lines[i + 4].Split(" ");
                                 string[] split6 = Lines[i + 5].Split(" ");
                                 string[] split7 = Lines[i + 6].Split(" ");
-
+                                string ta = "";
+                                string consumoSms = "";
+                                string consumoSmsRoaming = "";
+                                string consumoLlamadasRoaming = "";
+                                string consumoGprs = "";
+                                string consumoGprsRoaming = "";
+                                string total = "";
+                                int x = 1;
+                                if (Lines[i].Length >= 16 && Lines[i].Substring(0, 16) == "3 TIEMPO DE AIRE")
+                                {
+                                    split = Lines[i].Split(" ");
+                                    ta = split[4];
+                                }
+                                if (Lines[i + x].Length >= 18 && Lines[i + x].Substring(0, 18) == "116 CONSUMO DE SMS")
+                                {
+                                    split = Lines[i + x].Split(" ");
+                                    consumoSms = split[4]; 
+                                    x++;
+                                }
+                                if (Lines[i + x].Length >= 26 && Lines[i + x].Substring(0, 26) == "117 CONSUMO DE SMS ROAMING")
+                                {
+                                    split = Lines[i + x].Split(" ");
+                                    consumoSmsRoaming = split[5]; 
+                                    x++;
+                                }
+                                if (Lines[i + x].Length >= 28 && Lines[i + x].Substring(0, 28) == "118 CONSUMO LLAMADAS ROAMING")
+                                {
+                                    split = Lines[i + x].Split(" ");
+                                    consumoLlamadasRoaming = split[4]; 
+                                    x++;
+                                }
+                                if (Lines[i + x].Length >= 16 && Lines[i + x].Substring(0, 16) == "125 CONSUMO GPRS")
+                                {
+                                    split = Lines[i + x].Split(" ");
+                                    consumoGprs = split[3];
+                                    x++;
+                                }
+                                if (Lines[i + x].Length >= 24 && Lines[i + x].Substring(0, 24) == "126 CONSUMO GPRS ROAMING")
+                                {
+                                    split = Lines[i + x].Split(" ");
+                                    consumoGprsRoaming = split[4];
+                                    x++;
+                                }
+                                if (Lines[i + x].Length >= 15 && Lines[i + x].Substring(0, 15) == "Total Facturado")
+                                {
+                                    split = Lines[i + x].Split(" ");
+                                    total = split[2];
+                                }
                                 FactRecord record = new FactRecord()
                                 {
-                                    TA = split1[4],
-                                    ConsumoSms = split2[4],
-                                    ConsumoSmsRoaming = split3[5],
-                                    ConsumoLLamadasRoaming = split4[4],
-                                    ConsumoGprs = split5[3],
-                                    ConsumoGprsRoaming = split6[4],
-                                    Total = split7[2]
+                                    TA = ta,
+                                    ConsumoSms = consumoSms,
+                                    ConsumoSmsRoaming = consumoSmsRoaming,
+                                    ConsumoLLamadasRoaming = consumoLlamadasRoaming,
+                                    ConsumoGprs = consumoGprs,
+                                    ConsumoGprsRoaming = consumoGprsRoaming,
+                                    Total = total
                                 };
                                 factura.FactRecord = record;
                             }
@@ -262,6 +313,9 @@ namespace PDFReader
                             string[] contr3 = Lines[l + 4].Split(":");
 
                             phoneNumber = new PhoneNumber(phone.ToString());
+                            mvcApnCount = 0;
+                            mvcBytes = 0;
+                            internationalSmsNumbers = new List<string>();
                             phoneNumber.HasDetails = true;
                             phoneNumber.Contract = contr[2];
                             phoneNumber.Plan = contr1[1].Substring(1, contr1[1].Length - 1);
@@ -434,6 +488,10 @@ namespace PDFReader
                                     sms.LD = float.Parse(splitLine[index--]);
                                     sms.Monto = float.Parse(splitLine[index--]);
                                     sms.PhoneNumber = splitLine[index--];
+                                    long temp = 0;
+                                    //para guardar los numeros que son internacionales
+                                    if (long.TryParse(sms.PhoneNumber, out temp) && sms.PhoneNumber.Substring(0, 2) != "53")
+                                        internationalSmsNumbers.Add(sms.PhoneNumber);
 
                                     string location = "";
                                     int n = 4;
@@ -539,6 +597,14 @@ namespace PDFReader
                                     gprs.Vol_Fact = splitLine[index--];
                                     gprs.Volume = splitLine[index--];
                                     gprs.Apn = splitLine[index--];
+                                    if(gprs.Apn == "MCV")
+                                    {
+                                        mvcApnCount += 1;
+                                        long byteTemp = 0;
+                                        if (long.TryParse(gprs.Volume, out byteTemp))
+                                            mvcBytes += long.Parse(gprs.Volume);
+                                    }
+
                                     string location = "";
                                     for (int k = 4; k <= index; k++)
                                     {
@@ -853,6 +919,9 @@ namespace PDFReader
                                 };
                             }
                             phoneNumber.FinalPhoneNumberRecord = fr;
+                            phoneNumber.InternationalSmsNumbers = internationalSmsNumbers;
+                            phoneNumber.MvcApnBytes = mvcBytes;
+                            phoneNumber.MvcApnUses = mvcApnCount;
                             report.Add(phoneNumber);
                         }
                     }

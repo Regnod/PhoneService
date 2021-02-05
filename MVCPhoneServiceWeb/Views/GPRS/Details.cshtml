@@ -1,0 +1,124 @@
+﻿@model Data.Models.GPRS
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2 class="text-black">Details GPRS</h2>
+<br />
+<div class="backgroundWhiteBorder row">
+    <div class="col-8">
+        <fieldset disabled style="background-color:white;">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="PhoneLine" class="custom-label"></label>
+                    @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PhoneNumber)*@
+                    <input type="text" asp-for="PhoneLine.PhoneNumber" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="DateTime" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="DateTime" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Location" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="Location" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="APN" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="APN" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Volume" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="Volume" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="VolFact" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="VolFact" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Amount" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="Amount" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Discount" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="Discount" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Charge" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="Charge" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Total" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="Total" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Roaming" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    @*@Html.DisplayFor(model => model.PUK)*@
+                    <input type="text" asp-for="Roaming" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="col-12"></div>
+    <div class="col-8">
+        <div class="col-8 offset-3">
+            @*<partial name="_addCartDetailsAndBactkToList" model="Model.Announce.AnnounceID" />*@
+            <a asp-action="Edit" class="btn btn-info" asp-route-id="@Model.GPRSId">Edit</a>
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
+</div>

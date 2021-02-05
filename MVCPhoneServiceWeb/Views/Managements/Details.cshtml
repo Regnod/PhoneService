@@ -1,0 +1,41 @@
+﻿@model Data.Models.Management
+@using MVCPhoneServiceWeb.Utils;
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-black">Details Gerency</h2>
+<br />
+
+<div class="backgroundWhiteBorder row">
+    <div class="col-8">
+        <fieldset disabled style="background-color:white;">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="ManagementId" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    <input type="text" asp-for="ManagementId" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="Name" class="custom-label"></label>
+                </div>
+                <div class="col-4">
+                    <input type="text" asp-for="Name" style="background-color:white;" class="form-control text-center" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="col-12"></div>
+    <div class="col-8">
+        <div class="col-8 offset-3">
+            <a asp-action="Edit" class="btn btn-info" asp-route-id="@Model.ManagementId">Edit</a>
+            <a asp-action="Index" asp-all-route-data="@SD.Managements_params" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
+</div>

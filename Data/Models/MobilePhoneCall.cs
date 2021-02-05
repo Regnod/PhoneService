@@ -5,23 +5,27 @@ namespace Data.Models
 {
     public class MobilePhoneCall
     {
+        [Key]
+        public int MobilePhoneCallId { get; set; }//this 
+        
         [Display(Name ="Phone Number")]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }//this
         [Display(Name = "Phone Line")]
         public PhoneLine PhoneLine { get; set; }
         
-        public int IMEI { get; set; }
-        [Display(Name = "Mobile Phone")]
-        public MobilePhone MobilePhone { get; set; }
-        
         [Display(Name = "Date Time")]
-        public DateTime DateTime { get; set; }
+        public DateTime DateTime { get; set; }//this
         
         [Display(Name = "Address")]
-        public int MobilePhoneCallAddressee { get; set; }
+        public string Addressee { get; set; }//this
         [Display(Name = "Duration")]
-        public int MobilePhoneCallDuration { get; set; }
-        [Display(Name = "Cost")]
-        public int MobilePhoneCallCost { get; set; }
+        public float Duration { get; set; }//this
+        public float TA { get; set; }
+        public float LD { get; set; }
+        public float Discount { get; set; }
+        public float Charge { get; set; }
+        public float TotalCost { get; set; }//this
+        public bool RoamingCall { get; set; } //this
+        
     }
 }

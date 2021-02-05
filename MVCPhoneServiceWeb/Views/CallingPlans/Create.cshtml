@@ -1,4 +1,5 @@
 ﻿@model Data.Models.CallingPlan
+@using MVCPhoneServiceWeb.Utils;
 
 @{
     ViewData["Title"] = "Create";
@@ -6,38 +7,46 @@
 }
 
 <h2 class="text-black">Create Calling Plan</h2>
-<br />
+<br/>
 
 <form method="post" enctype="multipart/form-data">
     <div class="border backgroundWhite">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
             <div class="col-2">
+                <label asp-for="CallingPlanId" class="control-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="CallingPlanId" class="form-control text-center"/>
+            </div>
+            <span asp-validation-for="CallingPlanId" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
                 <label asp-for="Minutes" class="control-label"></label>
             </div>
             <div class="col-3">
-                <input asp-for="Minutes" class="form-control" />
+                <input asp-for="Minutes" class="form-control text-center"/>
             </div>
             <span asp-validation-for="Minutes" class="text-danger"></span>
         </div>
-        @* cambio *@
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="Messages" class="control-label"></label>
+                <label asp-for="Cost" class="control-label"></label>
             </div>
             <div class="col-3">
-                <input asp-for="Messages" class="form-control" />
+                <input asp-for="Cost" class="form-control text-center"/>
             </div>
-            <span asp-validation-for="Messages" class="text-danger"></span>
+            <span asp-validation-for="Cost" class="text-danger"></span>
         </div>
         <div class="form-group row">
             <div class="col-5 offset-2">
                 <div class="row">
                     <div class="col-2">
-                        <input type="submit" class="btn btn-info" value="Create" />
+                        <input type="submit" class="btn btn-info" value="Create"/>
                     </div>
                     <div class="col-6">
-                        <a asp-action="Index" class="btn btn-success">Back to List</a>
+                        <a asp-action="Index" asp-all-route-data="@SD.CallingPlans_params" class="btn btn-success">Back to List</a>
                     </div>
                 </div>
             </div>
@@ -46,5 +55,5 @@
 </form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

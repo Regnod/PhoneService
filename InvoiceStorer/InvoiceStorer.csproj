@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="iTextSharp" Version="5.5.13.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\PDFReader\PDFReader.csproj" />
+        <ProjectReference Include="..\Repo\Repo.csproj" />
+    </ItemGroup>
+
+</Project>

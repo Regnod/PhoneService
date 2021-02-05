@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MVCPhoneServiceWeb.Utils;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -33,49 +34,55 @@
                                 Mobile
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
-                                <a class="dropdown-item" asp-area="" asp-controller="TotalCost" asp-action="CostCenterExpenseMobile">Cost Center Expenses</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="TotalCost" asp-action="CostCenterExpenseMobile">Cost Center Expenses Details</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="TotalCost" asp-action="CostCenterExpenseMobile">General Expenses</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="CallingPlans" asp-action="Index">GPRS</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="InternationalMobilePhoneCalls" asp-action="Index">International Calls</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="UserExceededCallingPlans" asp-action="Index">Users who have exceeded calling plans </a>
-                                <a class="dropdown-item" asp-area="" asp-controller="UserExceededDataPlans" asp-action="Index">Users who have exceeded data plans </a>
+                                <a class="dropdown-item" asp-area="" asp-controller="CostCenterMobilePhoneExpense" asp-action="General" asp-all-route-data="@SD.CostCenterMobileGeneralExpenses_params">Cost Center General Expenses</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="CostCenterMobilePhoneExpense" asp-all-route-data="@SD.CostCenterMobileExpenses_params" asp-action="Index">Cost Center MobilePhone Expenses</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="InternationalMobilePhoneCalls" asp-all-route-data="@SD.InternationalCalls_params" asp-action="Index">International Calls</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="UserExceededCallingPlans" asp-all-route-data="@SD.UserWhoHasExceededCallingPlan_params" asp-action="Index">Users who have exceeded calling plans </a>
+                                <a class="dropdown-item" asp-area="" asp-controller="UserExceededDataPlans" asp-all-route-data="@SD.UserWhoHasExceededDataPlan_params" asp-action="Index">Users who have exceeded data plans </a>
 
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownMenuLink3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Landline
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
-                                <a class="dropdown-item" asp-area="" asp-controller="TotalCost" asp-action="CostCenterExpenseLandline">Cost Center Expenses</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="TotalCost" asp-action="CostCenterExpenseLandline">Cost Center Expenses Details</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="TotalCost" asp-action="CostCenterExpenseLandline">Extension Expenses Details</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="InternationalMobilePhoneCalls" asp-action="Index">Internationals Calls</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="TotalCost" asp-action="CostCenterExpenseLandline">Personal Acces Code Expenses Details</a>
-                            </div>
+                        <li class="nav-item" role="button">
+                            <a class="nav-link" asp-area="" asp-controller="InvoiceStorer" asp-action="Index">New Bill</a>
                         </li>
+                        @*<li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownMenuLink3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Landline
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+                                    <a class="dropdown-item" asp-area="" asp-controller="TotalCost" asp-action="CostCenterExpenseLandline">Cost Center Expenses</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="TotalCost" asp-action="CostCenterExpenseLandline">Cost Center Expenses Details</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="TotalCost" asp-action="CostCenterExpenseLandline">Extension Expenses Details</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="InternationalMobilePhoneCalls" asp-action="Index">Internationals Calls</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="TotalCost" asp-action="CostCenterExpenseLandline">Personal Acces Code Expenses Details</a>
+                                </div>
+                            </li>*@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownMenuLink1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Database Management
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
-                                <a class="dropdown-item" asp-area="" asp-controller="CallingPlans" asp-action="Index">Calling Plans</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="DataPlans" asp-action="Index">Data Plans</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Employees" asp-action="Index">Employees</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="CallingPlanAssignments" asp-action="Index" asp-all-route-data="@SD.CallingPlanAssignments_params">Calling Plan Assignments</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="CallingPlans" asp-action="Index" asp-all-route-data="@SD.CallingPlans_params">Calling Plans</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="CostCenters" asp-action="Index" asp-all-route-data="@SD.CostCenters_params">Cost Centers</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="DataPlanAssignments" asp-action="Index" asp-all-route-data="@SD.DataPlanAssignments_params">Data Plan Assignments</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="DataPlans" asp-action="Index" asp-all-route-data="@SD.DataPlans_params">Data Plans</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Employees" asp-action="Index" asp-all-route-data="@SD.Employee_params">Employees</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Managements" asp-action="Index" asp-all-route-data="@SD.Managements_params">Managements</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="MobilePhoneCalls" asp-action="Index" asp-all-route-data="@SD.MobilePhoneCalls_params">Mobile Phone Calls</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="MobilePhoneEmployees" asp-action="Index" asp-all-route-data="@SD.MobilePhoneEmployees_params">Mobile Phone Employees</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="MobilePhones" asp-action="Index" asp-all-route-data="@SD.MobilePhones_params">Mobile Phones</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="LandlinePhoneCalls" asp-action="Index">Landline Phone Calls</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="MobilePhones" asp-action="Index">Mobile Phones</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="MobilePhoneCalls" asp-action="Index">Mobile Phone Calls</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="MobilePhoneCallingPlanAssignments" asp-action="Index">Mobile Phone Calling Plan Assignments</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="MobilePhoneDataPlanAssignments" asp-action="Index">Mobile Phone Data Plan Assignments</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="MobilePhoneEmployees" asp-action="Index">Mobile Phone Employees</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="PhoneLines" asp-action="Index">Phone Lines</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="PhoneLineEmployees" asp-action="Index">Phone Line Employees</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="PhoneLineEmployees" asp-action="Index" asp-all-route-data="@SD.PhoneLineEmployees_params">Phone Line Employees</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="PhoneLines" asp-action="Index" asp-all-route-data="@SD.PhoneLines_params">Phone Lines</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="SMS" asp-action="Index" asp-all-route-data="@SD.Sms_params">Messages</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="SMSPlanAssignments" asp-action="Index" asp-all-route-data="@SD.SmsPlansAssignments_params">Sms Plans Assignments</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="SMSPlans" asp-action="Index" asp-all-route-data="@SD.SmsPlans_params">Sms Plans</a>
                             </div>
                         </li>
                         @*<li class="nav-item">
-                            <a class="nav-link text-white-50" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>*@
+                                <a class="nav-link text-white-50" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>*@
                     </ul>
                 </div>
             </div>

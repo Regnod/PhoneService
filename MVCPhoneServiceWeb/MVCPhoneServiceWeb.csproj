@@ -10,10 +10,12 @@
       <Compile Remove="Migrations\20200326212831_starting.Designer.cs" />
       <Compile Remove="Migrations\20200326213418_starting.cs" />
       <Compile Remove="Migrations\20200326213418_starting.Designer.cs" />
+      <Compile Remove="Pages\**" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Chart.Mvc.Core" Version="1.1.0" />
+        <PackageReference Include="iTextSharp" Version="5.5.13.1" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
@@ -27,6 +29,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Data\Data.csproj" />
+      <ProjectReference Include="..\InvoiceStorer\InvoiceStorer.csproj" />
       <ProjectReference Include="..\Repo\Repo.csproj" />
     </ItemGroup>
 
@@ -36,7 +40,20 @@
 
     <ItemGroup>
       <Folder Include="Services\" />
-      <Folder Include="Pages" />
+      <Folder Include="wwwroot\Facturas\" />
+      <Folder Include="wwwroot\ExportFiles\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Pages\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Pages\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Pages\**" />
     </ItemGroup>
 
 </Project>

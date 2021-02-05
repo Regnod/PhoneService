@@ -1,5 +1,5 @@
 ﻿@model Data.Models.DataPlan
-
+@using MVCPhoneServiceWeb.Utils;
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,23 +13,23 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="NationalData" class="control-label"></label>
+                <label asp-for="DataPlanId" class="control-label"></label>
             </div>
             <div class="col-3">
-                <input asp-for="NationalData" class="form-control" />
+                <input asp-for="DataPlanId" class="form-control text-center" />
             </div>
-            <span asp-validation-for="NationalData" class="text-danger"></span>
+            <span asp-validation-for="DataPlanId" class="text-danger"></span>
         </div>
-        @* cambio *@
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="InternationalData" class="control-label"></label>
+                <label asp-for="Data" class="control-label"></label>
             </div>
             <div class="col-3">
-                <input asp-for="InternationalData" class="form-control" />
+                <input asp-for="Data" class="form-control text-center" />
             </div>
-            <span asp-validation-for="InternationalData" class="text-danger"></span>
+            <span asp-validation-for="Data" class="text-danger"></span>
         </div>
+        @* cambio *@
         <div class="form-group row">
             <div class="col-5 offset-2">
                 <div class="row">
@@ -37,7 +37,7 @@
                         <input type="submit" class="btn btn-info" value="Create" />
                     </div>
                     <div class="col-6">
-                        <a asp-action="Index" class="btn btn-success">Back to List</a>
+                        <a asp-action="Index" asp-all-route-data="@SD.DataPlans_params" class="btn btn-success">Back to List</a>
                     </div>
                 </div>
             </div>

@@ -1,12 +1,12 @@
 ﻿@model Data.Models.Employee
-
+@using MVCPhoneServiceWeb.Utils;
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2 class="text-black">Create Employee</h2>
-<br />
+<br/>
 
 <form method="post" enctype="multipart/form-data">
     <div class="border backgroundWhite">
@@ -16,36 +16,34 @@
                 <label asp-for="EmployeeId" class="control-label"></label>
             </div>
             <div class="col-3">
-                <input asp-for="EmployeeId" class="form-control" />
+                <input asp-for="EmployeeId" class="form-control"/>
             </div>
             <span asp-validation-for="EmployeeId" class="text-danger"></span>
         </div>
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="EmployeeName" class="control-label"></label>
+                <label asp-for="Name" class="control-label"></label>
             </div>
             <div class="col-3">
-                <input asp-for="EmployeeName" class="form-control" />
+                <input asp-for="Name" class="form-control"/>
             </div>
-            <span asp-validation-for="EmployeeName" class="text-danger"></span>
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        @* cambio *@
         <div class="form-group row">
             <div class="col-2">
-                <label asp-for="CostCenter" class="control-label"></label>
+                <label asp-for="CostCenterCode" class="control-label"></label>
             </div>
             <div class="col-3">
-                <input asp-for="CostCenter" class="form-control" />
+                <select asp-for="CostCenterCode" class="form-control" asp-items="@ViewBag.Code"></select>
             </div>
-            <span asp-validation-for="CostCenter" class="text-danger"></span>
+            <span asp-validation-for="CostCenterCode" class="text-danger"></span>
         </div>
-        @* cambio *@
         <div class="form-group row">
             <div class="col-2">
                 <label asp-for="PersonalCode" class="control-label"></label>
             </div>
             <div class="col-3">
-                <input asp-for="PersonalCode" class="form-control" />
+                <input asp-for="PersonalCode" class="form-control"/>
             </div>
             <span asp-validation-for="PersonalCode" class="text-danger"></span>
         </div>
@@ -53,10 +51,10 @@
             <div class="col-5 offset-2">
                 <div class="row">
                     <div class="col-2">
-                        <input type="submit" class="btn btn-info" value="Create" />
+                        <input type="submit" class="btn btn-info" value="Create"/>
                     </div>
                     <div class="col-6">
-                        <a asp-action="Index" class="btn btn-success">Back to List</a>
+                        <a asp-action="Index" asp-all-route-data="@SD.Employee_params" class="btn btn-success">Back to List</a>
                     </div>
                 </div>
             </div>
@@ -65,5 +63,5 @@
 </form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }
