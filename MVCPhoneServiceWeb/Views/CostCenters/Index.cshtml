@@ -70,26 +70,26 @@
             <tr class="text-center">
                 @if (show[0].Item1)
                 {
-                    <th class="col-1">
+                    <th>
                         @Html.DisplayNameFor(model => model.Code)
                     </th>
                 }
                 @if (show[1].Item1)
                 {
-                    <th class="col-5">
+                    <th>
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
                 }
                 @if (show[2].Item1)
                 {
-                    <th class="col-5">
+                    <th>
                         @Html.DisplayNameFor(model => model.Management.Name)
                     </th>
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[2].Item1)
+                @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1)
                 {
                     <th class="col-1"></th>
-                }
+                }*@
             </tr>
             <tr class="text-center">
                 @if (show[0].Item1)
@@ -137,15 +137,13 @@
                         </th>
                     }
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[2].Item1)
+                @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1)
                 {
                     <th></th>
-                }
+                }*@
             </tr>
             @foreach (var item in Model)
             {
-
-
                 <tr>
                     @if (show[0].Item1)
                     {
@@ -155,13 +153,13 @@
                     }
                     @if (show[1].Item1)
                     {
-                        <td>
+                        <td class="text-center">
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                     }
                     @if (show[2].Item1)
                     {
-                        <td>
+                        <td class="text-center">
                             @Html.DisplayFor(modelItem => item.Management.Name)
                         </td>
                     }
@@ -184,10 +182,10 @@
                             </div>
                         </td>
                     }
-                    else
+                    @*else
                     {
                         <td></td>
-                    }
+                    }*@
                 </tr>
             }
         </table>
@@ -212,36 +210,7 @@
         </div>
         <div class="row">
             <div class="col-12 text-right">
-                @{
-                    string csv = "";
-                    for (int j = 0; j < show.Length; j++)
-                    {
-                        if (show[j].Item1)
-                        {
-                            if (j == show.Length-1)
-                                csv += SD.costCenter[j] += "\n";
-                            else
-                                csv += SD.costCenter[j] + ",";
-                        }
-                    }
-                    foreach (var item in Model)
-                    {
-                        if (show[0].Item1)
-                        {
-                            csv += item.Code + ",";
-                        }
-                        if (show[1].Item1)
-                        {
-                            csv += item.Name + ",";
-                        }
-                        if (show[2].Item1)
-                        {
-                            csv += item.Management.Name;
-                        }
-                        csv += "\n";
-                    }
-                }
-                <a class=" btn btn-success text-white" asp-action="Export" asp-route-page="cpage" asp-route-csv="@csv"asp-route-codeCheck="@show[0].Item1"asp-route-nameCheck="@show[1].Item1" 
+                <a class=" btn btn-success text-white" asp-action="Export" asp-route-page="cpage" asp-route-codeCheck="@show[0].Item1"asp-route-nameCheck="@show[1].Item1" 
                    asp-route-managementNameCheck="@show[2].Item1"asp-route-code="@show[0].Item2"asp-route-name="@show[1].Item2" asp-route-managementName="@show[2].Item2">
                     <i class="fas fa-trash-"></i>
                     Export

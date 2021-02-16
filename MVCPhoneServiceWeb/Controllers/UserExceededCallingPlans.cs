@@ -7,22 +7,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVCPhoneServiceWeb.Utils;
 using Repo;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class UserExceededCallingPlans : Controller
     {
         private ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public UserExceededCallingPlans(ApplicationDbContext context)
+        public UserExceededCallingPlans(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnvironment;
         }
 
         // GET
-        public async Task<IActionResult> Index(int cpage, string phoneNumber, string employeeName, string callingPlan,string smsPlan, 
+        public async Task<IActionResult> Index(int cpage, string phoneNumber, string employeeName, string callingPlan, string smsPlan,
             string minMinExc, string maxMinExc, string minSmsExc, string maxSmsExc, string minMinPercent, string maxMinPercent, string minSmsPercent, string maxSmsPercent,
-            string phoneNumberCheck, string employeeNameCheck, string callingPlanCheck, string smsPlanCheck, string minExcCheck, string smsExcCheck, string minPercentCheck, string smsPercentCheck, string monthCheck, string yearCheck,
+            string phoneNumberCheck, string employeeNameCheck, string callingPlanCheck, string smsPlanCheck, string minExcCheck, string smsExcCheck, string minPercentCheck,
+            string smsPercentCheck, string monthCheck, string yearCheck,
             string month, string year, string page, string next, string previous)
         {
             var _month = (month != null && SD.months.ContainsKey(month)) ? SD.months[month] : -1;
@@ -39,31 +45,31 @@ namespace MVCPhoneServiceWeb.Controllers
             var _maxSmsPercent = Parse.FloatTryParse(maxSmsPercent);
 
             var query = (from pls in _context.PhoneLineSummaries
-                        join ple in _context.PhoneLineEmployees on pls.PhoneNumber equals ple.PhoneNumber
-                        join e in _context.Employees on ple.EmployeeId equals e.EmployeeId
-                        join mpcpa in _context.CallingPlanAssignments on pls.PhoneNumber equals mpcpa.PhoneNumber
-                        join cp in _context.CallingPlans on mpcpa.CallingPlanId equals cp.CallingPlanId
-                        join spa in _context.SmsPlanAssignments on ple.PhoneNumber equals spa.PhoneNumber
-                        join sp in _context.SmsPlans on spa.SMSPlanId equals sp.SMSPlanId
-                        where (pls.AirTime + pls.RoamingExpenses > cp.Cost || pls.SmsExpenses + pls.RoamingSmsExpenses > sp.Cost)
-                        select new 
-                        {
-                            EmployeeName = e.Name,
-                            EmployeeId = e.EmployeeId,
-                            PhoneNumber = pls.PhoneNumber,
-                            CallingPlan = cp.CallingPlanId,
-                            MinutesExceeded = Math.Max(pls.AirTime + pls.RoamingExpenses - cp.Cost,0),
-                            Month = pls.Month,
-                            Year = pls.Year,
-                            cpaMonth = mpcpa.Month,
-                            cpaYear = mpcpa.Year,
-                            spaMonth = spa.Month,
-                            spaYear = spa.Year,
-                            SmsPlan = sp.SMSPlanId,
-                            MessagesExceeded = Math.Max( pls.SmsExpenses + pls.RoamingSmsExpenses - sp.Cost, 0),
-                            PerCentCalls= 0,
-                            PerCentSms = 0
-                        }).ToList().Where(a=> SD.DateFilter(_month, _year, new int[] { a.Month, a.cpaMonth, a.spaMonth}, new int[] { a.Year, a.cpaYear, a.spaYear }, false));
+                         join ple in _context.PhoneLineEmployees on pls.PhoneNumber equals ple.PhoneNumber
+                         join e in _context.Employees on ple.EmployeeId equals e.EmployeeId
+                         join mpcpa in _context.CallingPlanAssignments on pls.PhoneNumber equals mpcpa.PhoneNumber
+                         join cp in _context.CallingPlans on mpcpa.CallingPlanId equals cp.CallingPlanId
+                         join spa in _context.SmsPlanAssignments on ple.PhoneNumber equals spa.PhoneNumber
+                         join sp in _context.SmsPlans on spa.SMSPlanId equals sp.SMSPlanId
+                         where (pls.AirTime + pls.RoamingExpenses > cp.Cost || pls.SmsExpenses + pls.RoamingSmsExpenses > sp.Cost)
+                         select new
+                         {
+                             EmployeeName = e.Name,
+                             EmployeeId = e.EmployeeId,
+                             PhoneNumber = pls.PhoneNumber,
+                             CallingPlan = cp.CallingPlanId,
+                             MinutesExceeded = Math.Max(pls.AirTime + pls.RoamingExpenses - cp.Cost, 0),
+                             Month = pls.Month,
+                             Year = pls.Year,
+                             cpaMonth = mpcpa.Month,
+                             cpaYear = mpcpa.Year,
+                             spaMonth = spa.Month,
+                             spaYear = spa.Year,
+                             SmsPlan = sp.SMSPlanId,
+                             MessagesExceeded = Math.Max(pls.SmsExpenses + pls.RoamingSmsExpenses - sp.Cost, 0),
+                             PerCentCalls = 0,
+                             PerCentSms = 0
+                         }).ToList().Where(a => SD.DateFilter(_month, _year, new int[] { a.Month, a.cpaMonth, a.spaMonth }, new int[] { a.Year, a.cpaYear, a.spaYear }, false));
 
             float totalCallCost = query.Sum(a => a.MinutesExceeded);
             float totalMessagesCost = query.Sum(a => a.MessagesExceeded);
@@ -112,8 +118,126 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
-
+            bool[] mask = { phoneNumberCheck != null, employeeNameCheck != null, callingPlanCheck != null, smsPlanCheck != null, minExcCheck != null, false, smsExcCheck != null, false, monthCheck != null, yearCheck != null, minPercentCheck != null, false, smsPercentCheck != null, false };
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            //ViewData["csv"] = ss;
+            HttpContext.Session.SetString(SD.csv, csv);
             return View(result.Item1);
+        }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<UserExceededCallingPlan> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < mask.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.usersExceededCallingPlan[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+
+                if (show[0].Item1)
+                {
+                    row.Add(item.PhoneNumber);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.EmployeeName);
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.CallingPlan);
+                }
+                if (show[3].Item1)
+                {
+                    row.Add(item.SmsPlan);
+                }
+                if (show[4].Item1)
+                {
+                    row.Add(item.MinutesExceeded.ToString());
+                }
+                if (show[6].Item1)
+                {
+                    row.Add(item.MessagesExceeded.ToString());
+                }
+                if (show[8].Item1)
+                {
+                    row.Add(SD.Months[item.Month]);
+                }
+                if (show[9].Item1)
+                {
+                    row.Add(item.Year.ToString());
+                }
+                if (show[10].Item1)
+                {
+                    row.Add(item.PerCentCalls.ToString());
+                }
+                if (show[12].Item1)
+                {
+                    row.Add(item.PerCentSms.ToString());
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string phoneNumber, string employeeName, string callingPlan, string smsPlan,
+            string minMinExc, string maxMinExc, string minSmsExc, string maxSmsExc, string minMinPercent, string maxMinPercent, string minSmsPercent, string maxSmsPercent,
+            string phoneNumberCheck, string employeeNameCheck, string callingPlanCheck, string smsPlanCheck, string minExcCheck, string smsExcCheck,
+            string minPercentCheck, string smsPercentCheck, string monthCheck, string yearCheck,
+            string month, string year)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var path = Path.Combine(uploads, "userExceededCallingPlan.csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "userExceededCallingPlan.csv"));
+            string csv = HttpContext.Session.GetString(SD.csv);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                smsPercentCheck = smsPercentCheck,
+                phoneNumber = phoneNumber,
+                month = month,
+                year = year,
+                employeeName = employeeName,
+                callingPlan = callingPlan,
+                smsPlan = smsPlan,
+                minMinExc = minMinExc,
+                maxMinExc = maxMinExc,
+                minSmsExc = minSmsExc,
+                maxSmsExc = maxSmsExc,
+                minMinPercent = minMinPercent,
+                maxMinPercent = maxMinPercent,
+                minSmsPercent = minSmsPercent,
+                maxSmsPercent = maxSmsPercent,
+                phoneNumberCheck = phoneNumberCheck,
+                employeeNameCheck = employeeNameCheck,
+                callingPlanCheck = callingPlanCheck,
+                smsPlanCheck = smsPlanCheck,
+                minExcCheck = minExcCheck,
+                smsExcCheck = smsExcCheck,
+                minPercentCheck = minPercentCheck,
+                monthCheck = monthCheck,
+                yearCheck = yearCheck,
+                cpage = page
+            });
         }
     }
 }

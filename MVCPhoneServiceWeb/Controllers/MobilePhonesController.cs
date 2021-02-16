@@ -8,16 +8,21 @@ using Repo;
 using System;
 using System.Collections.Generic;
 using MVCPhoneServiceWeb.Utils;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class MobilePhonesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public MobilePhonesController(ApplicationDbContext context)
+        public MobilePhonesController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnvironment;
         }
 
         // GET: MobilePhones
@@ -46,8 +51,71 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { iMEICheck != null, modelCheck != null };
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            //ViewData["csv"] = ss;
+            HttpContext.Session.SetString(SD.csv, csv);
 
             return View(result.Item1);
+        }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<MobilePhone> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < mask.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.mobilePhone[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.IMEI);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.Model);
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string iMEI, string model,
+            string iMEICheck, string modelCheck)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var path = Path.Combine(uploads, "mobilePhone.csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "mobilePhone.csv"));
+            string csv = HttpContext.Session.GetString(SD.csv);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                iMEI = iMEI,
+                model = model,
+                iMEICheck = iMEICheck,
+                modelCheck = modelCheck,
+                cpage = page
+            });
         }
         // GET: MobilePhones/Details/5
         public async Task<IActionResult> Details(string id)

@@ -10,16 +10,21 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Internal;
 using MVCPhoneServiceWeb.Utils;
 using Repo;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class UserExceededDataPlans : Controller
     {
         private ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public UserExceededDataPlans(ApplicationDbContext context)
+        public UserExceededDataPlans(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnvironment;
         }
 
         // GET
@@ -101,8 +106,117 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
-
+            bool[] mask = { phoneNumberCheck != null, employeeNameCheck != null, dataPlanCheck != null, cccCheck != null, ccNameCheck != null, monthCheck != null, yearCheck != null, DataExcCheck != null, false, PercentCheck != null, false };
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            //ViewData["csv"] = ss;
+            HttpContext.Session.SetString(SD.csv, csv);
             return View(result.Item1);
+        }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<UserExceededDataPlan> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < mask.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.userExceededDataPlan[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+
+                if (show[0].Item1)
+                {
+                    row.Add(item.PhoneNumber);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.EmployeeName);
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.DataPlanId);
+                }
+                if (show[3].Item1)
+                {
+                    row.Add(item.CC);
+                }
+                if (show[4].Item1)
+                {
+                    row.Add(item.CostCenter);
+                }
+                if (show[5].Item1)
+                {
+                    row.Add(SD.Months[item.Month]);
+                }
+                if (show[6].Item1)
+                {
+                    row.Add(item.Year.ToString());
+                }
+                if (show[7].Item1)
+                {
+                    row.Add(item.DataExceeded.ToString());
+                }
+                if (show[9].Item1)
+                {
+                    row.Add(item.PerCent.ToString());
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string phoneNumber, string employeeName, string dataPlan, string ccc, string ccName, string month, string year,
+            string minDataExc, string maxDataExc, string minPercent, string maxPercent,
+            string phoneNumberCheck, string employeeNameCheck, string dataPlanCheck, string cccCheck, string ccNameCheck, string monthCheck, string yearCheck,
+            string DataExcCheck, string PercentCheck)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var path = Path.Combine(uploads, "userExceededDataPlan.csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "userExceededDataPlan.csv"));
+            string csv = HttpContext.Session.GetString(SD.csv);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                phoneNumber = phoneNumber,
+                month = month,
+                year = year,
+                employeeName = employeeName,
+                dataPlan = dataPlan,
+                ccc = ccc,
+                ccName = ccName,
+                minDataExc = minDataExc,
+                maxDataExc = maxDataExc,
+                minPercent = minPercent,
+                maxPercent = maxPercent,
+                phoneNumberCheck = phoneNumberCheck,
+                employeeNameCheck = employeeNameCheck,
+                dataPlanCheck = dataPlanCheck,
+                cccCheck = cccCheck,
+                ccNameCheck = ccNameCheck,
+                DataExcCheck = DataExcCheck,
+                PercentCheck = PercentCheck,
+                monthCheck = monthCheck,
+                yearCheck = yearCheck,
+                cpage = page
+            });
         }
     }
 }

@@ -172,7 +172,8 @@
         </div>
         <div class="row">
             <div class="col-12 text-right">
-                <a class=" btn btn-success text-white">
+                <a class=" btn btn-success text-white" asp-action="Export" asp-route-page="cpage" asp-route-iMEI="@show[0].Item2" asp-route-iMEICheck="@show[0].Item1"
+                   asp-route-model="@show[1].Item2" asp-route-modelCheck="@show[1].Item1">
                     <i class="fas fa-trash-"></i>
                     Export
                 </a>

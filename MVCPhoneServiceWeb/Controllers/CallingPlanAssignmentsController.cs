@@ -8,16 +8,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Repo;
 using MVCPhoneServiceWeb.Utils;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class CallingPlanAssignmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public CallingPlanAssignmentsController(ApplicationDbContext context)
+        public CallingPlanAssignmentsController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnvironment;
         }
 
         // GET: MobilePhoneCallingPlanAssignments
@@ -52,8 +56,81 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { pNCheck != null, monthCheck != null, yearCheck != null, cPCheck != null };
+            string ss = CSVStringConstructor(show, mask, result.Item1 );
+            ViewData["csv"] = ss;
 
             return View(result.Item1);
+        }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<CallingPlanAssignment> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < mask.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.callingPlanAssignment[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.PhoneNumber);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(SD.Months[item.Month]);
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.Year.ToString());
+                }
+                if (show[3].Item1)
+                {
+                    row.Add(item.CallingPlanId);
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string phoneNumber, string month, string year, string callingPlan,
+            string pNCheck, string monthCheck, string yearCheck, string cPCheck, string csv)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var path = Path.Combine(uploads, "callingPlanAssignment.csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "callingPlanAssignment.csv"));
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                phoneNumber = phoneNumber,
+                month = month,
+                year = year,
+                callingPlan = callingPlan,
+                pNCheck = pNCheck,
+                monthCheck = monthCheck,
+                yearCheck = yearCheck,
+                cPCheck = cPCheck,
+                cpage = page
+            });
         }
 
         // GET: MobilePhoneCallingPlanAssignments/Details/5

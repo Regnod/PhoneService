@@ -9,16 +9,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCPhoneServiceWeb.Utils;
 using Repo;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class PhoneLineEmployeesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public PhoneLineEmployeesController(ApplicationDbContext context)
+        public PhoneLineEmployeesController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnvironment;
         }
 
         // GET: PhoneLineEmployees
@@ -47,8 +52,71 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { phoneNumberCheck != null, employeeNameCheck != null };
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            //ViewData["csv"] = ss;
+            HttpContext.Session.SetString(SD.csv, csv);
 
             return View(result.Item1);
+        }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<PhoneLineEmployee> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < mask.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.phoneLineEmployee[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.PhoneNumber);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.Employee.Name);
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string phoneNumber, string name,
+            string phoneNumberCheck, string employeeNameCheck)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var path = Path.Combine(uploads, "phoneLineEmployee.csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "phoneLineEmployee.csv"));
+            string csv = HttpContext.Session.GetString(SD.csv);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                phoneNumber = phoneNumber,
+                name = name,
+                phoneNumberCheck = phoneNumberCheck,
+                employeeNameCheck = employeeNameCheck,
+                cpage = page
+            });
         }
 
         // GET: PhoneLineEmployees/Details/5

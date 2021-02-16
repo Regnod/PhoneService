@@ -8,16 +8,21 @@ using Microsoft.EntityFrameworkCore;
 using Data.Models;
 using Repo;
 using MVCPhoneServiceWeb.Utils;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class SMSController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public SMSController(ApplicationDbContext context)
+        public SMSController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnvironment;
         }
 
         // GET: SMS
@@ -33,8 +38,8 @@ namespace MVCPhoneServiceWeb.Controllers
                 _month = Parse.IntTryParse(month);
             var _year = Parse.IntTryParse(year);
             //
-            Tuple<bool, string>[] show = SD.Show(new List<string>() { phoneNumberCheck, dateTimeCheck, dateTimeCheck, dateTimeCheck, erCheck, totalCostCheck, totalCostCheck, locationCheck, locationCheck, destinationCheck, roamingCheck }, 
-                new List<string>() { phoneNumber, day, month, year, er, min, max, location, destination, min, max, roaming });
+            Tuple<bool, string>[] show = SD.Show(new List<string>() { phoneNumberCheck, dateTimeCheck, dateTimeCheck, dateTimeCheck, erCheck, locationCheck, destinationCheck, totalCostCheck, totalCostCheck, roamingCheck },
+                new List<string>() { phoneNumber, day, month, year, er, location, destination, min, max, roaming });
             ViewData["columns"] = show;
             //     
             var mensajes = await _context.SMS.Include(m => m.PhoneLine).ToListAsync();
@@ -67,6 +72,10 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { phoneNumberCheck != null, dateTimeCheck != null, false, false, erCheck != null, locationCheck != null, destinationCheck != null, totalCostCheck != null, false, roamingCheck != null };
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            //ViewData["csv"] = ss;
+            HttpContext.Session.SetString(SD.csv, csv);
 
             return View(result.Item1);
             //List<List<SMS>> calls = new List<List<SMS>>();
@@ -140,6 +149,98 @@ namespace MVCPhoneServiceWeb.Controllers
             //    return View(new List<SMS>());
         }
 
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<SMS> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < mask.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.sms[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.PhoneNumber);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.DateTime.ToString());
+                }
+                if (show[4].Item1)
+                {
+                    row.Add(item.E_R);
+                }
+                if (show[5].Item1)
+                {
+                    row.Add(item.Location);
+                }
+                if (show[6].Item1)
+                {
+                    row.Add(item.Destination);
+                }
+                if (show[7].Item1)
+                {
+                    row.Add(item.Total.ToString());
+                }
+                if (show[9].Item1)
+                {
+                    row.Add(item.Roaming.ToString());
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string phoneNumber, string day, string month, string year, string er, string min, string max, string location, string destination, string roaming,
+            string phoneNumberCheck, string dateTimeCheck, string erCheck, string totalCostCheck, string locationCheck, string destinationCheck, string roamingCheck)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var path = Path.Combine(uploads, "sMS.csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "sMS.csv"));
+            string csv = HttpContext.Session.GetString(SD.csv);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                phoneNumber = phoneNumber,
+                day = day,
+                month = month,
+                year = year,
+                er = er,
+                min = min,
+                max = max,
+                location = location,
+                destination = destination,
+                roaming = roaming,
+                phoneNumberCheck = phoneNumberCheck,
+                dateTimeCheck = dateTimeCheck,
+                erCheck = erCheck,
+                totalCostCheck = totalCostCheck,
+                locationCheck = locationCheck,
+                destinationCheck = destinationCheck,
+                roamingCheck = roamingCheck,
+                cpage = page
+            });
+        }
+
         // GET: SMS/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -163,7 +264,7 @@ namespace MVCPhoneServiceWeb.Controllers
         public IActionResult Create()
         {
             ViewData["PhoneNumber"] = new SelectList(_context.PhoneLines, "PhoneNumber", "PhoneNumber");
-            List<e_r> er = new List<e_r>() { new e_r("Sended","Env"), new e_r("Received", "Rec") };
+            List<e_r> er = new List<e_r>() { new e_r("Sended", "Env"), new e_r("Received", "Rec") };
             ViewData["E_R"] = new SelectList(er, "State", "Name");
             return View();
         }

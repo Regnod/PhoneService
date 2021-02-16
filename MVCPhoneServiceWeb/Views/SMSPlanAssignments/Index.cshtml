@@ -61,11 +61,11 @@
             }
             @if (show[3].Item1)
             {
-                <li class="border-0 dropdown-item"><input type="checkbox" checked name="cPCheck" />  @Html.DisplayNameFor(model => model.SMSPlanId)</li>
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="sPCheck" />  @Html.DisplayNameFor(model => model.SMSPlanId)</li>
             }
             else
             {
-                <li class="border-0 dropdown-item"><input type="checkbox" name="cPCheck" />  @Html.DisplayNameFor(model => model.SMSPlanId)</li>
+                <li class="border-0 dropdown-item"><input type="checkbox" name="sPCheck" />  @Html.DisplayNameFor(model => model.SMSPlanId)</li>
             }
         </div>
         <input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />
@@ -97,10 +97,10 @@
                         @Html.DisplayNameFor(model => model.SMSPlanId)
                     </th>
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[2].Item1 || show[3].Item1)
+                @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1 || show[3].Item1)
                 {
                     <th></th>
-                }
+                }*@
             </tr>
             <tr>
                 @if (show[0].Item1)
@@ -108,13 +108,13 @@
                     if (show[0].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[0].Item2" name="phoneNumber" />
+                            <input class="border rounded form-control text-center" value="@show[0].Item2" name="phoneNumber" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="phoneNumber" />
+                            <input class="border rounded form-control text-center" name="phoneNumber" />
                         </th>
                     }
                 }
@@ -124,7 +124,7 @@
                     {
                         <th>
                             <div>
-                                <input class="border rounded form-control" value="@show[1].Item2" name="month" />
+                                <input class="border rounded form-control text-center" value="@show[1].Item2" name="month" />
                             </div>
                         </th>
                     }
@@ -132,7 +132,7 @@
                     {
                         <th>
                             <div class="input-group">
-                                <input class="border rounded form-control" value="Month" name="month" />
+                                <input class="border rounded form-control text-center" value="Month" name="month" />
                             </div>
                         </th>
                     }
@@ -143,7 +143,7 @@
                     {
                         <th>
                             <div>
-                                <input class="border rounded form-control" value="@show[2].Item2" name="year" />
+                                <input class="border rounded form-control text-center" value="@show[2].Item2" name="year" />
                             </div>
                         </th>
                     }
@@ -151,7 +151,7 @@
                     {
                         <th>
                             <div>
-                                <input class="border rounded form-control" value="Year" name="year" />
+                                <input class="border rounded form-control text-center" value="Year" name="year" />
                             </div>
                         </th>
                     }
@@ -161,19 +161,15 @@
                     if (show[3].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[3].Item2" name="smsPlan" />
+                            <input class="border rounded form-control text-center" value="@show[3].Item2" name="smsPlan" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="smsPlan" />
+                            <input class="border rounded form-control text-center" name="smsPlan" />
                         </th>
                     }
-                }
-                @if (show[0].Item1 || show[1].Item1 || show[2].Item1 || show[3].Item1)
-                {
-                    <th></th>
                 }
             </tr>
             @foreach (var item in Model)
@@ -188,13 +184,7 @@
                     @if (show[1].Item1)
                     {
                         <td>
-                            @Html.DisplayFor(modelItem => item.Month)
-                        </td>
-                    }
-                    @if (show[1].Item1)
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Year)
+                            @Html.DisplayFor(modelItem => SD.Months[item.Month])
                         </td>
                     }
                     @if (show[2].Item1)
@@ -209,7 +199,7 @@
                             @Html.DisplayFor(modelItem => item.SMSPlanId)
                         </td>
                     }
-                    @if (User.IsInRole(SD.AdminUser) && (show[0].Item1 || show[1].Item1 || show[2].Item1 || show[3].Item1))
+                    @if ((show[0].Item1 || show[1].Item1 || show[2].Item1 || show[3].Item1) && User.IsInRole(SD.AdminUser))
                     {
                         <td style="width:150px">
                             <div class="btn-group" role="group">
@@ -227,6 +217,7 @@
                                 </a>
                             </div>
                         </td>
+
                     }
                 </tr>
             }
@@ -252,7 +243,8 @@
         </div>
         <div class="row">
             <div class="col-12 text-right">
-                <a class=" btn btn-success text-white">
+                <a class=" btn btn-success text-white" asp-action="Export" asp-route-page="cpage" asp-route-phoneNumberCheck="@show[0].Item1" asp-route-monthCheck="@show[1].Item1"
+                   asp-route-yearCheck="@show[2].Item1" asp-route-sPCheck="@show[3].Item1" asp-route-phoneNumber="@show[0].Item2" asp-route-month="@show[1].Item2" asp-route-year="@show[2].Item2" asp-route-smsPlan="@show[3].Item2">
                     <i class="fas fa-trash-"></i>
                     Export
                 </a>

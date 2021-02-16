@@ -216,7 +216,8 @@
         </div>
         <div class="row">
             <div class="col-12 text-right">
-                <a class=" btn btn-success text-white">
+                <a class=" btn btn-success text-white" asp-action="Export" asp-route-page="cpage" asp-route-sPCheck="@show[0].Item1" asp-route-messagesCheck="@show[1].Item1"
+                   asp-route-costCheck="@show[2].Item1" asp-route-smsPlanId="@show[0].Item2" asp-route-messages="@show[1].Item2" asp-route-minCost="@show[2].Item2" asp-route-maxCost="@show[3].Item2">
                     <i class="fas fa-trash-"></i>
                     Export
                 </a>

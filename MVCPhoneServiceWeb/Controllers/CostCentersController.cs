@@ -10,6 +10,7 @@ using Repo;
 using MVCPhoneServiceWeb.Utils;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
@@ -17,7 +18,6 @@ namespace MVCPhoneServiceWeb.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IHostingEnvironment _hostingEnviroment;
-
         public CostCentersController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
@@ -54,25 +54,79 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
-
+            bool[] mask = { codeCheck != null, nameCheck != null, managementNameCheck != null };
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            //ViewData["csv"] = ss;
+            HttpContext.Session.SetString(SD.csv, csv);
+            
             return View(result.Item1);
         }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<CostCenter> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < mask.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.costCenter[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.Code);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.Name);
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.Management.Name);
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
         public async Task<IActionResult> Export(int page, string code, string name, string managementName,
-            string codeCheck, string nameCheck, string managementNameCheck, string csv)
+            string codeCheck, string nameCheck, string managementNameCheck)
         {
 
             string webRootPath = _hostingEnviroment.WebRootPath;
-            var uploads =Path.Combine(webRootPath, "ExportFiles");
-            var path = Path.Combine(uploads, "test.csv");
-            using (var filesStream = new FileStream(path, FileMode.Create))
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+
+            var path = Path.Combine(uploads, "costCenter.csv");
+            using (var filesStream = new FileStream(path, FileMode.CreateNew))
             {
 
             }
-            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "test.csv"));
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "costCenter.csv"));
+
+            string csv = HttpContext.Session.GetString(SD.csv);
             stw.Write(csv);
             stw.Dispose();
-            return RedirectToAction(nameof(Index), new { codeCheck = codeCheck, nameCheck = nameCheck, managementIdCheck = managementNameCheck
-                , code = code, name = name, managementName = managementName, cpage = page});
+            return RedirectToAction(nameof(Index), new
+            {
+                codeCheck = codeCheck,
+                nameCheck = nameCheck,
+                managementNameCheck = managementNameCheck,
+                code = code,
+                name = name,
+                managementName = managementName,
+                cpage = page
+            });
         }
         // GET: CostCenters/Details/5
         public async Task<IActionResult> Details(string id)

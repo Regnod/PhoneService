@@ -8,28 +8,33 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVCPhoneServiceWeb.Utils;
 using Repo;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class PhoneLinesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public PhoneLinesController(ApplicationDbContext context)
+        public PhoneLinesController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
-        }
+            _hostingEnviroment = hostingEnvironment;
+        } 
 
         // GET: PhoneLines
-        public async Task<IActionResult> Index(int cpage, string phoneNumber, string pUK, string pIN, 
-            string phoneNumberCheck, string pUKCheck, string pINCheck, 
+        public async Task<IActionResult> Index(int cpage, string phoneNumber, string pUK, string pIN, string contract,
+            string phoneNumberCheck, string pUKCheck, string pINCheck, string contractCheck,
             string page, string next, string previous)
         {
             // 
             var _PUK = Parse.IntTryParse(pUK);
             var _PIN = Parse.IntTryParse(pIN);
             //
-            Tuple<bool, string>[] show = SD.Show(new List<string>() { phoneNumberCheck, pUKCheck, pINCheck }, new List<string>() { phoneNumber, pUK, pIN });
+            Tuple<bool, string>[] show = SD.Show(new List<string>() { phoneNumberCheck, pUKCheck, pINCheck, contractCheck }, new List<string>() { phoneNumber, pUK, pIN, contract });
             ViewData["columns"] = show;
             //
             IEnumerable<PhoneLine> phoneLines = await _context.PhoneLines.ToListAsync();
@@ -43,6 +48,8 @@ namespace MVCPhoneServiceWeb.Controllers
 
             _phoneLines = DataFilter<PhoneLine>.Filter(_PUK, (m) => m.PUK, _phoneLines).ToList();
 
+            _phoneLines = DataFilter<PhoneLine>.Filter(contract, (m) => m.Contract, _phoneLines).ToList();
+
             //Separar en paginas
             _phoneLines = _phoneLines.OrderBy(m => m.PhoneNumber).ToList();
             var result = Paging<PhoneLine>.Pages(_phoneLines, page, cpage, (next != null), (previous != null));
@@ -50,8 +57,83 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { phoneNumberCheck == "On", pUKCheck == "On", pINCheck == "On", contractCheck == "On" };
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            //ViewData["csv"] = ss;
+            HttpContext.Session.SetString(SD.csv, csv);
 
             return View(result.Item1);
+        }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<PhoneLine> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < mask.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.phoneLine[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.PhoneNumber);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.PUK.ToString());
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.PIN.ToString());
+                }
+                if (show[3].Item1)
+                {
+                    row.Add(item.Contract);
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string phoneNumber, string pUK, string pIN, string contract,
+            string phoneNumberCheck, string pUKCheck, string pINCheck, string contractCheck)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var path = Path.Combine(uploads, "phoneLine.csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "phoneLine.csv"));
+            string csv = HttpContext.Session.GetString(SD.csv);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                phoneNumber = phoneNumber,
+                pUK = pUK,
+                pIN = pIN,
+                contract = contract,
+                phoneNumberCheck = phoneNumberCheck,
+                pUKCheck = pUKCheck,
+                pINCheck = pINCheck,
+                contractCheck = contractCheck,
+                cpage = page
+            });
         }
 
         // GET: PhoneLines/Details/5

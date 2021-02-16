@@ -8,16 +8,21 @@ using Microsoft.EntityFrameworkCore;
 using Data.Models;
 using Repo;
 using MVCPhoneServiceWeb.Utils;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class SMSPlansController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public SMSPlansController(ApplicationDbContext context)
+        public SMSPlansController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnvironment;
         }
 
         // GET: SMSPlans
@@ -26,7 +31,7 @@ namespace MVCPhoneServiceWeb.Controllers
         {
             var _messages = Parse.IntTryParse(messages);
             var _minCost = Parse.FloatTryParse(minCost);
-            var _maxCost = Parse.FloatTryParse(maxCost);
+            var _maxCost = Parse.FloatTryParse(maxCost); 
 
             // para setear propiedades en la vista
             Tuple<bool, string>[] show = SD.Show(new List<string>() { sPCheck, messagesCheck, costCheck, costCheck }, new List<string>() { smsPlanId, messages, minCost, maxCost });
@@ -50,8 +55,78 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { sPCheck != null, messagesCheck != null, costCheck != null, false };
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            //ViewData["csv"] = ss;
+            HttpContext.Session.SetString(SD.csv, csv);
 
             return View(result.Item1);
+        }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<SMSPlan> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < mask.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.smsPlan[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.SMSPlanId);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.Messages.ToString());
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.Cost.ToString());
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string smsPlanId, string messages, string minCost, string maxCost,
+            string sPCheck, string messagesCheck, string costCheck)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var path = Path.Combine(uploads, "callingPlanAssignment.csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "callingPlanAssignment.csv"));
+            string csv = HttpContext.Session.GetString(SD.csv);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                smsPlanId = smsPlanId,
+                messages = messages,
+                minCost = minCost,
+                maxCost = maxCost,
+                sPCheck = sPCheck,
+                messagesCheck = messagesCheck,
+                costCheck = costCheck,
+                cpage = page
+            });
         }
 
         // GET: SMSPlans/Details/5 

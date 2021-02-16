@@ -8,16 +8,21 @@ using Microsoft.EntityFrameworkCore;
 using Data.Models;
 using Repo;
 using MVCPhoneServiceWeb.Utils;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class SMSPlanAssignmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public SMSPlanAssignmentsController(ApplicationDbContext context)
+        public SMSPlanAssignmentsController(ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnvironment;
         }
 
         // GET: SMSPlanAssignments
@@ -31,7 +36,10 @@ namespace MVCPhoneServiceWeb.Controllers
             if (_month == -1)
                 _month = Parse.IntTryParse(month);
             var _year = Parse.IntTryParse(year);
+            if (_month != -1)
+                month = SD.Months[_month];
             //
+
             Tuple<bool, string>[] show = SD.Show(new List<string>() { pNCheck, monthCheck, yearCheck, sPCheck }, new List<string>() { phoneNumber, month, year, smsPlan });
             ViewData["columns"] = show;
             // Filters
@@ -55,8 +63,82 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
-
+            bool[] mask = { pNCheck != null, monthCheck != null, yearCheck != null, sPCheck != null };
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            //ViewData["csv"] = ss;
+            HttpContext.Session.SetString(SD.csv, csv);
             return View(result.Item1);
+        }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<SMSPlanAssignment> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < mask.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.smsPlanAssignment[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.PhoneNumber);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(SD.Months[item.Month]);
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.Year.ToString());
+                }
+                if (show[3].Item1)
+                {
+                    row.Add(item.SMSPlanId);
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string phoneNumber, string month, string year, string smsPlan,
+            string pNCheck, string monthCheck, string yearCheck, string sPCheck)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var path = Path.Combine(uploads, "sMSPlanAssignment.csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "sMSPlanAssignment.csv"));
+            string csv = HttpContext.Session.GetString(SD.csv);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                phoneNumber = phoneNumber,
+                month = month,
+                year = year,
+                smsPlan = smsPlan,
+                pNCheck = pNCheck,
+                monthCheck = monthCheck,
+                yearCheck = yearCheck,
+                sPCheck = sPCheck,
+                cpage = page
+            });
         }
 
         // GET: SMSPlanAssignments/Details/5 

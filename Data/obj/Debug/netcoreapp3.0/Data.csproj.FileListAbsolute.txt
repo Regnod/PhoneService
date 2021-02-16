@@ -1944,3 +1944,4 @@ C:\Users\Richard\source\repos\PhoneService\Data\obj\Debug\netcoreapp3.0\Data.Ass
 C:\Users\Richard\source\repos\PhoneService\Data\obj\Debug\netcoreapp3.0\Data.AssemblyInfo.cs
 C:\Users\Richard\source\repos\PhoneService\Data\obj\Debug\netcoreapp3.0\Data.dll
 C:\Users\Richard\source\repos\PhoneService\Data\obj\Debug\netcoreapp3.0\Data.pdb
+C:\Users\Richard\source\repos\PhoneService\Data\obj\Debug\netcoreapp3.0\Data.csprojAssemblyReference.cache
