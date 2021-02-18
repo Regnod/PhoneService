@@ -75,78 +75,13 @@ namespace MVCPhoneServiceWeb.Controllers
             bool[] mask = { phoneNumberCheck != null, dateTimeCheck != null, false, false, erCheck != null, locationCheck != null, destinationCheck != null, totalCostCheck != null, false, roamingCheck != null };
             string csv = CSVStringConstructor(show, mask, result.Item1);
             //ViewData["csv"] = ss;
-            HttpContext.Session.SetString(SD.csv, csv);
+            string httpSessionName = SD.HttpSessionString(new List<string> { "SMS", result.Item4.ToString(), phoneNumber, day, month, year, er, min, max, location, destination, roaming,
+                (phoneNumberCheck != null).ToString(), (dateTimeCheck != null).ToString(), (erCheck != null).ToString(), (totalCostCheck != null).ToString(), (locationCheck != null).ToString(),
+                (destinationCheck != null).ToString(), (roamingCheck != null).ToString()});
+
+            HttpContext.Session.SetString(httpSessionName, csv);
 
             return View(result.Item1);
-            //List<List<SMS>> calls = new List<List<SMS>>();
-            //List<SMS> list = new List<SMS>();
-            //int i = 0;
-            //int j = 0;
-            //foreach (var call in _mensajes)
-            //{
-            //    if (i == 20)
-            //    {
-            //        j++;
-            //        i = 0;
-            //        calls.Add(list);
-            //        list = new List<SMS>();
-            //    }
-            //    list.Add(call);
-            //    i++;
-            //}
-            //if (i < 20)
-            //{
-            //    calls.Add(list);
-            //    j++;
-            //}
-            //// elegir pagina
-            //int currentPage = 0;
-            //if (page != null)
-            //{
-            //    currentPage = (Parse.IntTryParse(page) != -1) ? Parse.IntTryParse(page) - 1 : (cpage >= j) ? 0 : cpage;
-            //}
-            //else if (next != null)
-            //    currentPage = (cpage + 1 >= j) ? cpage : cpage + 1;
-            //else if (previous != null)
-            //    currentPage = (cpage - 1 < 0) ? 0 : cpage - 1;
-
-            //int mult = currentPage / 20;
-
-            //if (j > 20 && j - currentPage < 20)
-            //    ViewData["top"] = j - currentPage;
-            //else if (j < 20 && j - currentPage < 20)
-            //    ViewData["top"] = j;
-            //else
-            //    ViewData["top"] = 20;
-
-            //ViewData["mult"] = mult;
-            //ViewData["columns"] = show;
-            //ViewData["page"] = currentPage;
-
-            //if (calls.Count != 0)
-            //{
-            //    if (j > currentPage)
-            //    {
-            //        ViewData["page"] = currentPage;
-            //        return View(calls[currentPage]);
-            //    }
-            //    else
-            //    {
-            //        if (j >= cpage)
-            //        {
-            //            ViewData["page"] = cpage;
-            //            return View(calls[cpage]);
-            //        }
-            //        else
-            //        {
-            //            cpage = 0;
-            //            ViewData["page"] = cpage;
-            //            return View(calls[0]);
-            //        }
-            //    }
-            //}
-            //else
-            //    return View(new List<SMS>());
         }
 
         public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<SMS> data)
@@ -209,13 +144,17 @@ namespace MVCPhoneServiceWeb.Controllers
 
             string webRootPath = _hostingEnviroment.WebRootPath;
             var uploads = Path.Combine(webRootPath, "ExportFiles");
-            var path = Path.Combine(uploads, "sMS.csv");
+            string time = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " " + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second;
+            var path = Path.Combine(uploads, "sMS " + time + ".csv");
             using (var filesStream = new FileStream(path, FileMode.Create))
             {
 
             }
-            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "sMS.csv"));
-            string csv = HttpContext.Session.GetString(SD.csv);
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "sMS " + time + ".csv"));
+            string httpSessionName = SD.HttpSessionString(new List<string> { "SMS", page.ToString(), phoneNumber, day, month, year, er, min, max, location, destination, roaming,
+                phoneNumberCheck.ToString(), dateTimeCheck.ToString(), erCheck.ToString(), totalCostCheck.ToString(), locationCheck.ToString(), destinationCheck.ToString(), roamingCheck.ToString()});
+
+            string csv = HttpContext.Session.GetString(httpSessionName);
             stw.Write(csv);
             stw.Dispose();
             return RedirectToAction(nameof(Index), new
@@ -230,13 +169,13 @@ namespace MVCPhoneServiceWeb.Controllers
                 location = location,
                 destination = destination,
                 roaming = roaming,
-                phoneNumberCheck = phoneNumberCheck,
-                dateTimeCheck = dateTimeCheck,
-                erCheck = erCheck,
-                totalCostCheck = totalCostCheck,
-                locationCheck = locationCheck,
-                destinationCheck = destinationCheck,
-                roamingCheck = roamingCheck,
+                phoneNumberCheck = phoneNumberCheck == "True" ? "True" : null,
+                dateTimeCheck = dateTimeCheck == "True" ? "True" : null,
+                erCheck = erCheck == "True" ? "True" : null,
+                totalCostCheck = totalCostCheck == "True" ? "True" : null,
+                locationCheck = locationCheck == "True" ? "True" : null,
+                destinationCheck = destinationCheck == "True" ? "True" : null,
+                roamingCheck = roamingCheck == "True" ? "True" : null,
                 cpage = page
             });
         }

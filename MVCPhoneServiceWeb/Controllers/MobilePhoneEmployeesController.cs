@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Http;
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class MobilePhoneEmployeesController : Controller
-    {
+    { 
         private readonly ApplicationDbContext _context;
         private readonly IHostingEnvironment _hostingEnviroment;
 
@@ -54,7 +54,10 @@ namespace MVCPhoneServiceWeb.Controllers
             bool[] mask = { iMEICheck != null, employeeNameCheck != null };
             string csv = CSVStringConstructor(show, mask, result.Item1);
             //ViewData["csv"] = ss;
-            HttpContext.Session.SetString(SD.csv, csv);
+            string httpSessionName = SD.HttpSessionString(new List<string> { "MobilePhoneEmployee", result.Item4.ToString(), iMEI, name,
+                 (iMEICheck != null).ToString(), (employeeNameCheck != null).ToString() });
+
+            HttpContext.Session.SetString(httpSessionName, csv);
 
             return View(result.Item1);
         }
@@ -99,13 +102,16 @@ namespace MVCPhoneServiceWeb.Controllers
 
             string webRootPath = _hostingEnviroment.WebRootPath;
             var uploads = Path.Combine(webRootPath, "ExportFiles");
-            var path = Path.Combine(uploads, "mobilePhoneEmployee.csv");
+            string time = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " " + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second;
+            var path = Path.Combine(uploads, "mobilePhoneEmployee " + time + ".csv");
             using (var filesStream = new FileStream(path, FileMode.Create))
             {
 
             }
-            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "mobilePhoneEmployee.csv"));
-
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "mobilePhoneEmployee " + time + ".csv"));
+            string httpSessionName = SD.HttpSessionString(new List<string> { "MobilePhoneEmployee", page.ToString(), iMEI, name,
+                 iMEICheck.ToString(), employeeNameCheck.ToString() });
+            
             string csv = HttpContext.Session.GetString(SD.csv);
             stw.Write(csv);
             stw.Dispose();
@@ -113,8 +119,8 @@ namespace MVCPhoneServiceWeb.Controllers
             {
                 iMEI = iMEI,
                 name = name,
-                iMEICheck = iMEICheck,
-                employeeNameCheck = employeeNameCheck,
+                iMEICheck = iMEICheck == "True" ? "True" : null,
+                employeeNameCheck = employeeNameCheck == "True" ? "True" : null,
                 cpage = page
             });
         }

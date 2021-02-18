@@ -121,7 +121,11 @@ namespace MVCPhoneServiceWeb.Controllers
             bool[] mask = { phoneNumberCheck != null, employeeNameCheck != null, callingPlanCheck != null, smsPlanCheck != null, minExcCheck != null, false, smsExcCheck != null, false, monthCheck != null, yearCheck != null, minPercentCheck != null, false, smsPercentCheck != null, false };
             string csv = CSVStringConstructor(show, mask, result.Item1);
             //ViewData["csv"] = ss;
-            HttpContext.Session.SetString(SD.csv, csv);
+            string httpSessionName = SD.HttpSessionString(new List<string> { "UserExceededCallingPlan", result.Item4.ToString(), phoneNumber, employeeName, callingPlan, smsPlan, minMinExc, maxMinExc, month, year, minSmsExc, maxSmsExc, minMinPercent, maxMinPercent, minSmsPercent, maxSmsPercent,
+                (phoneNumberCheck != null).ToString(), (employeeNameCheck != null).ToString(), (callingPlanCheck != null).ToString(), (smsPlanCheck != null).ToString(), (minExcCheck != null).ToString(), (monthCheck != null).ToString(),
+                (yearCheck != null).ToString(), (smsExcCheck != null).ToString(), (minPercentCheck != null).ToString(), (smsPercentCheck != null).ToString() });
+
+            HttpContext.Session.SetString(httpSessionName, csv);
             return View(result.Item1);
         }
 
@@ -201,13 +205,17 @@ namespace MVCPhoneServiceWeb.Controllers
 
             string webRootPath = _hostingEnviroment.WebRootPath;
             var uploads = Path.Combine(webRootPath, "ExportFiles");
-            var path = Path.Combine(uploads, "userExceededCallingPlan.csv");
+            string time = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " " + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second;
+            var path = Path.Combine(uploads, "userExceededCallingPlan" + time + ".csv");
             using (var filesStream = new FileStream(path, FileMode.Create))
             {
 
             }
-            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "userExceededCallingPlan.csv"));
-            string csv = HttpContext.Session.GetString(SD.csv);
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "userExceededCallingPlan " + time + ".csv"));
+            string httpSessionName = SD.HttpSessionString(new List<string> { "UserExceededCallingPlan", page.ToString(), phoneNumber, employeeName, callingPlan, smsPlan, minMinExc, maxMinExc, month, year, minSmsExc, maxSmsExc, minMinPercent, maxMinPercent, minSmsPercent, maxSmsPercent,
+                phoneNumberCheck.ToString(), employeeNameCheck.ToString(), callingPlanCheck.ToString(), smsPlanCheck.ToString(), minExcCheck.ToString(), monthCheck.ToString(), yearCheck.ToString(), smsExcCheck.ToString(), minPercentCheck.ToString(), smsPercentCheck.ToString() });
+
+            string csv = HttpContext.Session.GetString(httpSessionName);
             stw.Write(csv);
             stw.Dispose();
             return RedirectToAction(nameof(Index), new
@@ -227,15 +235,15 @@ namespace MVCPhoneServiceWeb.Controllers
                 maxMinPercent = maxMinPercent,
                 minSmsPercent = minSmsPercent,
                 maxSmsPercent = maxSmsPercent,
-                phoneNumberCheck = phoneNumberCheck,
-                employeeNameCheck = employeeNameCheck,
-                callingPlanCheck = callingPlanCheck,
-                smsPlanCheck = smsPlanCheck,
-                minExcCheck = minExcCheck,
-                smsExcCheck = smsExcCheck,
-                minPercentCheck = minPercentCheck,
-                monthCheck = monthCheck,
-                yearCheck = yearCheck,
+                phoneNumberCheck = phoneNumberCheck == "True" ? "True" : null,
+                employeeNameCheck = employeeNameCheck == "True" ? "True" : null,
+                callingPlanCheck = callingPlanCheck == "True" ? "True" : null,
+                smsPlanCheck = smsPlanCheck == "True" ? "True" : null,
+                minExcCheck = minExcCheck == "True" ? "True" : null,
+                smsExcCheck = smsExcCheck == "True" ? "True" : null,
+                minPercentCheck = minPercentCheck == "True" ? "True" : null,
+                monthCheck = monthCheck == "True" ? "True" : null,
+                yearCheck = yearCheck == "True" ? "True" : null,
                 cpage = page
             });
         }

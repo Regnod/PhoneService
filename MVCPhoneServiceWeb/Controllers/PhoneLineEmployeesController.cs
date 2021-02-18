@@ -27,8 +27,8 @@ namespace MVCPhoneServiceWeb.Controllers
         }
 
         // GET: PhoneLineEmployees
-        public async Task<IActionResult> Index(int cpage, string phoneNumber, string name, 
-            string phoneNumberCheck, string employeeNameCheck, 
+        public async Task<IActionResult> Index(int cpage, string phoneNumber, string name,
+            string phoneNumberCheck, string employeeNameCheck,
             string page, string next, string previous)
         {
             // 
@@ -55,7 +55,10 @@ namespace MVCPhoneServiceWeb.Controllers
             bool[] mask = { phoneNumberCheck != null, employeeNameCheck != null };
             string csv = CSVStringConstructor(show, mask, result.Item1);
             //ViewData["csv"] = ss;
-            HttpContext.Session.SetString(SD.csv, csv);
+            string httpSessionName = SD.HttpSessionString(new List<string> { "PhoneLineEmployee", result.Item4.ToString(), phoneNumber, name,
+                (phoneNumberCheck != null).ToString(), (employeeNameCheck != null).ToString() });
+
+            HttpContext.Session.SetString(httpSessionName, csv);
 
             return View(result.Item1);
         }
@@ -100,21 +103,24 @@ namespace MVCPhoneServiceWeb.Controllers
 
             string webRootPath = _hostingEnviroment.WebRootPath;
             var uploads = Path.Combine(webRootPath, "ExportFiles");
-            var path = Path.Combine(uploads, "phoneLineEmployee.csv");
+            string time = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " " + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second;
+            var path = Path.Combine(uploads, "phoneLineEmployee " + time + ".csv");
             using (var filesStream = new FileStream(path, FileMode.Create))
             {
 
             }
-            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "phoneLineEmployee.csv"));
-            string csv = HttpContext.Session.GetString(SD.csv);
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "phoneLineEmployee " + time + ".csv"));
+            string httpSessionName = SD.HttpSessionString(new List<string> { "PhoneLineEmployee", page.ToString(), phoneNumber, name, phoneNumberCheck.ToString(), employeeNameCheck.ToString() });
+
+            string csv = HttpContext.Session.GetString(httpSessionName);
             stw.Write(csv);
             stw.Dispose();
             return RedirectToAction(nameof(Index), new
             {
                 phoneNumber = phoneNumber,
                 name = name,
-                phoneNumberCheck = phoneNumberCheck,
-                employeeNameCheck = employeeNameCheck,
+                phoneNumberCheck = phoneNumberCheck == "True" ? "True" : null,
+                employeeNameCheck = employeeNameCheck == "True" ? "True" : null,
                 cpage = page
             });
         }

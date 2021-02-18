@@ -54,7 +54,9 @@ namespace MVCPhoneServiceWeb.Controllers
             bool[] mask = { iMEICheck != null, modelCheck != null };
             string csv = CSVStringConstructor(show, mask, result.Item1);
             //ViewData["csv"] = ss;
-            HttpContext.Session.SetString(SD.csv, csv);
+            string httpSessionName = SD.HttpSessionString(new List<string> { "MobilePhone", result.Item4.ToString(), iMEI, model, (iMEICheck != null).ToString(), (modelCheck != null).ToString() });
+
+            HttpContext.Session.SetString(httpSessionName, csv);
 
             return View(result.Item1);
         }
@@ -99,12 +101,15 @@ namespace MVCPhoneServiceWeb.Controllers
 
             string webRootPath = _hostingEnviroment.WebRootPath;
             var uploads = Path.Combine(webRootPath, "ExportFiles");
-            var path = Path.Combine(uploads, "mobilePhone.csv");
+            string time = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " " + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second;
+            var path = Path.Combine(uploads, "mobilePhone " + time + ".csv");
             using (var filesStream = new FileStream(path, FileMode.Create))
             {
 
             }
-            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "mobilePhone.csv"));
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "mobilePhone " + time + ".csv"));
+            string httpSessionName = SD.HttpSessionString(new List<string> { "MobilePhone", page.ToString(), iMEI, model, iMEICheck.ToString(), modelCheck.ToString() });
+
             string csv = HttpContext.Session.GetString(SD.csv);
             stw.Write(csv);
             stw.Dispose();
@@ -112,8 +117,8 @@ namespace MVCPhoneServiceWeb.Controllers
             {
                 iMEI = iMEI,
                 model = model,
-                iMEICheck = iMEICheck,
-                modelCheck = modelCheck,
+                iMEICheck = iMEICheck == "True" ? "True" : null,
+                modelCheck = modelCheck == "True" ? "True" : null,
                 cpage = page
             });
         }

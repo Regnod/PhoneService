@@ -23,7 +23,7 @@ namespace MVCPhoneServiceWeb.Controllers
         {
             _context = context;
             _hostingEnviroment = hostingEnvironment;
-        } 
+        }
 
         // GET: PhoneLines
         public async Task<IActionResult> Index(int cpage, string phoneNumber, string pUK, string pIN, string contract,
@@ -60,7 +60,9 @@ namespace MVCPhoneServiceWeb.Controllers
             bool[] mask = { phoneNumberCheck == "On", pUKCheck == "On", pINCheck == "On", contractCheck == "On" };
             string csv = CSVStringConstructor(show, mask, result.Item1);
             //ViewData["csv"] = ss;
-            HttpContext.Session.SetString(SD.csv, csv);
+            string httpSessionName = SD.HttpSessionString(new List<string> { "PhoneLine", result.Item4.ToString(), phoneNumber, pUK, pIN, contract,
+                 (phoneNumberCheck != null).ToString(), (pUKCheck != null).ToString(), (pINCheck != null).ToString(), (contractCheck != null).ToString() });
+            HttpContext.Session.SetString(httpSessionName, csv);
 
             return View(result.Item1);
         }
@@ -113,13 +115,17 @@ namespace MVCPhoneServiceWeb.Controllers
 
             string webRootPath = _hostingEnviroment.WebRootPath;
             var uploads = Path.Combine(webRootPath, "ExportFiles");
-            var path = Path.Combine(uploads, "phoneLine.csv");
+            string time = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " " + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second;
+            var path = Path.Combine(uploads, "phoneLine " + time + ".csv");
             using (var filesStream = new FileStream(path, FileMode.Create))
             {
 
             }
-            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "phoneLine.csv"));
-            string csv = HttpContext.Session.GetString(SD.csv);
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "phoneLine " + time + ".csv"));
+            string httpSessionName = SD.HttpSessionString(new List<string> { "PhoneLine", page.ToString(), phoneNumber, pUK, pIN, contract,
+                 phoneNumberCheck.ToString(), pUKCheck.ToString(), pINCheck.ToString(), contractCheck.ToString() });
+
+            string csv = HttpContext.Session.GetString(httpSessionName);
             stw.Write(csv);
             stw.Dispose();
             return RedirectToAction(nameof(Index), new
@@ -128,10 +134,10 @@ namespace MVCPhoneServiceWeb.Controllers
                 pUK = pUK,
                 pIN = pIN,
                 contract = contract,
-                phoneNumberCheck = phoneNumberCheck,
-                pUKCheck = pUKCheck,
-                pINCheck = pINCheck,
-                contractCheck = contractCheck,
+                phoneNumberCheck = phoneNumberCheck == "True" ? "True" : null,
+                pUKCheck = pUKCheck == "True" ? "True" : null,
+                pINCheck = pINCheck == "True" ? "True" : null,
+                contractCheck = contractCheck == "True" ? "True" : null,
                 cpage = page
             });
         }

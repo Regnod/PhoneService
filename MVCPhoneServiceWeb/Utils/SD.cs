@@ -1,6 +1,7 @@
 ﻿
 //using iTextSharp.text.pdf;
 //using iTextSharp.text.pdf.parser;
+using Data.Models;
 using System;
 using System.Collections.Generic;
 
@@ -11,7 +12,8 @@ namespace MVCPhoneServiceWeb.Utils
         public static string AdminUser = "Admin";
         public static string VisitorUser = "Vistitor";
         public static int NumberPages = 25;
-        public static string csv = "csv"; 
+        public static string csv = "csv";
+        public static string costCenterCsv = "Cost Center";
         public static Dictionary<string, int> months = new Dictionary<string, int>() { { "enero", 1 }, { "febrero", 2 }, { "marzo", 3 }, { "abril", 4 }, { "mayo", 5 }, { "junio", 6 }, { "julio", 7 }, { "agosto", 8 }, { "septiembre", 9 }, { "octubre", 10 }, { "noviembre", 11 }, { "diciembre", 12 } };
         public static Dictionary<int, string> Months = new Dictionary<int, string>() { { 1, "enero" }, { 2, "febrero" }, { 3, "marzo" }, { 4, "abril" }, { 5, "mayo" }, { 6, "junio" }, { 7, "julio" }, { 8, "agosto" }, { 9, "septiembre" }, { 10, "octubre" }, { 11, "noviembre" }, { 12, "diciembre" } };
         public static List<string> ProvinceCode = new List<string>() { "7" };
@@ -90,6 +92,15 @@ namespace MVCPhoneServiceWeb.Utils
             }
 
             return csv;
+        }
+        public static string HttpSessionString(List<string> data)
+        {
+            string name = "";
+            foreach (var s in data)
+            {
+                name += s;
+            }
+            return name;
         }
 
         public static Tuple<bool, string>[] Show(List<string> checks, List<string> filters)

@@ -31,7 +31,7 @@ namespace MVCPhoneServiceWeb.Controllers
         {
             var _messages = Parse.IntTryParse(messages);
             var _minCost = Parse.FloatTryParse(minCost);
-            var _maxCost = Parse.FloatTryParse(maxCost); 
+            var _maxCost = Parse.FloatTryParse(maxCost);
 
             // para setear propiedades en la vista
             Tuple<bool, string>[] show = SD.Show(new List<string>() { sPCheck, messagesCheck, costCheck, costCheck }, new List<string>() { smsPlanId, messages, minCost, maxCost });
@@ -58,7 +58,9 @@ namespace MVCPhoneServiceWeb.Controllers
             bool[] mask = { sPCheck != null, messagesCheck != null, costCheck != null, false };
             string csv = CSVStringConstructor(show, mask, result.Item1);
             //ViewData["csv"] = ss;
-            HttpContext.Session.SetString(SD.csv, csv);
+            string httpSessionName = SD.HttpSessionString(new List<string> { "SMSPlan", result.Item4.ToString(), smsPlanId, messages, minCost, maxCost,
+                 (sPCheck != null).ToString(), (messagesCheck != null).ToString(), (costCheck != null).ToString() });
+            HttpContext.Session.SetString(httpSessionName, csv);
 
             return View(result.Item1);
         }
@@ -107,13 +109,17 @@ namespace MVCPhoneServiceWeb.Controllers
 
             string webRootPath = _hostingEnviroment.WebRootPath;
             var uploads = Path.Combine(webRootPath, "ExportFiles");
-            var path = Path.Combine(uploads, "callingPlanAssignment.csv");
+            string time = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " " + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second;
+            var path = Path.Combine(uploads, "sMSPlan " + time + ".csv");
             using (var filesStream = new FileStream(path, FileMode.Create))
             {
 
             }
-            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "callingPlanAssignment.csv"));
-            string csv = HttpContext.Session.GetString(SD.csv);
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "sMSPlan " + time + ".csv"));
+            string httpSessionName = SD.HttpSessionString(new List<string> { "SMSPlan", page.ToString(), smsPlanId, messages, minCost, maxCost,
+                 sPCheck.ToString(), messagesCheck.ToString(), costCheck.ToString() });
+
+            string csv = HttpContext.Session.GetString(httpSessionName);
             stw.Write(csv);
             stw.Dispose();
             return RedirectToAction(nameof(Index), new
@@ -122,9 +128,9 @@ namespace MVCPhoneServiceWeb.Controllers
                 messages = messages,
                 minCost = minCost,
                 maxCost = maxCost,
-                sPCheck = sPCheck,
-                messagesCheck = messagesCheck,
-                costCheck = costCheck,
+                sPCheck = sPCheck == "True" ? "True" : null,
+                messagesCheck = messagesCheck == "True" ? "True" : null,
+                costCheck = costCheck == "True" ? "True" : null,
                 cpage = page
             });
         }

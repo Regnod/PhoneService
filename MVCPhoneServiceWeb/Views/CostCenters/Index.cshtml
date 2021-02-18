@@ -87,9 +87,9 @@
                     </th>
                 }
                 @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1)
-                {
-                    <th class="col-1"></th>
-                }*@
+                    {
+                        <th class="col-1"></th>
+                    }*@
             </tr>
             <tr class="text-center">
                 @if (show[0].Item1)
@@ -138,9 +138,9 @@
                     }
                 }
                 @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1)
-                {
-                    <th></th>
-                }*@
+                    {
+                        <th></th>
+                    }*@
             </tr>
             @foreach (var item in Model)
             {
@@ -183,9 +183,9 @@
                         </td>
                     }
                     @*else
-                    {
-                        <td></td>
-                    }*@
+                        {
+                            <td></td>
+                        }*@
                 </tr>
             }
         </table>
@@ -210,8 +210,8 @@
         </div>
         <div class="row">
             <div class="col-12 text-right">
-                <a class=" btn btn-success text-white" asp-action="Export" asp-route-page="cpage" asp-route-codeCheck="@show[0].Item1"asp-route-nameCheck="@show[1].Item1" 
-                   asp-route-managementNameCheck="@show[2].Item1"asp-route-code="@show[0].Item2"asp-route-name="@show[1].Item2" asp-route-managementName="@show[2].Item2">
+                <a class=" btn btn-success text-white" asp-action="Export" asp-route-page="cpage" asp-route-codeCheck="@show[0].Item1" asp-route-nameCheck="@show[1].Item1"
+                   asp-route-managementNameCheck="@show[2].Item1" asp-route-code="@show[0].Item2" asp-route-name="@show[1].Item2" asp-route-managementName="@show[2].Item2">
                     <i class="fas fa-trash-"></i>
                     Export
                 </a>

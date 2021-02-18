@@ -57,8 +57,10 @@ namespace MVCPhoneServiceWeb.Controllers
             bool[] mask = { codeCheck != null, nameCheck != null, managementNameCheck != null };
             string csv = CSVStringConstructor(show, mask, result.Item1);
             //ViewData["csv"] = ss;
-            HttpContext.Session.SetString(SD.csv, csv);
-            
+            string httpSessionName = SD.HttpSessionString(new List<string> { "CostCenter", result.Item4.ToString(), code, name, managementName, (codeCheck != null).ToString(), (nameCheck != null).ToString(), (managementNameCheck != null).ToString() });
+
+            HttpContext.Session.SetString(httpSessionName, csv);
+
             return View(result.Item1);
         }
 
@@ -106,22 +108,23 @@ namespace MVCPhoneServiceWeb.Controllers
 
             string webRootPath = _hostingEnviroment.WebRootPath;
             var uploads = Path.Combine(webRootPath, "ExportFiles");
-
-            var path = Path.Combine(uploads, "costCenter.csv");
-            using (var filesStream = new FileStream(path, FileMode.CreateNew))
+            string time = DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " " + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" + DateTime.Now.Second;
+            var path = Path.Combine(uploads, "costCenter " + time + ".csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
             {
 
             }
-            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "costCenter.csv"));
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "costCenter " + time + ".csv"));
 
-            string csv = HttpContext.Session.GetString(SD.csv);
+            string httpSessionName = SD.HttpSessionString(new List<string> { "CostCenter", page.ToString(), code, name, managementName, codeCheck.ToString(), nameCheck.ToString(), managementNameCheck.ToString() });
+            string csv = HttpContext.Session.GetString(httpSessionName);
             stw.Write(csv);
             stw.Dispose();
             return RedirectToAction(nameof(Index), new
             {
-                codeCheck = codeCheck,
-                nameCheck = nameCheck,
-                managementNameCheck = managementNameCheck,
+                codeCheck = codeCheck == "True" ? "True" : null,
+                nameCheck = nameCheck == "True" ? "True" : null,
+                managementNameCheck = managementNameCheck == "True" ? "True" : null,
                 code = code,
                 name = name,
                 managementName = managementName,
