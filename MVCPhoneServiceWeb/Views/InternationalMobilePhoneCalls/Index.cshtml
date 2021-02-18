@@ -65,22 +65,6 @@
             {
                 <li class="border-0 dropdown-item"><input type="checkbox" name="addresseCheck" />  @Html.DisplayNameFor(model => model.Addresse)</li>
             }
-            @if (show[7].Item1)
-            {
-                <li class="border-0 dropdown-item"><input type="checkbox" checked name="expenseCheck" />  @Html.DisplayNameFor(model => model.Expense)</li>
-            }
-            else
-            {
-                <li class="border-0 dropdown-item"><input type="checkbox" name="expenseCheck" />  @Html.DisplayNameFor(model => model.Expense)</li>
-            }
-            @if (show[9].Item1)
-            {
-                <li class="border-0 dropdown-item"><input type="checkbox" checked name="percentCheck" />  @Html.DisplayNameFor(model => model.PerCent)</li>
-            }
-            else
-            {
-                <li class="border-0 dropdown-item"><input type="checkbox" name="percentCheck" />  @Html.DisplayNameFor(model => model.PerCent)</li>
-            }
             @if (show[5].Item1)
             {
                 <li class="border-0 dropdown-item"><input type="checkbox" checked name="monthCheck" />  @Html.DisplayNameFor(model => model.Month)</li>
@@ -96,6 +80,22 @@
             else
             {
                 <li class="border-0 dropdown-item"><input type="checkbox" name="yearCheck" />  @Html.DisplayNameFor(model => model.Year)</li>
+            }
+            @if (show[7].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="expenseCheck" />  @Html.DisplayNameFor(model => model.Expense)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="expenseCheck" />  @Html.DisplayNameFor(model => model.Expense)</li>
+            }
+            @if (show[9].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="percentCheck" />  @Html.DisplayNameFor(model => model.PerCent)</li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="percentCheck" />  @Html.DisplayNameFor(model => model.PerCent)</li>
             }
         </div>
         <input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />
@@ -392,7 +392,18 @@
         </div>
         <div class="row">
             <div class="col-12 text-right">
-                <a class=" btn btn-success text-white">
+                <a class=" btn btn-success text-white" asp-action="Export" asp-route-page="cpage"
+                    asp-route-phoneNumberCheck="@show[0].Item1" asp-route-phoneNumber="@show[0].Item2"
+                    asp-route-employeeNameCheck="@show[1].Item1" asp-route-employeeName="@show[1].Item2"
+                    asp-route-costCenterNameCheck="@show[2].Item1" asp-route-costCenterName="@show[2].Item2"
+                    asp-route-costCenterCodeCheck="@show[3].Item1" asp-route-costCenterCode="@show[3].Item2"
+                    asp-route-addresseCheck="@show[4].Item1" asp-route-addresse="@show[4].Item2"
+                    asp-route-monthCheck="@show[5].Item1" asp-route-month="@show[5].Item2"
+                    asp-route-yearCheck="@show[6].Item1" asp-route-year="@show[6].Item2"
+                    asp-route-expenseCheck="@show[7].Item1" asp-route-minExpense="@show[7].Item2" asp-route-maxExpense="@show[8].Item2"
+
+                    asp-route-percentCheck="@show[9].Item1" asp-route-minPercent="@show[9].Item2" asp-route-maxPercent="@show[10].Item2">
+
                     <i class="fas fa-trash-"></i>
                     Export
                 </a>

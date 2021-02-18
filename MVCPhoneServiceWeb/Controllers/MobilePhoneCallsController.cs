@@ -8,16 +8,21 @@ using Repo;
 using System.Collections.Generic;
 using MVCPhoneServiceWeb.Utils;
 using System;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class MobilePhoneCallsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public MobilePhoneCallsController(ApplicationDbContext context)
+        public MobilePhoneCallsController(ApplicationDbContext context, IHostingEnvironment hostingEnviroment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnviroment;
         }
 
         // GET: MobilePhoneCalls
@@ -61,8 +66,96 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { phoneNumberCheck != null, dateTimeCheck != null, false, false, addressCheck != null, totalCostCheck != null, false, roamingCheck != null };
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "MobilePhoneCall", result.Item4.ToString(), phoneNumber, day, month, year, address, min, max, roaming,
+                                                                               (phoneNumberCheck != null).ToString(), (dateTimeCheck != null).ToString(), (addressCheck != null).ToString(), (totalCostCheck != null).ToString(), (roamingCheck != null).ToString() });
+            HttpContext.Session.SetString(HttpSessionName, csv);
 
             return View(result.Item1);
+        }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<MobilePhoneCall> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < show.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.mobilePhoneCalls[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.PhoneNumber);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.DateTime.ToString());
+                }
+                if (show[4].Item1)
+                {
+                    row.Add(item.Addressee);
+                }
+                if (show[5].Item1)
+                {
+                    row.Add(item.TotalCost.ToString());
+                }
+                if (show[7].Item1)
+                {
+                    row.Add(item.RoamingCall.ToString());
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string phoneNumber, string day, string month, string year, string address, string min, string max, string roaming,
+            string phoneNumberCheck, string dateTimeCheck, string addressCheck, string totalCostCheck, string roamingCheck)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var time = System.DateTime.Now.Day.ToString() + '-' + System.DateTime.Now.Month.ToString() + '-' + System.DateTime.Now.Year.ToString() + ' ' + System.DateTime.Now.Hour + '-' + System.DateTime.Now.Minute + '-' + System.DateTime.Now.Second;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var path = Path.Combine(uploads, "MobilePhoneCalls " + time + ".csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "MobilePhoneCalls " + time + ".csv"));
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "MobilePhoneCall", page.ToString(), phoneNumber, day, month, year, address, min, max, roaming,
+                                                                               phoneNumberCheck.ToString(), dateTimeCheck.ToString(), addressCheck.ToString(), totalCostCheck.ToString(), roamingCheck.ToString() });
+            string csv = HttpContext.Session.GetString(HttpSessionName);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                phoneNumber = phoneNumber,
+                day = day,
+                month = month,
+                year = year,
+                address = address,
+                min = min,
+                max = max,
+                roaming = roaming,
+                phoneNumberCheck = phoneNumberCheck == "True" ? "True" : null,
+                dateTimeCheck = dateTimeCheck == "True" ? "True" : null,
+                addressCheck = addressCheck == "True" ? "True" : null,
+                totalCostCheck = totalCostCheck == "True" ? "True" : null,
+                roamingCheck = roamingCheck == "True" ? "True" : null,
+                cpage = page
+            });
         }
 
         // GET: MobilePhoneCalls/Details/5

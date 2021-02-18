@@ -6,16 +6,21 @@ using Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Repo;
 using MVCPhoneServiceWeb.Utils;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class CostCenterMobilePhoneExpenseController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public CostCenterMobilePhoneExpenseController(ApplicationDbContext context)
+        public CostCenterMobilePhoneExpenseController(ApplicationDbContext context, IHostingEnvironment hostingEnviroment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnviroment;
         }
         // TODO: Falta revisar detalles y hacer el de detais
         // GET
@@ -102,8 +107,124 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { costCenterCodeCheck != null, costCenterNameCheck != null, callsCheck != null, false, smsCheck != null, false, gprsCheck != null, false, totalCheck != null, false, percentCheck != null, false, monthCheck != null, yearCheck != null };
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "CostCenterMobilePhoneExpense", result.Item4.ToString(), costCenterCode, costCenterName, minCalls, maxCalls, minSms, maxSms, minGprs, maxGprs, minTotal, maxTotal, minPercent, maxPercent, month, year,
+                                                                               (costCenterCodeCheck != null).ToString(), (costCenterNameCheck != null).ToString(), (callsCheck != null).ToString(), (smsCheck !=null).ToString(), (gprsCheck != null).ToString(), (totalCheck != null).ToString(), (percentCheck != null).ToString(), (monthCheck != null).ToString(), (yearCheck != null).ToString() });
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            HttpContext.Session.SetString(HttpSessionName, csv);
 
             return View(result.Item1);
+        }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<CostCenterMobilePhoneExpense> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < show.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.costCenterMPExpenses[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.CostCenterCode);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.CostCenterName);
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.Calls.ToString());
+                }
+                if (show[4].Item1)
+                {
+                    row.Add(item.SMS.ToString());
+                }
+                if (show[6].Item1)
+                {
+                    row.Add(item.GPRS.ToString());
+                }
+                if (show[12].Item1)
+                {
+                    row.Add(SD.Months[item.Month]);
+                }
+                if (show[13].Item1)
+                {
+                    row.Add(item.Year.ToString());
+                }
+                if (show[8].Item1)
+                {
+                    row.Add(item.Total.ToString());
+                }
+                if (show[10].Item1)
+                {
+                    row.Add(item.Percent.ToString());
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string costCenterCode, string costCenterName, string month, string year,
+            string minCalls, string maxCalls, string minSms, string maxSms, string minGprs, string maxGprs, string minTotal, string maxTotal, string minPercent, string maxPercent,
+            string costCenterCodeCheck, string costCenterNameCheck, string callsCheck, string smsCheck, string gprsCheck,
+            string totalCheck, string percentCheck, string monthCheck, string yearCheck)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var time = System.DateTime.Now.Day.ToString() + '-' + System.DateTime.Now.Month.ToString() + '-' + System.DateTime.Now.Year.ToString() + ' ' + System.DateTime.Now.Hour.ToString() + '-' + System.DateTime.Now.ToString() + '-' + System.DateTime.Now.Second.ToString();
+            var path = Path.Combine(uploads, "CostCenterMobilePhoneExpense " + time + ".csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "CostCenterMobilePhoneExpense " + time + ".csv"));
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "CostCenterMobilePhoneExpense", page.ToString(), costCenterCode, costCenterName, minCalls, maxCalls, minSms, maxSms, minGprs, maxGprs, minTotal, maxTotal, minPercent, maxPercent, month, year,
+                                                                               costCenterCodeCheck.ToString(), callsCheck.ToString(), smsCheck.ToString(), gprsCheck.ToString(), totalCheck.ToString(), percentCheck.ToString(), monthCheck.ToString(), yearCheck.ToString() });
+            string csv = HttpContext.Session.GetString(HttpSessionName);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                costCenterCode = costCenterCode,
+                costCenterName = costCenterName,
+                month = month,
+                year = year,
+                minCalls = minCalls,
+                maxCalls = maxCalls,
+                minSms = minSms,
+                maxSms = maxSms,
+                minGprs = minGprs,
+                maxGprs = maxGprs,
+                minTotal = minTotal,
+                maxTotal = maxTotal,
+                minPercent = minPercent,
+                maxPercent = maxPercent,
+                costCenterCodeCheck = costCenterCodeCheck == "True" ? "True" : null,
+                costCenterNameCheck = costCenterNameCheck == "True" ? "True" : null,
+                callsCheck = callsCheck == "True" ? "True" : null,
+                smsCheck = smsCheck == "True" ? "True" : null,
+                gprsCheck = gprsCheck == "True" ? "True" : null,
+                totalCheck = totalCheck == "True" ? "True" : null,
+                percentCheck = percentCheck == "True" ? "True" : null,
+                monthCheck = monthCheck == "True" ? "True" : null,
+                yearCheck = yearCheck == "True" ? "True" : null,
+                cpage = page
+            });
         }
 
         public async Task<IActionResult> Details(int cpage, string employeeName, string phoneNumber, string callingPlanId,
@@ -198,8 +319,125 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { employeeNameCheck != null, phoneNumberCheck != null, callingPlanIdCheck != null, callsCheck != null, false, smsCheck != null, false, gprsCheck != null, false, totalCheck != null, false, monthCheck != null, yearCheck != null };
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "CostCenterMobilePhoneExpensesDetails", result.Item4.ToString(), employeeName, phoneNumber, callingPlanId, minCalls, maxCalls, minSms, maxSms, minGprs, maxGprs, minTotal, maxTotal, month, year,
+                                                                               (employeeNameCheck != null).ToString(), (phoneNumberCheck != null).ToString(), (callingPlanIdCheck != null).ToString(), (callsCheck != null).ToString(), (smsCheck != null).ToString(), (gprsCheck !=null).ToString(), (totalCheck != null).ToString(), (monthCheck != null).ToString(), (yearCheck != null).ToString() });
+            string csv = CSVStringConstructorDetails(show, mask, result.Item1);
+
+            HttpContext.Session.SetString(HttpSessionName, csv);
 
             return View(result.Item1);
+        }
+
+
+        public string CSVStringConstructorDetails(Tuple<bool, string>[] show, bool[] mask, List<CostCenterMobilePhoneExpensesDetails> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < show.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.costCenterMPExpensesDetails[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.EmployeeName);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.PhoneNumber);
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.CallingPlanId.ToString());
+                }
+                if (show[3].Item1)
+                {
+                    row.Add(item.Minutes.ToString());
+                }
+                if (show[5].Item1)
+                {
+                    row.Add(item.SMS.ToString());
+                }
+                if (show[8].Item1)
+                {
+                    row.Add(item.Gprs.ToString());
+                }
+                if (show[9].Item1)
+                {
+                    row.Add(item.Total.ToString());
+                }
+                if (show[11].Item1)
+                {
+                    row.Add(SD.Months[item.Month]);
+                }
+                if (show[12].Item1)
+                {
+                    row.Add(item.Year.ToString());
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> ExportDetails(int page, string employeeName, string phoneNumber, string callingPlanId,
+            string minCalls, string maxCalls, string minSms, string maxSms, string minGprs, string maxGprs, string minTotal, string maxTotal,
+            string employeeNameCheck, string phoneNumberCheck, string callingPlanIdCheck, string callsCheck, string smsCheck, string gprsCheck,
+            string totalCheck, string monthCheck, string yearCheck, string month, string year)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var time = System.DateTime.Now.Day.ToString() + '-' + System.DateTime.Now.Month.ToString() + '-' + System.DateTime.Now.Year.ToString() + ' ' + System.DateTime.Now.Hour.ToString() + '-' + System.DateTime.Now.ToString() + '-' + System.DateTime.Now.Second.ToString();
+            var path = Path.Combine(uploads, "CostCenterMobilePhoneExpensesDetails " + time + ".csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "CostCenterMobilePhoneExpensesDetails " + time + ".csv"));
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "CostCenterMobilePhoneExpenseDetails", page.ToString(), employeeName, phoneNumber, callingPlanId, minCalls, maxCalls, minSms, maxSms, minGprs, maxGprs, minTotal, maxTotal, month, year,
+                                                                               employeeNameCheck.ToString(), phoneNumberCheck.ToString(), callingPlanIdCheck.ToString(), callsCheck.ToString(), smsCheck.ToString(), gprsCheck.ToString(), totalCheck.ToString(), monthCheck.ToString(), yearCheck.ToString() });
+            string csv = HttpContext.Session.GetString(HttpSessionName);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Details), new
+            {
+                employeeName = employeeName,
+                phoneNumber = phoneNumber,
+                callingPlanId = callingPlanId,
+                minCalls = minCalls,
+                maxCalls = maxCalls,
+                minSms = minSms,
+                maxSms = maxSms,
+                minGprs = minGprs,
+                maxGprs = maxGprs,
+                minTotal = minTotal,
+                maxTotal = maxTotal,
+                month = month,
+                year = year,
+                employeeNameCheck = employeeNameCheck == "True" ? "True" : null,
+                phoneNumberCheck = phoneNumberCheck == "True" ? "True" : null,
+                callingPlanIdCheck = callingPlanIdCheck == "True" ? "True" : null,
+                callsCheck = callsCheck == "True" ? "True" : null,
+                smsCheck = smsCheck == "True" ? "True" : null,
+                gprsCheck = gprsCheck == "True" ? "True" : null,
+                totalCheck = totalCheck == "True" ? "True" : null,
+                monthCheck = monthCheck == "True" ? "True" : null,
+                yearCheck = yearCheck == "True" ? "True" : null,
+                cpage = page
+            });
         }
 
         public async Task<IActionResult> General(int cpage, string employeeName, string phoneNumber, string callingPlanId, string costCenterCode, string costCenterName,
@@ -265,8 +503,8 @@ namespace MVCPhoneServiceWeb.Controllers
                 models.Add(newModel);
             }
             //
-            Tuple<bool, string>[] show = SD.Show(new List<string>() { employeeNameCheck, phoneNumberCheck, callingPlanIdCheck, callsCheck, callsCheck, smsCheck, smsCheck, gprsCheck, gprsCheck, totalCheck, totalCheck, monthCheck, yearCheck, costCenterCodeCheck, costCenterNameCheck },
-                   new List<string>() { employeeName, phoneNumber, callingPlanId, minCalls, maxCalls, minSms, maxSms, minGprs, maxGprs, minTotal, maxTotal, month, year, costCenterCode, costCenterName });
+            Tuple<bool, string>[] show = SD.Show(new List<string>() { employeeNameCheck, phoneNumberCheck, costCenterCodeCheck, costCenterNameCheck, callingPlanIdCheck, callsCheck, callsCheck, smsCheck, smsCheck, gprsCheck, gprsCheck, monthCheck, yearCheck, totalCheck, totalCheck },
+                   new List<string>() { employeeName, phoneNumber, costCenterCode, costCenterName, callingPlanId, minCalls, maxCalls, minSms, maxSms, minGprs, maxGprs, month, year, minTotal, maxTotal });
             ViewData["columns"] = show;
             //
             List<CostCenterMobilePhoneGeneralExpenses> final_result = new List<CostCenterMobilePhoneGeneralExpenses>();
@@ -297,8 +535,138 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { employeeNameCheck != null, phoneNumberCheck != null, costCenterCodeCheck != null, costCenterNameCheck != null, callingPlanIdCheck != null, callsCheck != null, false, smsCheck != null, false, gprsCheck != null, false, monthCheck != null, yearCheck != null, totalCheck != null, false };
+            string csv = CSVStringConstructorGeneral(show, mask, result.Item1);
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "CostCenterMobilePhoneGeneralExpenses", result.Item4.ToString(), employeeName, phoneNumber, costCenterCode, costCenterName, callingPlanId, minCalls, maxCalls, minSms, maxSms, minGprs, maxGprs, month, year, minTotal, maxTotal,
+                                                                               (employeeNameCheck != null).ToString(), (phoneNumberCheck != null).ToString(), (costCenterCodeCheck != null).ToString(), (costCenterNameCheck != null).ToString(), (callingPlanIdCheck != null).ToString(), (callsCheck != null).ToString(), (smsCheck != null).ToString(), (gprsCheck !=null).ToString(), (monthCheck != null).ToString(), (yearCheck != null).ToString(), (totalCheck != null).ToString() });
+            HttpContext.Session.SetString(HttpSessionName, csv);
+
+
 
             return View(result.Item1);
+        }
+
+        public string CSVStringConstructorGeneral(Tuple<bool, string>[] show, bool[] mask, List<CostCenterMobilePhoneGeneralExpenses> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < show.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.costCenterMPGeneralExpenses[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.EmployeeName);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.PhoneNumber);
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.CostCenterCode);
+                }
+                if (show[3].Item1)
+                {
+                    row.Add(item.CostCenterName);
+                }
+                if (show[4].Item1)
+                {
+                    row.Add(item.CallingPlanId.ToString());
+                }
+                if (show[5].Item1)
+                {
+                    row.Add(item.Minutes.ToString());
+                }
+                if (show[7].Item1)
+                {
+                    row.Add(item.SMS.ToString());
+                }
+                if (show[9].Item1)
+                {
+                    row.Add(item.Gprs.ToString());
+                }
+                if (show[11].Item1)
+                {
+                    row.Add(SD.Months[item.Month]);
+                }
+                if (show[12].Item1)
+                {
+                    row.Add(item.Year.ToString());
+                }
+                if (show[13].Item1)
+                {
+                    row.Add(item.Total.ToString());
+                }
+
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> ExportGeneral(int page, string employeeName, string phoneNumber, string callingPlanId, string costCenterCode, string costCenterName,
+            string minCalls, string maxCalls, string minSms, string maxSms, string minGprs, string maxGprs, string minTotal, string maxTotal,
+            string employeeNameCheck, string phoneNumberCheck, string callingPlanIdCheck, string callsCheck, string smsCheck, string gprsCheck,
+            string totalCheck, string costCenterCodeCheck, string costCenterNameCheck, string monthCheck, string yearCheck, string month, string year)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var time = System.DateTime.Now.Day.ToString() + '-' + System.DateTime.Now.Month.ToString() + '-' + System.DateTime.Now.Year.ToString() + ' ' + System.DateTime.Now.Hour.ToString() + '-' + System.DateTime.Now.ToString() + '-' + System.DateTime.Now.Second.ToString();
+            var path = Path.Combine(uploads, "CostCenterMobilePhoneGeneralExpenses " + time + ".csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "CostCenterMobilePhoneGeneralExpenses " + time + ".csv"));
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "CostCenterMobilePhoneGeneralExpenses", page.ToString(), employeeName, phoneNumber, costCenterCode, costCenterName, callingPlanId, minCalls, maxCalls, minSms, maxSms, minGprs, maxGprs, month, year, minTotal, maxTotal,
+                                                                               employeeNameCheck.ToString(), phoneNumberCheck.ToString(), costCenterCodeCheck.ToString(), costCenterNameCheck.ToString(), callingPlanIdCheck.ToString(), callsCheck.ToString(), smsCheck.ToString(), gprsCheck.ToString(), monthCheck.ToString(), yearCheck.ToString(), totalCheck.ToString() });
+            string csv = HttpContext.Session.GetString(HttpSessionName);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(General), new
+            {
+                employeeName = employeeName,
+                phoneNumber = phoneNumber,
+                callingPlanId = callingPlanId,
+                minCalls = minCalls,
+                maxCalls = maxCalls,
+                minSms = minSms,
+                maxSms = maxSms,
+                minGprs = minGprs,
+                maxGprs = maxGprs,
+                minTotal = minTotal,
+                maxTotal = maxTotal,
+                month = month,
+                year = year,
+                costCenterCode = costCenterCode,
+                costCenterName = costCenterName,
+                employeeNameCheck = employeeNameCheck == "True" ? "True" : null,
+                phoneNumberCheck = phoneNumberCheck == "True" ? "True" : null,
+                callingPlanIdCheck = callingPlanIdCheck == "True" ? "True" : null,
+                callsCheck = callsCheck == "True" ? "True" : null,
+                smsCheck = smsCheck == "True" ? "True" : null,
+                gprsCheck = gprsCheck == "True" ? "True" : null,
+                totalCheck = totalCheck == "True" ? "True" : null,
+                monthCheck = monthCheck == "True" ? "True" : null,
+                yearCheck = yearCheck == "True" ? "True" : null,
+                costCenterCodeCheck = costCenterCodeCheck == "True" ? "True" : null,
+                costCenterNameCheck = costCenterNameCheck == "True" ? "True" : null,
+                cpage = page
+            });
         }
     }
 }

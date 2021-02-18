@@ -54,35 +54,35 @@
             }
             @if (show[4].Item1)
             {
-                <li class="border-0 dropdown-item"><input type="checkbox" checked name="AddressCheck" />  @Html.DisplayNameFor(model => model.E_R) </li>
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="erCheck" />  @Html.DisplayNameFor(model => model.E_R) </li>
             }
             else
             {
-                <li class="border-0 dropdown-item"><input type="checkbox" name="AddressCheck" />  @Html.DisplayNameFor(model => model.E_R) </li>
+                <li class="border-0 dropdown-item"><input type="checkbox" name="erCheck" />  @Html.DisplayNameFor(model => model.E_R) </li>
             }
             @if (show[5].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="locationCheck" />  @Html.DisplayNameFor(model => model.Location) </li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="locationCheck" />  @Html.DisplayNameFor(model => model.Location) </li>
+            }
+            @if (show[6].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="destinationCheck" />  @Html.DisplayNameFor(model => model.Destination) </li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="destinationCheck" />  @Html.DisplayNameFor(model => model.Destination) </li>
+            }
+            @if (show[7].Item1)
             {
                 <li class="border-0 dropdown-item"><input type="checkbox" checked name="totalCostCheck" />  @Html.DisplayNameFor(model => model.Total) </li>
             }
             else
             {
                 <li class="border-0 dropdown-item"><input type="checkbox" name="totalCostCheck" />  @Html.DisplayNameFor(model => model.Total) </li>
-            }
-            @if (show[7].Item1)
-            {
-                <li class="border-0 dropdown-item"><input type="checkbox" checked name="roamingCheck" />  @Html.DisplayNameFor(model => model.Location) </li>
-            }
-            else
-            {
-                <li class="border-0 dropdown-item"><input type="checkbox" name="roamingCheck" />  @Html.DisplayNameFor(model => model.Location) </li>
-            }
-            @if (show[8].Item1)
-            {
-                <li class="border-0 dropdown-item"><input type="checkbox" checked name="roamingCheck" />  @Html.DisplayNameFor(model => model.Destination) </li>
-            }
-            else
-            {
-                <li class="border-0 dropdown-item"><input type="checkbox" name="roamingCheck" />  @Html.DisplayNameFor(model => model.Destination) </li>
             }
             @if (show[9].Item1)
             {
@@ -120,19 +120,19 @@
                 @if (show[5].Item1)
                 {
                     <th>
-                        @Html.DisplayNameFor(model => model.Total)
+                        @Html.DisplayNameFor(model => model.Location)
+                    </th>
+                }
+                @if (show[6].Item1)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Destination)
                     </th>
                 }
                 @if (show[7].Item1)
                 {
                     <th>
-                        @Html.DisplayNameFor(model => model.Location)
-                    </th>
-                }
-                @if (show[8].Item1)
-                {
-                    <th>
-                        @Html.DisplayNameFor(model => model.Destination)
+                        @Html.DisplayNameFor(model => model.Total)
                     </th>
                 }
                 @if (show[9].Item1)
@@ -141,10 +141,10 @@
                         @Html.DisplayNameFor(model => model.Roaming)
                     </th>
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[4].Item1 || show[5].Item1 || show[7].Item1 || show[8].Item1 || show[9].Item1)
+                @*@if (show[0].Item1 || show[1].Item1 || show[4].Item1 || show[5].Item1 || show[7].Item1 || show[8].Item1 || show[9].Item1)
                 {
                     <th></th>
-                }
+                }*@
             </tr>
             @* Headers   *@
             <tr>
@@ -211,32 +211,7 @@
                 }
                 @if (show[5].Item1)
                 {
-                    <th>
-                        <div class="input-group">
-                            @if (show[5].Item2 != null)
-                            {
-
-                                <input class="border rounded form-control text-center" value="@show[5].Item2" name="min" />
-                            }
-                            else
-                            {
-                                <input class="border rounded form-control text-center" value="Min" name="min" />
-                            }
-                            @if (show[6].Item2 != null)
-                            {
-
-                                <input class="border rounded form-control text-center" value="@show[6].Item2" name="max" />
-                            }
-                            else
-                            {
-                                <input class="border rounded form-control text-center" value="Max" name="max" />
-                            }
-                        </div>
-                    </th>
-                }
-                @if (show[7].Item1)
-                {
-                    if (show[7].Item2 != null)
+                    if (show[5].Item2 != null)
                     {
                         <th>
                             <input class="border rounded form-control text-center" value="@show[7].Item2" name="location" />
@@ -249,9 +224,9 @@
                         </th>
                     }
                 }
-                @if (show[8].Item1)
+                @if (show[6].Item1)
                 {
-                    if (show[8].Item2 != null)
+                    if (show[6].Item2 != null)
                     {
                         <th>
                             <input class="border rounded form-control text-center" value="@show[8].Item2" name="destination" />
@@ -263,6 +238,31 @@
                             <input class="border rounded form-control text-center" name="destination" />
                         </th>
                     }
+                }
+                @if (show[7].Item1)
+                {
+                    <th>
+                        <div class="input-group">
+                            @if (show[7].Item2 != null)
+                            {
+
+                                <input class="border rounded form-control text-center" value="@show[5].Item2" name="min" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control text-center" value="Min" name="min" />
+                            }
+                            @if (show[8].Item2 != null)
+                            {
+
+                                <input class="border rounded form-control text-center" value="@show[6].Item2" name="max" />
+                            }
+                            else
+                            {
+                                <input class="border rounded form-control text-center" value="Max" name="max" />
+                            }
+                        </div>
+                    </th>
                 }
                 @if (show[9].Item1)
                 {
@@ -279,10 +279,10 @@
                         </th>
                     }
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[4].Item1 || show[5].Item1 || show[7].Item1 || show[8].Item1 || show[9].Item1)
+                @*@if (show[0].Item1 || show[1].Item1 || show[4].Item1 || show[5].Item1 || show[7].Item1 || show[8].Item1 || show[9].Item1)
                 {
                     <th></th>
-                }
+                }*@
             </tr>
             @foreach (var item in Model)
             {
@@ -308,19 +308,19 @@
                     @if (show[5].Item1)
                     {
                         <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Total)
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                    }
+                    @if (show[6].Item1)
+                    {
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Destination)
                         </td>
                     }
                     @if (show[7].Item1)
                     {
                         <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Location)
-                        </td>
-                    }
-                    @if (show[8].Item1)
-                    {
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => item.Destination)
+                            @Html.DisplayFor(modelItem => item.Total)
                         </td>
                     }
                     @if (show[9].Item1)
@@ -329,7 +329,7 @@
                             @Html.DisplayFor(modelItem => item.Roaming)
                         </td>
                     }
-                    @if (User.IsInRole(SD.AdminUser) && (show[0].Item1 || show[1].Item1 || show[4].Item1 || show[5].Item1 || show[7].Item1 || show[8].Item1 || show[9].Item1))
+                    @if (User.IsInRole(SD.AdminUser) && (show[0].Item1 || show[1].Item1 || show[4].Item1 || show[5].Item1 || show[6].Item1 || show[7].Item1 || show[9].Item1))
                     {
                         <td style="width:150px">
                             <div class="btn-group" role="group">

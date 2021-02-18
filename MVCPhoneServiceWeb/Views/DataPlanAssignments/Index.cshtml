@@ -114,10 +114,10 @@
                         @Html.DisplayNameFor(model => model.DataPlan.DataPlanId)
                     </th>
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[2].Item1 || show[3].Item1)
+                @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1 || show[3].Item1)
                 {
                     <th></th>
-                }
+                }*@
             </tr>
             <tr>
                 @if (show[0].Item1)
@@ -125,13 +125,13 @@
                     if (show[0].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[0].Item2" name="honeNumber" />
+                            <input class="border rounded form-control text-center" value="@show[0].Item2" name="phoneNumber" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="phoneNumber" />
+                            <input class="border rounded form-control text-center" name="phoneNumber" />
                         </th>
                     }
                 }
@@ -141,7 +141,7 @@
                     {
                         <th>
                             <div>
-                                <input class="border rounded form-control" value="@show[1].Item2" name="month" />
+                                <input class="border rounded form-control text-center" value="@show[1].Item2" name="month" />
                             </div>
                         </th>
                     }
@@ -160,7 +160,7 @@
                     {
                         <th>
                             <div>
-                                <input class="border rounded form-control" value="@show[2].Item2" name="year" />
+                                <input class="border rounded form-control text-center" value="@show[2].Item2" name="year" />
                             </div>
                         </th>
                     }
@@ -178,20 +178,20 @@
                     if (show[3].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[3].Item2" name="dataPlanId" />
+                            <input class="border rounded form-control text-center" value="@show[3].Item2" name="dataPlanId" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="dataPlanId" />
+                            <input class="border rounded form-control text-center" name="dataPlanId" />
                         </th>
                     }
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[2].Item1 || show[3].Item1)
+                @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1 || show[3].Item1)
                 {
                     <th></th>
-                }
+                }*@
             </tr>
             @foreach (var item in Model)
             {
@@ -267,7 +267,11 @@
         </div>
         <div class="row">
             <div class="col-12 text-right">
-                <a class=" btn btn-success text-white">
+                <a class=" btn btn-success text-white" asp-action="Export" asp-route-page="cpage"
+                    asp-route-pNCheck="@show[0].Item1" asp-route-phoneNumber="@show[0].Item2"
+                    asp-route-monthCheck="@show[1].Item1" asp-route-month="@show[1].Item2"
+                    asp-route-yearCheck="@show[2].Item1" asp-route-year="@show[2].Item2"
+                    asp-route-dPCheck="@show[3].Item1" asp-route-dataPlanId="@show[3].Item2">
                     <i class="fas fa-trash-"></i>
                     Export
                 </a>

@@ -21,15 +21,15 @@ namespace MVCPhoneServiceWeb.Controllers
         }
 
         // GET: PhoneLines
-        public async Task<IActionResult> Index(int cpage, string phoneNumber, string pUK, string pIN, 
-            string phoneNumberCheck, string pUKCheck, string pINCheck, 
+        public async Task<IActionResult> Index(int cpage, string phoneNumber, string pUK, string pIN, string contract,
+            string phoneNumberCheck, string pUKCheck, string pINCheck, string contractCheck,
             string page, string next, string previous)
         {
             // 
             var _PUK = Parse.IntTryParse(pUK);
             var _PIN = Parse.IntTryParse(pIN);
             //
-            Tuple<bool, string>[] show = SD.Show(new List<string>() { phoneNumberCheck, pUKCheck, pINCheck }, new List<string>() { phoneNumber, pUK, pIN });
+            Tuple<bool, string>[] show = SD.Show(new List<string>() { phoneNumberCheck, pUKCheck, pINCheck, contractCheck }, new List<string>() { phoneNumber, pUK, pIN, contract });
             ViewData["columns"] = show;
             //
             IEnumerable<PhoneLine> phoneLines = await _context.PhoneLines.ToListAsync();
@@ -42,6 +42,8 @@ namespace MVCPhoneServiceWeb.Controllers
             _phoneLines = DataFilter<PhoneLine>.Filter(_PIN, (m) => m.PIN, _phoneLines).ToList();
 
             _phoneLines = DataFilter<PhoneLine>.Filter(_PUK, (m) => m.PUK, _phoneLines).ToList();
+
+            _phoneLines = DataFilter<PhoneLine>.Filter(contract, (m) => m.Contract, _phoneLines).ToList();
 
             //Separar en paginas
             _phoneLines = _phoneLines.OrderBy(m => m.PhoneNumber).ToList();
