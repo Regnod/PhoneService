@@ -86,10 +86,10 @@
                         @Html.DisplayNameFor(model => model.Management.Name)
                     </th>
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[2].Item1)
+                @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1)
                 {
                     <th class="col-1"></th>
-                }
+                }*@
             </tr>
             <tr class="text-center">
                 @if (show[0].Item1)
@@ -97,13 +97,13 @@
                     if (show[0].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[0].Item2" name="code" />
+                            <input class="border rounded form-control text-center" value="@show[0].Item2" name="code" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="code" />
+                            <input class="border rounded form-control text-center" name="code" />
                         </th>
                     }
                 }
@@ -112,13 +112,13 @@
                     if (show[1].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[1].Item2" name="name" />
+                            <input class="border rounded form-control text-center" value="@show[1].Item2" name="name" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="name" />
+                            <input class="border rounded form-control text-center" name="name" />
                         </th>
                     }
                 }
@@ -127,20 +127,20 @@
                     if (show[2].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[2].Item2" name="managementName" />
+                            <input class="border rounded form-control text-center" value="@show[2].Item2" name="managementName" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="managementName" />
+                            <input class="border rounded form-control text-center" name="managementName" />
                         </th>
                     }
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[2].Item1)
+                @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1)
                 {
                     <th></th>
-                }
+                }*@
             </tr>
             @foreach (var item in Model)
             {
@@ -155,13 +155,13 @@
                     }
                     @if (show[1].Item1)
                     {
-                        <td>
+                        <td class="text-center">
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                     }
                     @if (show[2].Item1)
                     {
-                        <td>
+                        <td class="text-center">
                             @Html.DisplayFor(modelItem => item.Management.Name)
                         </td>
                     }
@@ -184,10 +184,10 @@
                             </div>
                         </td>
                     }
-                    else
+                    @*else
                     {
                         <td></td>
-                    }
+                    }*@
                 </tr>
             }
         </table>

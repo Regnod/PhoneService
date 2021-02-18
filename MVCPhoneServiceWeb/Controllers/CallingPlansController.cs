@@ -7,21 +7,26 @@ using Microsoft.EntityFrameworkCore;
 using Repo;
 using MVCPhoneServiceWeb.Utils;
 using System;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class CallingPlansController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public CallingPlansController(ApplicationDbContext context)
+        public CallingPlansController(ApplicationDbContext context, IHostingEnvironment hostingEnviroment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnviroment;
         }
 
         // GET: CallingPlans
         public async Task<IActionResult> Index(int cpage, string callingPlanId, string minutes, string minCost, string maxCost,
-            string cPCheck, string minutesCheck, string costCheck, 
+            string cPCheck, string minutesCheck, string costCheck,
             string page, string next, string previous)
         {
             // var _callingPlanId = Utils.Utils.IntTryParse(callingPlanId);
@@ -51,8 +56,81 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { cPCheck != null, minutesCheck != null, costCheck != null, false };
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "CallingPlan", result.Item4.ToString(), callingPlanId, minutes, minCost, maxCost,
+                                                                               (cPCheck != null).ToString(), (minutesCheck != null).ToString(), (costCheck != null).ToString()});
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            HttpContext.Session.SetString(HttpSessionName, csv);
 
             return View(result.Item1);
+        }
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<CallingPlan> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < show.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.callingPlan[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.CallingPlanId);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.Minutes.ToString());
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.Cost.ToString());
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string callingPlanId, string minutes, string minCost, string maxCost,
+            string cPCheck, string minutesCheck, string costCheck)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var time = System.DateTime.Now.Day.ToString() + '-' + System.DateTime.Now.Month.ToString() + '-' + System.DateTime.Now.Year.ToString() + ' ' + System.DateTime.Now.Hour.ToString() + '-' + System.DateTime.Now.ToString() + '-' + System.DateTime.Now.Second.ToString();
+            var path = Path.Combine(uploads, "CallingPlans " + time + ".csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "CallingPlans " + time + ".csv"));
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "CallingPlanAssignment", page.ToString(), callingPlanId, minutes, minCost, maxCost,
+                                                                               cPCheck.ToString(), minutesCheck.ToString(), costCheck.ToString()});
+            string csv = HttpContext.Session.GetString(HttpSessionName);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                callingPlanId = callingPlanId,
+                minutes = minutes,
+                minCost = minCost,
+                maxCost = maxCost,
+                cPCheck = cPCheck == "True" ? "True" : null,
+                minutesCheck = minutesCheck == "True" ? "True" : null,
+                costCheck = costCheck == "True" ? "True" : null,
+                cpage = page
+            });
         }
 
         // GET: CallingPlans/Details/5

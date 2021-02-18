@@ -24,7 +24,7 @@ namespace MVCPhoneServiceWeb.Controllers
             int _month = Utils.Parse.IntTryParse(month);
             int _year = Utils.Parse.IntTryParse(year);
 
-            await Task.Delay(TimeSpan.FromSeconds(5));
+            await Task.Delay(TimeSpan.FromSeconds(3));
             var model = ( from pls in _context.PhoneLineSummaries
                 join ple in _context.PhoneLineEmployees on pls.PhoneNumber equals ple.PhoneNumber
                 join e in _context.Employees on ple.EmployeeId equals e.EmployeeId
