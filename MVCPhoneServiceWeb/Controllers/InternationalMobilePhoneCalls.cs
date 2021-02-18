@@ -6,16 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Repo;
 using MVCPhoneServiceWeb.Utils;
 using System.Collections.Generic;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class InternationalMobilePhoneCalls : Controller
     {
         private ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public InternationalMobilePhoneCalls(ApplicationDbContext context)
+        public InternationalMobilePhoneCalls(ApplicationDbContext context, IHostingEnvironment hostingEnviroment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnviroment;
         }
 
         // GET
@@ -60,7 +65,7 @@ namespace MVCPhoneServiceWeb.Controllers
             }
             //
             Tuple<bool, string>[] show = SD.Show(new List<string>() { phoneNumberCheck, employeeNameCheck, costCenterNameCheck, costCenterCodeCheck, addresseCheck, monthCheck, yearCheck, expenseCheck, expenseCheck, percentCheck, percentCheck },
-                new List<string>() { phoneNumber, employeeName, costCenterName, costCenterCode, addresse, month, year, minExpense, maxExpense, minPercent, maxPercent, });
+                new List<string>() { phoneNumber, employeeName, costCenterName, costCenterCode, addresse, month, year, minExpense, maxExpense, minPercent, maxPercent });
             ViewData["columns"] = show;
             //
             List<InternationalMobilePhoneCall> final_result = new List<InternationalMobilePhoneCall>();
@@ -80,11 +85,124 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["top"] = result.Item2;
             ViewData["mult"] = result.Item3;
             ViewData["page"] = result.Item4;
+            bool[] mask = { phoneNumberCheck != null, employeeNameCheck != null, costCenterNameCheck != null, costCenterCodeCheck != null, addresseCheck != null, monthCheck != null, yearCheck != null, expenseCheck != null, false, percentCheck != null, false };
+            string csv = CSVStringConstructor(show, mask, result.Item1);
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "InternationalMobilePhoneCall", result.Item4.ToString(), phoneNumber, employeeName, costCenterName, costCenterCode, addresse, month, year, minExpense, maxExpense, minPercent, maxPercent,
+                                                                               (phoneNumberCheck != null).ToString(), (employeeNameCheck != null).ToString(), (costCenterNameCheck != null).ToString(), (costCenterCodeCheck != null).ToString(), (addresseCheck != null).ToString(), (monthCheck !=null).ToString(), (yearCheck != null).ToString(), (expenseCheck != null).ToString(), (percentCheck != null).ToString() });
+            HttpContext.Session.SetString(HttpSessionName, csv);
 
             return View(result.Item1);
 
             return View(query);
         }
+        public string CSVStringConstructor(Tuple<bool, string>[] show, bool[] mask, List<InternationalMobilePhoneCall> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < show.Length; j++)
+            {
+                if (mask[j])
+                {
+                    headers.Add(SD.internationalCalls[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.PhoneNumber);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.EmployeeName);
+                }
+                if (show[3].Item1)
+                {
+                    row.Add(item.CostCenterCode);
+                }
+                if (show[2].Item1)
+                {
+                    row.Add(item.CostCenterName);
+                }
+                if (show[4].Item1)
+                {
+                    row.Add(item.Addresse);
+                }
+                if (show[5].Item1)
+                {
+                    row.Add(SD.Months[item.Month]);
+                }
+                if (show[6].Item1)
+                {
+                    row.Add(item.Year.ToString());
+                }
+                if (show[7].Item1)
+                {
+                    row.Add(item.Expense.ToString());
+                }
+                if (show[9].Item1)
+                {
+                    row.Add(item.PerCent.ToString());
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string phoneNumber, string employeeName, string costCenterName, string costCenterCode,
+            string addresse, string month, string year, string minExpense, string maxExpense, string minPercent, string maxPercent,
+            string phoneNumberCheck, string employeeNameCheck, string costCenterNameCheck, string costCenterCodeCheck,
+            string addresseCheck, string expenseCheck, string percentCheck, string monthCheck, string yearCheck)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var time = System.DateTime.Now.Day.ToString() + '-' + System.DateTime.Now.Month.ToString() + '-' + System.DateTime.Now.Year.ToString() + ' ' + System.DateTime.Now.Hour.ToString() + '-' + System.DateTime.Now.ToString() + '-' + System.DateTime.Now.Second.ToString();
+            var path = Path.Combine(uploads, "InternationalMobilePhoneCalls " + time + ".csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "InternationalMobilePhoneCalls " + time + ".csv"));
+            string HttpSessionName = SD.HttpSessionString(new List<string> { "InternationalMobilePhoneCall", page.ToString(), phoneNumber, employeeName, costCenterName, costCenterCode, addresse, month, year, minExpense, maxExpense, minPercent, maxPercent,
+                                                                               phoneNumberCheck.ToString(), employeeNameCheck.ToString(), costCenterNameCheck.ToString(), costCenterCodeCheck.ToString(), addresseCheck.ToString(), monthCheck.ToString(), yearCheck.ToString(), expenseCheck.ToString(), percentCheck.ToString() });
+            string csv = HttpContext.Session.GetString(HttpSessionName);
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                phoneNumber = phoneNumber,
+                employeeName = employeeName,
+                costCenterCode = costCenterCode,
+                costCenterName = costCenterName,
+                addresse = addresse,
+                month = month,
+                year = year,
+                minExpense = minExpense,
+                maxExpense = maxExpense,
+                minPercent = minPercent,
+                maxPercent = maxPercent,
+                phoneNumberCheck = phoneNumberCheck == "True" ? "True" : null,
+                employeeNameCheck = employeeNameCheck == "True" ? "True" : null,
+                costCenterNameCheck = costCenterNameCheck == "True" ? "True" : null,
+                costCenterCodeCheck = costCenterCodeCheck == "True" ? "True" : null,
+                addresseCheck = addresseCheck == "True" ? "True" : null,
+                expenseCheck = expenseCheck == "True" ? "True" : null,
+                percentCheck = percentCheck == "True" ? "True" : null,
+                monthCheck = monthCheck == "True" ? "True" : null,
+                yearCheck = yearCheck == "True" ? "True" : null,
+                cpage = page
+            });
+        }
+
         public bool Checking(string addresse, int _month, int _year, int month, int year)
         {
             bool a1 = !((addresse[0] == '5' && addresse.Length == 8));

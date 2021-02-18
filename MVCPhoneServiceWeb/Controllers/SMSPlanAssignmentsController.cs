@@ -31,6 +31,8 @@ namespace MVCPhoneServiceWeb.Controllers
             if (_month == -1)
                 _month = Parse.IntTryParse(month);
             var _year = Parse.IntTryParse(year);
+            if (_month != -1)
+                month = SD.Months[_month];
             //
             Tuple<bool, string>[] show = SD.Show(new List<string>() { pNCheck, monthCheck, yearCheck, sPCheck }, new List<string>() { phoneNumber, month, year, smsPlan });
             ViewData["columns"] = show;

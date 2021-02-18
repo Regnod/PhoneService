@@ -53,11 +53,11 @@
             }
             @if (show[2].Item1)
             {
-                <li class="border-0 dropdown-item"><input type="checkbox" checked name="dataCheck" />  @Html.DisplayNameFor(model => model.Cost)</li>
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="costCheck" />  @Html.DisplayNameFor(model => model.Cost)</li>
             }
             else
             {
-                <li class="border-0 dropdown-item"><input type="checkbox" name="dataCheck" />  @Html.DisplayNameFor(model => model.Cost)</li>
+                <li class="border-0 dropdown-item"><input type="checkbox" name="costCheck" />  @Html.DisplayNameFor(model => model.Cost)</li>
             }
         </div>
         <input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />
@@ -80,13 +80,13 @@
                 @if (show[2].Item1)
                 {
                     <th>
-                        @Html.DisplayNameFor(model => model.Data)
+                        @Html.DisplayNameFor(model => model.Cost)
                     </th>
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[2].Item1)
+                @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1)
                 {
                     <th></th>
-                }
+                }*@
             </tr>
             <tr class="text-center">
                 @if (show[0].Item1)
@@ -94,13 +94,13 @@
                     if (show[0].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[0].Item2" name="dataPlanId" />
+                            <input class="border rounded form-control text-center" value="@show[0].Item2" name="dataPlanId" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="dataPlanId" />
+                            <input class="border rounded form-control text-center" name="dataPlanId" />
                         </th>
                     }
                 }
@@ -109,13 +109,13 @@
                     if (show[1].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[1].Item2" name="data" />
+                            <input class="border rounded form-control text-center" value="@show[1].Item2" name="data" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="data" />
+                            <input class="border rounded form-control text-center" name="data" />
                         </th>
                     }
                 }
@@ -125,34 +125,34 @@
                         <div class="input-group">
                             @if (show[2].Item2 != null)
                             {
-                                <input class="border rounded form-control" value="@show[2].Item2" name="minCost" />
+                                <input class="border rounded form-control text-center" value="@show[2].Item2" name="minCost" />
                             }
                             else
                             {
-                                <input class="border rounded form-control" name="minCost" />
+                                <input class="border rounded form-control text-center" name="minCost" />
                             }
                             @if (show[3].Item2 != null)
                             {
-                                <input class="border rounded form-control" value="@show[3].Item2" name="maxCost" />
+                                <input class="border rounded form-control text-center" value="@show[3].Item2" name="maxCost" />
                             }
                             else
                             {
-                                <input class="border rounded form-control" name="maxCost" />
+                                <input class="border rounded form-control text-center" name="maxCost" />
                             }
                         </div>
                     </th>
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[1].Item1)
+                @*@if (show[0].Item1 || show[1].Item1 || show[1].Item1)
                 {
                     <th></th>
-                }
+                }*@
             </tr>
             @foreach (var item in Model)
             {
                 <tr>
                     @if (show[0].Item1)
                     {
-                        <td>
+                        <td class="text-center">
                             @Html.DisplayFor(modelItem => item.DataPlanId)
                         </td>
                     }
@@ -187,10 +187,10 @@
                             </div>
                         </td>
                     }
-                    else
+                    @*else
                     {
                         <td></td>
-                    }
+                    }*@
                 </tr>
             }
         </table>
@@ -215,7 +215,10 @@
         </div>
         <div class="row">
             <div class="col-12 text-right">
-                <a class=" btn btn-success text-white">
+                <a class=" btn btn-success text-white" asp-action="Export" asp-route-page="cpage"
+                    asp-route-dPCheck="@show[0].Item1" asp-route-dataPlanId="@show[0].Item2"
+                    asp-route-dataCheck="@show[1].Item1" asp-route-data="@show[1].Item2"
+                    asp-route-costCheck="@show[2].Item1" asp-route-minCost="@show[2].Item2" asp-route-maxCost="@show[3].Item2">
                     <i class="fas fa-trash-"></i>
                     Export
                 </a>

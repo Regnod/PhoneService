@@ -1971,3 +1971,5 @@ C:\Users\Richard\source\repos\PhoneService\Repo\obj\Debug\netcoreapp3.0\Repo.Ass
 C:\Users\Richard\source\repos\PhoneService\Repo\obj\Debug\netcoreapp3.0\Repo.csproj.CopyComplete
 C:\Users\Richard\source\repos\PhoneService\Repo\obj\Debug\netcoreapp3.0\Repo.dll
 C:\Users\Richard\source\repos\PhoneService\Repo\obj\Debug\netcoreapp3.0\Repo.pdb
+C:\PhoneService\PhoneService\Repo\bin\Debug\netcoreapp3.0\refs\Microsoft.AspNetCore.ResponseCompression.dll
+C:\PhoneService\PhoneService\Repo\bin\Debug\netcoreapp3.0\refs\Microsoft.AspNetCore.Routing.Abstractions.dll

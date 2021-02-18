@@ -71,10 +71,10 @@
                         @Html.DisplayNameFor(model => model.Model)
                     </th>
                 }
-                @if (show[0].Item1 || show[1].Item1)
+                @*@if (show[0].Item1 || show[1].Item1)
                 {
                     <th></th>
-                }
+                }*@
             </tr>
             <tr>
                 @if (show[0].Item1)
@@ -82,13 +82,13 @@
                     if (show[0].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[0].Item2" name="iMEI" />
+                            <input class="border rounded form-control text-center" value="@show[0].Item2" name="iMEI" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="iMEI" />
+                            <input class="border rounded form-control text-center" name="iMEI" />
                         </th>
                     }
                 }
@@ -97,20 +97,20 @@
                     if (show[1].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[1].Item2" name="model" />
+                            <input class="border rounded form-control text-center" value="@show[1].Item2" name="model" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="model" />
+                            <input class="border rounded form-control text-center" name="model" />
                         </th>
                     }
                 }
-                @if (show[0].Item1 || show[1].Item1)
+                @*@if (show[0].Item1 || show[1].Item1)
                 {
                     <th></th>
-                }
+                }*@
             </tr>
             @foreach (var item in Model)
             {

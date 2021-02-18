@@ -3419,3 +3419,4 @@ C:\Users\Richard\source\repos\PhoneService\MVCPhoneServiceWeb\obj\Debug\netcorea
 C:\Users\Richard\source\repos\PhoneService\MVCPhoneServiceWeb\obj\Debug\netcoreapp3.0\MVCPhoneServiceWeb.csproj.CopyComplete
 C:\Users\Richard\source\repos\PhoneService\MVCPhoneServiceWeb\obj\Debug\netcoreapp3.0\MVCPhoneServiceWeb.dll
 C:\Users\Richard\source\repos\PhoneService\MVCPhoneServiceWeb\obj\Debug\netcoreapp3.0\MVCPhoneServiceWeb.pdb
+C:\PhoneService\PhoneService\MVCPhoneServiceWeb\bin\Debug\netcoreapp3.0\refs\Microsoft.AspNetCore.Server.Kestrel.Core.dll

@@ -11,11 +11,12 @@ namespace MVCPhoneServiceWeb.Utils
         public static string AdminUser = "Admin";
         public static string VisitorUser = "Vistitor";
         public static int NumberPages = 25;
+        public static string csv = "csv";
         public static Dictionary<string, int> months = new Dictionary<string, int>() { { "enero", 1 }, { "febrero", 2 }, { "marzo", 3 }, { "abril", 4 }, { "mayo", 5 }, { "junio", 6 }, { "julio", 7 }, { "agosto", 8 }, { "septiembre", 9 }, { "octubre", 10 }, { "noviembre", 11 }, { "diciembre", 12 } };
         public static Dictionary<int, string> Months = new Dictionary<int, string>() { { 1, "enero" }, { 2, "febrero" }, { 3, "marzo" }, { 4, "abril" }, { 5, "mayo" }, { 6, "junio" }, { 7, "julio" }, { 8, "agosto" }, { 9, "septiembre" }, { 10, "octubre" }, { 11, "noviembre" }, { 12, "diciembre" } };
         public static List<string> ProvinceCode = new List<string>() { "7" };
         //diccionarios para pasar parametros a las vistas
-        public static Dictionary<string, string> CallingPlanAssignments_params = new Dictionary<string, string> { { "pNCheck", "On" }, { "monthCheck", "On" }, { "yearCheck", "On" }, { "cPCheck", "On" } };
+        public static Dictionary<string, string> CallingPlanAssignments_params = new Dictionary<string, string> { { "phoneNumberCheck", "On" }, { "monthCheck", "On" }, { "yearCheck", "On" }, { "cPCheck", "On" } };
         public static Dictionary<string, string> CallingPlans_params = new Dictionary<string, string> { { "cPCheck", "On" }, { "minutesCheck", "On" }, { "messagesCheck", "On" } };
         public static Dictionary<string, string> CostCenterMobileExpenses_params = new Dictionary<string, string> { { "costCenterCodeCheck", "On" }, { "costCenterNameCheck", "On" }, { "callsCheck", "On" }, { "smsCheck", "On" }, { "gprsCheck", "On" }, { "totalCheck", "On" }, { "percentCheck", "On" }, { "monthCheck", "On" }, { "yearCheck", "On" } };
         public static Dictionary<string, string> CostCenterMobileExpensesDetails_params = new Dictionary<string, string> { { "employeeNameCheck", "On" }, { "phoneNumberCheck", "On" }, { "callingPlanIdCheck", "On" }, { "callsCheck", "On" }, { "smsCheck", "On" }, { "gprsCheck", "On" }, { "totalCheck", "On" }, { "monthCheck", "On" }, { "yearCheck", "On" } };
@@ -38,27 +39,28 @@ namespace MVCPhoneServiceWeb.Utils
         public static Dictionary<string, string> UserWhoHasExceededDataPlan_params = new Dictionary<string, string> { { "phoneNumberCheck", "On" }, { "employeeNameCheck", "On" }, { "dataPlanCheck", "On" }, { "cccCheck", "On" }, { "ccNameCheck", "On" }, { "monthCheck", "On" }, { "yearCheck", "On" }, { "DataExcCheck", "On" }, { "PercentCheck", "On" } };
 
 
-        public static Dictionary<int, string> callingPlan = new Dictionary<int, string>(){ {0, "Calling Plan" }, {1, "Minutes" }, {2, "Cost" } };
-        public static Dictionary<int, string> callingPlanAssignment = new Dictionary<int, string>(){ {0, "PhoneNumber" }, {1, "Month" }, { 2, "Year" }, { 3, "Calling Plan" } };
-        public static Dictionary<int, string> costCenter = new Dictionary<int, string>(){ {0, "CC" }, {1, "Cost Center" }, {2, "Gerency" } };
-        public static Dictionary<int, string> dataPlan = new Dictionary<int, string>(){ {0, "Data Plan" }, {1, "Data" }, {2, "Cost" } };
-        public static Dictionary<int, string> dataPlanAssignment = new Dictionary<int, string>(){ {0, "Phone Number" }, {1, "Data Plan" }, { 2, "Month" }, { 3, "Year" } };
-        public static Dictionary<int, string> employee = new Dictionary<int, string>(){ {0, "Name" }, {1, "CC" }, {2, "Cost Center" }, { 3, "Personal Code" }, { 4, "Email" }, { 5, "Extension" } };
-        public static Dictionary<int, string> management = new Dictionary<int, string>(){ {0, "Gerency" } };
-        public static Dictionary<int, string> mobilePhoneCalls = new Dictionary<int, string>(){ {0, "Phone Number" }, {1, "Date Time" }, {2, "Addressee" }, { 3, "Duration" }, { 4, "Total Cost" }, { 5, "Roaming Call" } };
-        public static Dictionary<int, string> mobilePhoneEmployee = new Dictionary<int, string>(){ {0, "IMEI" }, {1, "Employee" } };
-        public static Dictionary<int, string> phoneLine = new Dictionary<int, string>(){ {0, "Phone Number" }, {1, "PUK" }, {2, "Contract" }, { 3, "PIN" } };
-        public static Dictionary<int, string> phoneLineEmployee = new Dictionary<int, string>(){ {0, "Phone Number" }, {1, "Employee" } };
-        public static Dictionary<int, string> sms = new Dictionary<int, string>(){ {0, "Phone Number" }, {1, "Date Time" }, {2, "E_R" }, { 3, "Location" }, { 4, "Destination" }, { 5, "Total" }, { 6, "Roaming" } };
-        public static Dictionary<int, string> smsPlan = new Dictionary<int, string>(){ {0, "SMS Plan" }, {1, "Messages" }, {2, "Cost" } };
-        public static Dictionary<int, string> smsPlanAssignment = new Dictionary<int, string>(){ {0, "Phone Number" }, {1, "SMS Plan" }, { 2, "Month" }, { 3, "Year" } };
-        public static Dictionary<int, string> costCenterMPExpenses = new Dictionary<int, string>(){ {0, "CC" }, {1, "Cost Center" }, {2, "Calls" }, { 3, "Sms" }, { 4, "GPRS" }, { 5, "Month" }, { 6, "Year" }, { 7, "Total" }, { 8, "Percent" } };
-        public static Dictionary<int, string> costCenterMPExpensesDetails = new Dictionary<int, string>() { { 0, "Employee" }, { 1, "Phone Number" }, { 2, "Calling Plan" }, { 3, "Calls" }, { 4, "Sms" }, { 5, "GPRS" }, { 6, "Month" }, { 7, "Year" }, { 8, "Total" } };
-        public static Dictionary<int, string> costCenterMPGeneralExpenses = new Dictionary<int, string>() { { 0, "Employee" }, { 1, "Phone Number" }, { 2, "CC" }, { 3, "Cost Center" }, { 4, "Calling Plan" }, { 5, "Calls" }, { 6, "Sms" }, { 7, "GPRS" }, { 8, "Month" }, { 9, "Year" }, { 10, "Total" } };
-        public static Dictionary<int, string> internationalCalls = new Dictionary<int, string>() { { 0, "Employee" }, { 1, "Phone Number" }, { 2, "CC" }, { 3, "Cost Center" }, { 8, "Month" }, { 9, "Year" }, { 10, "Addresse" }, { 11, "Expense" }, { 12, "PerCent" } };
-        public static Dictionary<int, string> usersExceededCallingPlan = new Dictionary<int, string>() { { 0, "Employee" }, { 1, "Phone Number" }, { 2, "Calling Plan" }, { 3, "Sms Plan" }, { 8, "Calling Cost Exceded" }, { 9, "Sms Cost Exceded" }, { 10, "Sms %" }, { 11, "Calls %" }, { 12, "Month" }, { 13, "Year" } };
-        public static Dictionary<int, string> userExceededDataPlan = new Dictionary<int, string>() { { 0, "Employee" }, { 1, "Phone Number" }, { 2, "CC" }, { 3, "Cost Center" }, { 8, "Data Plan" }, { 9, "Data Cost Exceded" }, { 10, "Month" }, { 11, "Year" }, { 12, "PerCent" } };
-
+        public static Dictionary<int, string> callingPlanAssignment = new Dictionary<int, string>() { { 0, "PhoneNumber" }, { 1, "Month" }, { 2, "Year" }, { 3, "Calling Plan" } };
+        public static Dictionary<int, string> callingPlan = new Dictionary<int, string>() { { 0, "Calling Plan" }, { 1, "Minutes" }, { 2, "Cost" } };
+        public static Dictionary<int, string> costCenterMPExpenses = new Dictionary<int, string>() { { 0, "CC" }, { 1, "Cost Center" }, { 2, "Calls" }, { 4, "Sms" }, { 6, "GPRS" }, { 12, "Month" }, { 13, "Year" }, { 8, "Total" }, { 10, "Percent" } };
+        public static Dictionary<int, string> costCenterMPExpensesDetails = new Dictionary<int, string>() { { 0, "Employee" }, { 1, "Phone Number" }, { 2, "Calling Plan" }, { 3, "Calls" }, { 5, "Sms" }, { 7, "GPRS" }, { 11, "Month" }, { 12, "Year" }, { 9, "Total" } };
+        public static Dictionary<int, string> costCenterMPGeneralExpenses = new Dictionary<int, string>() { { 0, "Employee" }, { 1, "Phone Number" }, { 2, "CC" }, { 3, "Cost Center" }, { 4, "Calling Plan" }, { 5, "Calls" }, { 7, "Sms" }, { 9, "GPRS" }, { 11, "Month" }, { 12, "Year" }, { 13, "Total" } };
+        public static Dictionary<int, string> costCenter = new Dictionary<int, string>() { { 0, "CC" }, { 1, "Cost Center" }, { 2, "Gerency" } };
+        public static Dictionary<int, string> dataPlanAssignment = new Dictionary<int, string>() { { 0, "Phone Number" }, { 1, "Month" }, { 2, "Year" }, { 3, "Data Plan" } };
+        public static Dictionary<int, string> dataPlan = new Dictionary<int, string>() { { 0, "Data Plan" }, { 1, "Data" }, { 2, "Cost" } };
+        public static Dictionary<int, string> employee = new Dictionary<int, string>() { { 0, "Name" }, { 3, "Email" }, { 1, "CC" }, { 4, "Extension" }, { 2, "Personal Code" } };
+        public static Dictionary<int, string> internationalCalls = new Dictionary<int, string>() { { 1, "Employee" }, { 0, "Phone Number" }, { 3, "CC" }, { 2, "Cost Center" }, { 5, "Month" }, { 6, "Year" }, { 4, "Addresse" }, { 7, "Expense" }, { 9, "PerCent" } };
+        public static Dictionary<int, string> management = new Dictionary<int, string>() { { 0, "Gerency" } };
+        public static Dictionary<int, string> managementMobilePhoneExpenses = new Dictionary<int, string>() { { 0, "Management" }, { 1, "Calls" }, { 3, "SMS" }, { 5, "GPRS" }, { 7, "Total" }, { 9, "Percent" }, { 11, "Moth" }, { 12, "Year" } };
+        public static Dictionary<int, string> mobilePhoneCalls = new Dictionary<int, string>() { { 0, "Phone Number" }, { 1, "Date Time" }, { 4, "Addressee" }, { 5, "Total Cost" }, { 7, "Roaming Call" } };
+        public static Dictionary<int, string> mobilePhoneEmployee = new Dictionary<int, string>() { { 0, "IMEI" }, { 1, "Employee" } };
+        public static Dictionary<int, string> mobilePhone = new Dictionary<int, string>() { { 0, "IMEI" }, { 1, "Model" } };
+        public static Dictionary<int, string> phoneLineEmployee = new Dictionary<int, string>() { { 0, "Phone Number" }, { 1, "Employee" } };
+        public static Dictionary<int, string> phoneLine = new Dictionary<int, string>() { { 0, "Phone Number" }, { 1, "PUK" }, { 2, "PIN" }, { 3, "Contract" } };
+        public static Dictionary<int, string> smsPlanAssignment = new Dictionary<int, string>() { { 0, "Phone Number" }, { 1, "Month" }, { 2, "Year" }, { 3, "SMS Plan" } };
+        public static Dictionary<int, string> smsPlan = new Dictionary<int, string>() { { 0, "SMS Plan" }, { 1, "Messages" }, { 2, "Cost" } };
+        public static Dictionary<int, string> sms = new Dictionary<int, string>() { { 0, "Phone Number" }, { 1, "Date Time" }, { 4, "E_R" }, { 5, "Location" }, { 6, "Destination" }, { 7, "Total" }, { 9, "Roaming" } };
+        public static Dictionary<int, string> usersExceededCallingPlan = new Dictionary<int, string>() { { 1, "Employee" }, { 0, "Phone Number" }, { 2, "Calling Plan" }, { 3, "Sms Plan" }, { 4, "Calling Cost Exceded" }, { 6, "Sms Cost Exceded" }, { 12, "Sms %" }, { 10, "Calls %" }, { 8, "Month" }, { 9, "Year" } };
+        public static Dictionary<int, string> userExceededDataPlan = new Dictionary<int, string>() { { 1, "Employee" }, { 0, "Phone Number" }, { 3, "CC" }, { 4, "Cost Center" }, { 2, "Data Plan" }, { 7, "Data Cost Exceded" }, { 5, "Month" }, { 6, "Year" }, { 9, "PerCent" } };
 
         public static Tuple<bool, string>[] Show(List<string> checks, List<string> filters)
         {
@@ -114,6 +116,45 @@ namespace MVCPhoneServiceWeb.Utils
 
             }
         }
+        public static string csvString(List<string> headers, List<List<string>> data)
+        {
+            string csv = "";
+            int count = headers.Count;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (i == count - 1)
+                    csv += headers[i] + "\n";
+                else
+                    csv += headers[i] + ",";
+            }
+
+            int rows = data.Count;
+
+            for (int i = 0; i < rows; i++)
+            {
+                List<string> row = data[i];
+                for (int j = 0; j < count; j++)
+                {
+                    if (j == count - 1)
+                        csv += row[j];
+                    else
+                        csv += row[j] + ",";
+                }
+                csv += "\n";
+            }
+
+            return csv;
+        }
+        public static string HttpSessionString(List<string> data)
+        {
+            string name = "";
+            foreach (var s in data)
+            {
+                name += s;
+            }
+            return name;
+        }
     }
     public static class AuxiliarFilterClass<TClass>
     {
@@ -149,5 +190,6 @@ namespace MVCPhoneServiceWeb.Utils
 
             return filteredItems;
         }
+        
     }
 }

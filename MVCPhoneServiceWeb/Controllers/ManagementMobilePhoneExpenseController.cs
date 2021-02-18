@@ -8,22 +8,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVCPhoneServiceWeb.Utils;
 using Repo;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace MVCPhoneServiceWeb.Controllers
 {
     public class ManagementMobilePhoneExpenseController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnviroment;
 
-        public ManagementMobilePhoneExpenseController(ApplicationDbContext context)
+        public ManagementMobilePhoneExpenseController(ApplicationDbContext context, IHostingEnvironment hostingEnviroment)
         {
             _context = context;
+            _hostingEnviroment = hostingEnviroment;
         }
 
         public async Task<IActionResult> Index(int cpage, string management,
             string minCalls, string maxCalls, string minSms, string maxSms, string minGprs, string maxGprs, string minTotal, string maxTotal, string minPercent, string maxPercent,
-            string managementCheck, string callsCheck, string smsCheck, string gprsCheck,
-            string totalCheck, string percentCheck, string monthCheck, string yearCheck, string month, string year, string page, string previous, string next)
+            string managementCheck, string callsCheck, string smsCheck, string gprsCheck, string totalCheck, string percentCheck, string monthCheck, string yearCheck, string month, string year,
+            string page, string previous, string next)
         {
             var _month = (month != null && SD.months.ContainsKey(month)) ? SD.months[month] : -1;
             if (_month == -1)
@@ -226,10 +230,9 @@ namespace MVCPhoneServiceWeb.Controllers
                 }
             }
             //
-            Tuple<bool, string>[] show = Show(management, minCalls, maxCalls, minSms,
-            maxSms, minGprs, maxGprs, minTotal, maxTotal, minPercent, maxPercent,
-            managementCheck, callsCheck, smsCheck, gprsCheck,
-            totalCheck, percentCheck, monthCheck, yearCheck, month, year);
+            Tuple<bool, string>[] show = SD.Show(new List<string>() { managementCheck, callsCheck, callsCheck, smsCheck, smsCheck, gprsCheck, gprsCheck, totalCheck, totalCheck, percentCheck, percentCheck, monthCheck, yearCheck },
+                                                    new List<string>() { management, minCalls, maxCalls, minSms, maxSms, minGprs, maxGprs, minTotal, maxTotal, minPercent, maxPercent, month, year });
+                                                    
             //
             List<ManagementsMobilePhoneExpense> final_result = new List<ManagementsMobilePhoneExpense>();
 
@@ -428,11 +431,16 @@ namespace MVCPhoneServiceWeb.Controllers
             ViewData["mult"] = mult;
             ViewData["columns"] = show;
             //return View(_mobilePhoneCalls);
+            
+            //Arreglar la parte de paginado y cambiar el 2do parametro de csvstringconstructor x result.item1 y poner las 2 instucciones del csv aqui
+
             ViewData["page"] = currentPage;
             if (pages.Count != 0)
             {
                 if (j > currentPage)
                 {
+                    string ss = CSVStringConstructor(show, pages[currentPage]);
+                    ViewData["csv"] = ss;
                     ViewData["page"] = currentPage;
                     return View(pages[currentPage]);
                 }
@@ -440,12 +448,16 @@ namespace MVCPhoneServiceWeb.Controllers
                 {
                     if (j >= cpage)
                     {
+                        string ss = CSVStringConstructor(show, pages[cpage]);
+                        ViewData["csv"] = ss;
                         ViewData["page"] = cpage;
                         return View(pages[cpage]);
                     }
                     else
                     {
                         cpage = 0;
+                        string ss = CSVStringConstructor(show, pages[0]);
+                        ViewData["csv"] = ss;
                         ViewData["page"] = cpage;
                         return View(pages[0]);
                     }
@@ -453,11 +465,108 @@ namespace MVCPhoneServiceWeb.Controllers
             }
             else
                 return View(new List<ManagementsMobilePhoneExpense>());
-
-
-
-
         }
+
+        public string CSVStringConstructor(Tuple<bool, string>[] show, List<ManagementsMobilePhoneExpense> data)
+        {
+            List<string> headers = new List<string>();
+
+            int t = 0;
+
+            for (int j = 0; j < show.Length; j++)
+            {
+                if (show[j].Item1)
+                {
+                    headers.Add(SD.managementMobilePhoneExpenses[j]);
+                }
+            }
+
+            List<List<string>> datas = new List<List<string>>();
+
+            foreach (var item in data)
+            {
+                List<string> row = new List<string>();
+                if (show[0].Item1)
+                {
+                    row.Add(item.Management);
+                }
+                if (show[1].Item1)
+                {
+                    row.Add(item.Calls.ToString());
+                }
+                if (show[3].Item1)
+                {
+                    row.Add(item.SMS.ToString());
+                }
+                if (show[5].Item1)
+                {
+                    row.Add(item.GPRS.ToString());
+                }
+                if (show[7].Item1)
+                {
+                    row.Add(item.Total.ToString());
+                }
+                if (show[9].Item1)
+                {
+                    row.Add(item.Percent.ToString());
+                }
+                if (show[11].Item1)
+                {
+                    row.Add(SD.Months[item.Month]);
+                }
+                if (show[12].Item1)
+                {
+                    row.Add(item.Year.ToString());
+                }
+                datas.Add(row);
+            }
+
+            string csv = SD.csvString(headers, datas);
+            return csv;
+        }
+
+        public async Task<IActionResult> Export(int page, string management,
+            string minCalls, string maxCalls, string minSms, string maxSms, string minGprs, string maxGprs, string minTotal, string maxTotal, string minPercent, string maxPercent,
+            string managementCheck, string callsCheck, string smsCheck, string gprsCheck, string totalCheck, string percentCheck, string monthCheck, string yearCheck, string month, string year, string csv)
+        {
+
+            string webRootPath = _hostingEnviroment.WebRootPath;
+            var uploads = Path.Combine(webRootPath, "ExportFiles");
+            var path = Path.Combine(uploads, "callingPlanAssignment.csv");
+            using (var filesStream = new FileStream(path, FileMode.Create))
+            {
+
+            }
+            StreamWriter stw = new StreamWriter(Path.Combine(uploads, "callingPlanAssignment.csv"));
+            stw.Write(csv);
+            stw.Dispose();
+            return RedirectToAction(nameof(Index), new
+            {
+                management = management,
+                minCalls = minCalls,
+                maxCalls = maxCalls,
+                minSms = minSms,
+                maxSms = maxSms,
+                minGprs = minGprs,
+                maxGprs = maxGprs,
+                minTotal = minTotal,
+                maxTotal = maxTotal,
+                minPercent = minPercent,
+                maxPercent = maxPercent,
+                month = month,
+                year = year,
+                managementCheck = managementCheck,
+                callsCheck = callsCheck,
+                smsCheck = smsCheck,
+                gprsCheck = gprsCheck,
+                totalCheck = totalCheck,
+                percentCheck = percentCheck,
+                monthCheck = monthCheck,
+                yearCheck = yearCheck,
+                cpage = page
+            });
+        }
+
         Tuple<bool, string>[] Show(string management, string minCalls, string maxCalls, string minSms, string maxSms,
             string minGprs, string maxGprs, string minTotal, string maxTotal, string minPercent, string maxPercent,
             string managementCheck, string callsCheck, string smsCheck, string gprsCheck,

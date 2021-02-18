@@ -382,7 +382,21 @@
         </div>
         <div class="row">
             <div class="col-12 text-right">
-                <a class=" btn btn-success text-white">
+                <a class=" btn btn-success text-white" asp-action="Export" asp-route-page="cpage" asp-route-csv="@ViewData["csv"]"
+                   asp-route-managementCheck="@show[0].Item1" asp-route-management="@show[0].Item2"
+                   asp-route-callsCheck="@show[1].Item1" asp-route-minCalls="@show[1].Item2" asp-route-maxCalls="@show[2].Item2"
+
+                   asp-route-smsCheck="@show[3].Item1" asp-route-minSms="@show[3].Item2" asp-route-maxSms="@show[4].Item2"
+
+                   asp-route-gprsCheck="@show[5].Item1" asp-route-minGprs="@show[5].Item2" asp-route-maxGprs="@show[6].Item2"
+
+                   asp-route-totalCheck="@show[7].Item1" asp-route-minTotal="@show[7].Item2" asp-route-maxTotal="@show[8].Item2"
+
+                   asp-route-percentCheck="@show[9].Item1" asp-route-minPercent="@show[9].Item2" asp-route-maxPercent="@show[10].Item2"
+
+                   asp-route-monthCheck="@show[11].Item1" asp-route-month="@show[11].Item2"
+                   asp-route-yearCheck="@show[12].Item1" asp-route-year="@show[12].Item2">
+
                     <i class="fas fa-trash-"></i>
                     Export
                 </a>
