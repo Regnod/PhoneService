@@ -63,6 +63,7 @@ namespace MVCPhoneServiceWeb
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.UseSession();
 

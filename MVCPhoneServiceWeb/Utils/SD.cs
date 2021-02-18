@@ -12,13 +12,11 @@ namespace MVCPhoneServiceWeb.Utils
         public static string AdminUser = "Admin";
         public static string VisitorUser = "Vistitor";
         public static int NumberPages = 25;
-        public static string csv = "csv";
-        public static string costCenterCsv = "Cost Center";
         public static Dictionary<string, int> months = new Dictionary<string, int>() { { "enero", 1 }, { "febrero", 2 }, { "marzo", 3 }, { "abril", 4 }, { "mayo", 5 }, { "junio", 6 }, { "julio", 7 }, { "agosto", 8 }, { "septiembre", 9 }, { "octubre", 10 }, { "noviembre", 11 }, { "diciembre", 12 } };
         public static Dictionary<int, string> Months = new Dictionary<int, string>() { { 1, "enero" }, { 2, "febrero" }, { 3, "marzo" }, { 4, "abril" }, { 5, "mayo" }, { 6, "junio" }, { 7, "julio" }, { 8, "agosto" }, { 9, "septiembre" }, { 10, "octubre" }, { 11, "noviembre" }, { 12, "diciembre" } };
         public static List<string> ProvinceCode = new List<string>() { "7" };
         //diccionarios para pasar parametros a las vistas
-        public static Dictionary<string, string> CallingPlanAssignments_params = new Dictionary<string, string> { { "pNCheck", "On" }, { "monthCheck", "On" }, { "yearCheck", "On" }, { "cPCheck", "On" } };
+        public static Dictionary<string, string> CallingPlanAssignments_params = new Dictionary<string, string> { { "phoneNumberCheck", "On" }, { "monthCheck", "On" }, { "yearCheck", "On" }, { "cPCheck", "On" } };
         public static Dictionary<string, string> CallingPlans_params = new Dictionary<string, string> { { "cPCheck", "On" }, { "minutesCheck", "On" }, { "messagesCheck", "On" } };
         public static Dictionary<string, string> CostCenterMobileExpenses_params = new Dictionary<string, string> { { "costCenterCodeCheck", "On" }, { "costCenterNameCheck", "On" }, { "callsCheck", "On" }, { "smsCheck", "On" }, { "gprsCheck", "On" }, { "totalCheck", "On" }, { "percentCheck", "On" }, { "monthCheck", "On" }, { "yearCheck", "On" } };
         public static Dictionary<string, string> CostCenterMobileExpensesDetails_params = new Dictionary<string, string> { { "employeeNameCheck", "On" }, { "phoneNumberCheck", "On" }, { "callingPlanIdCheck", "On" }, { "callsCheck", "On" }, { "smsCheck", "On" }, { "gprsCheck", "On" }, { "totalCheck", "On" }, { "monthCheck", "On" }, { "yearCheck", "On" } };
@@ -52,6 +50,7 @@ namespace MVCPhoneServiceWeb.Utils
         public static Dictionary<int, string> employee = new Dictionary<int, string>() { { 0, "Name" }, { 3, "Email" }, { 1, "CC" }, { 4, "Extension" }, { 2, "Personal Code" } };
         public static Dictionary<int, string> internationalCalls = new Dictionary<int, string>() { { 1, "Employee" }, { 0, "Phone Number" }, { 3, "CC" }, { 2, "Cost Center" }, { 5, "Month" }, { 6, "Year" }, { 4, "Addresse" }, { 7, "Expense" }, { 9, "PerCent" } };
         public static Dictionary<int, string> management = new Dictionary<int, string>() { { 0, "Gerency" } };
+        public static Dictionary<int, string> managementMobilePhoneExpenses = new Dictionary<int, string>() { { 0, "Management" }, { 1, "Calls" }, { 3, "SMS" }, { 5, "GPRS" }, { 7, "Total" }, { 9, "Percent" }, { 11, "Moth" }, { 12, "Year" } };
         public static Dictionary<int, string> mobilePhoneCalls = new Dictionary<int, string>() { { 0, "Phone Number" }, { 1, "Date Time" }, { 4, "Addressee" }, { 5, "Total Cost" }, { 7, "Roaming Call" } };
         public static Dictionary<int, string> mobilePhoneEmployee = new Dictionary<int, string>() { { 0, "IMEI" }, { 1, "Employee" } };
         public static Dictionary<int, string> mobilePhone = new Dictionary<int, string>() { { 0, "IMEI" }, { 1, "Model" } };
@@ -157,74 +156,75 @@ namespace MVCPhoneServiceWeb.Utils
 
             }
         }
-    }
-    //public static class CSVString<T>
-    //{
+        //public static class CSVString<T>
+        //{
 
-    //    public static string csvString(List<string> headers, List<List<string>> data)
-    //    {
-    //        string csv = "";
-    //        int count = headers.Count;
+        //    public static string csvString(List<string> headers, List<List<string>> data)
+        //    {
+        //        string csv = "";
+        //        int count = headers.Count;
 
-    //        for (int i = 0; i < count; i++)
-    //        {
-    //            if (i == count - 1)
-    //                csv += headers[i] + "\n";
-    //            else
-    //                csv += headers[i] + ",";
-    //        }
+        //        for (int i = 0; i < count; i++)
+        //        {
+        //            if (i == count - 1)
+        //                csv += headers[i] + "\n";
+        //            else
+        //                csv += headers[i] + ",";
+        //        }
 
-    //        int rows = data.Count;
+        //        int rows = data.Count;
 
-    //        for (int i = 0; i < rows; i++)
-    //        {
-    //            List<string> row = data[i];
-    //            for (int j = 0; j < count; j++)
-    //            {
-    //                if (j == count - 1)
-    //                    csv += row[j];
-    //                else
-    //                    csv += row[j] + ",";
-    //            }
-    //            csv += "\n";
-    //        }
+        //        for (int i = 0; i < rows; i++)
+        //        {
+        //            List<string> row = data[i];
+        //            for (int j = 0; j < count; j++)
+        //            {
+        //                if (j == count - 1)
+        //                    csv += row[j];
+        //                else
+        //                    csv += row[j] + ",";
+        //            }
+        //            csv += "\n";
+        //        }
 
-    //        return csv;
-    //    }
-    //}
-    public static class AuxiliarFilterClass<TClass>
-    {
-        public static IEnumerable<TClass> TheFilter(int? id, Func<TClass, int> member, IEnumerable<TClass> items)
+        //        return csv;
+        //    }
+        //}
+        public static class AuxiliarFilterClass<TClass>
         {
-            if (id == -1)
-                return items;
-
-            List<TClass> filteredItems = new List<TClass>();
-
-            foreach (var item in items)
+            public static IEnumerable<TClass> TheFilter(int? id, Func<TClass, int> member, IEnumerable<TClass> items)
             {
-                var f = member(item);
-                if (f == id)
-                    filteredItems.Add(item);
+                if (id == -1)
+                    return items;
+
+                List<TClass> filteredItems = new List<TClass>();
+
+                foreach (var item in items)
+                {
+                    var f = member(item);
+                    if (f == id)
+                        filteredItems.Add(item);
+                }
+
+                return filteredItems;
+            }
+            public static IEnumerable<TClass> TheFilter(string id, Func<TClass, string> member, IEnumerable<TClass> items)
+            {
+                if (id == null)
+                    return items;
+                List<TClass> filteredItems = new List<TClass>();
+
+                foreach (var item in items)
+                {
+                    var f = member(item);
+                    f = f.ToLower();
+                    if (f.Contains(id))
+                        filteredItems.Add(item);
+                }
+
+                return filteredItems;
             }
 
-            return filteredItems;
-        }
-        public static IEnumerable<TClass> TheFilter(string id, Func<TClass, string> member, IEnumerable<TClass> items)
-        {
-            if (id == null)
-                return items;
-            List<TClass> filteredItems = new List<TClass>();
-
-            foreach (var item in items)
-            {
-                var f = member(item);
-                f = f.ToLower();
-                if (f.Contains(id))
-                    filteredItems.Add(item);
-            }
-
-            return filteredItems;
         }
     }
 }

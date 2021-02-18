@@ -62,6 +62,14 @@
             {
                 <li class="border-0 dropdown-item"><input type="checkbox" name="pINCheck" />  @Html.DisplayNameFor(model => model.PIN) </li>
             }
+            @if (show[3].Item1)
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" checked name="contractCheck" />  @Html.DisplayNameFor(model => model.Contract) </li>
+            }
+            else
+            {
+                <li class="border-0 dropdown-item"><input type="checkbox" name="contractCheck" />  @Html.DisplayNameFor(model => model.Contract) </li>
+            }
         </div>
         <input class="btn btn-outline-dark col-form-label" type="submit" value="filter" />
         <br />
@@ -85,11 +93,16 @@
                     <th>
                         @Html.DisplayNameFor(model => model.PIN)
                     </th>
-                }
-                @if (show[0].Item1 || show[1].Item1 || show[2].Item1)
+                }@if (show[3].Item1)
                 {
-                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Contract)
+                    </th>
                 }
+                @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1)
+        {
+            <th></th>
+        }*@
             </tr>
             <tr>
                 @if (show[0].Item1)
@@ -97,13 +110,13 @@
                     if (show[0].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[0].Item2" name="phoneNumber" />
+                            <input class="border rounded form-control text-center" value="@show[0].Item2" name="phoneNumber" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="phoneNumber" />
+                            <input class="border rounded form-control text-center" name="phoneNumber" />
                         </th>
                     }
                 }
@@ -112,13 +125,13 @@
                     if (show[1].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[1].Item2" name="pUK" />
+                            <input class="border rounded form-control text-center" value="@show[1].Item2" name="pUK" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="pUK" />
+                            <input class="border rounded form-control text-center" name="pUK" />
                         </th>
                     }
                 }
@@ -127,63 +140,84 @@
                     if (show[2].Item2 != null)
                     {
                         <th>
-                            <input class="border rounded form-control" value="@show[2].Item2" name="pIN" />
+                            <input class="border rounded form-control text-center" value="@show[2].Item2" name="pIN" />
                         </th>
                     }
                     else
                     {
                         <th>
-                            <input class="border rounded form-control" name="pIN" />
+                            <input class="border rounded form-control text-center" name="pIN" />
                         </th>
                     }
                 }
-                @if (show[0].Item1 || show[1].Item1 || show[2].Item1)
+                @if (show[3].Item1)
                 {
-                    <th></th>
+                    if (show[3].Item2 != null)
+                    {
+                        <th>
+                            <input class="border rounded form-control text-center" value="@show[3].Item2" name="contract" />
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            <input class="border rounded form-control text-center" name="contract" />
+                        </th>
+                    }
                 }
+                @*@if (show[0].Item1 || show[1].Item1 || show[2].Item1)
+        {
+            <th></th>
+        }*@
             </tr>
             @foreach (var item in Model)
             {
 
 
-                <tr>
-                    @if (show[0].Item1)
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PhoneNumber)
-                        </td>
-                    }
-                    @if (show[1].Item1)
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PUK)
-                        </td>
-                    }
-                    @if (show[2].Item1)
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PIN)
-                        </td>
-                    }
-                    @if (User.IsInRole(SD.AdminUser) && (show[0].Item1 || show[1].Item1 || show[2].Item1))
-                    {
-                        <td style="width:150px">
-                            <div class="btn-group" role="group">
-                                <a class=" btn btn-info text-white" asp-action="Edit" asp-route-id="@item.PhoneNumber">
-                                    <i class="fas fa-edit"></i>
-                                </a>
+        <tr>
+            @if (show[0].Item1)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+            }
+            @if (show[1].Item1)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.PUK)
+                </td>
+            }
+            @if (show[2].Item1)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.PIN)
+                </td>
+            }
+            @if (show[3].Item1)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contract)
+                </td>
+            }
+            @if (User.IsInRole(SD.AdminUser) && (show[0].Item1 || show[1].Item1 || show[2].Item1 || show[3].Item1))
+            {
+                <td style="width:150px">
+                    <div class="btn-group" role="group">
+                        <a class=" btn btn-info text-white" asp-action="Edit" asp-route-id="@item.PhoneNumber">
+                            <i class="fas fa-edit"></i>
+                        </a>
 
-                                <a class=" btn btn-dark text-white" asp-action="Details" asp-route-id="@item.PhoneNumber">
-                                    <i class="fas fa-list"></i>
-                                </a>
+                        <a class=" btn btn-dark text-white" asp-action="Details" asp-route-id="@item.PhoneNumber">
+                            <i class="fas fa-list"></i>
+                        </a>
 
-                                <a class=" btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.PhoneNumber">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>
-                            </div>
-                        </td>
-                    }
-                </tr>
+                        <a class=" btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.PhoneNumber">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </td>
+            }
+        </tr>
             }
         </table>
         <div class="row">

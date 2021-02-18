@@ -2966,10 +2966,7 @@
         },
         "runtime": {
           "bin/placeholder/Data.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       },
       "InvoiceStorer/1.0.0": {
         "type": "project",
@@ -2984,10 +2981,7 @@
         },
         "runtime": {
           "bin/placeholder/InvoiceStorer.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       },
       "PDFReader/1.0.0": {
         "type": "project",
@@ -3022,10 +3016,7 @@
         },
         "runtime": {
           "bin/placeholder/Repo.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       }
     }
   },

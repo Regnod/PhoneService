@@ -29,7 +29,7 @@ namespace MVCPhoneServiceWeb.Controllers
         public async Task<IActionResult> Index(int cpage, string phoneNumber, string day, string month, string year, string er, string min, string max, string location, string destination, string roaming,
             string phoneNumberCheck, string dateTimeCheck, string erCheck, string totalCostCheck, string locationCheck, string destinationCheck, string roamingCheck, string page, string next, string previous)
         {
-            // 
+            //
             var _min = Parse.FloatTryParse(min);
             var _max = Parse.FloatTryParse(max);
             var _day = Parse.IntTryParse(day);
@@ -38,10 +38,10 @@ namespace MVCPhoneServiceWeb.Controllers
                 _month = Parse.IntTryParse(month);
             var _year = Parse.IntTryParse(year);
             //
-            Tuple<bool, string>[] show = SD.Show(new List<string>() { phoneNumberCheck, dateTimeCheck, dateTimeCheck, dateTimeCheck, erCheck, locationCheck, destinationCheck, totalCostCheck, totalCostCheck, roamingCheck },
+            Tuple<bool, string>[] show = SD.Show(new List<string>() { phoneNumberCheck, dateTimeCheck, dateTimeCheck, dateTimeCheck, erCheck, locationCheck, destinationCheck, totalCostCheck, totalCostCheck, roamingCheck }, 
                 new List<string>() { phoneNumber, day, month, year, er, location, destination, min, max, roaming });
             ViewData["columns"] = show;
-            //     
+            //
             var mensajes = await _context.SMS.Include(m => m.PhoneLine).ToListAsync();
             List<SMS> _mensajes = mensajes.ToList();
             List<SMS> final_result = new List<SMS>();
