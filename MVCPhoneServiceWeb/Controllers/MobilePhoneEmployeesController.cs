@@ -112,7 +112,7 @@ namespace MVCPhoneServiceWeb.Controllers
             string httpSessionName = SD.HttpSessionString(new List<string> { "MobilePhoneEmployee", page.ToString(), iMEI, name,
                  iMEICheck.ToString(), employeeNameCheck.ToString() });
             
-            string csv = HttpContext.Session.GetString(SD.csv);
+            string csv = HttpContext.Session.GetString(httpSessionName);
             stw.Write(csv);
             stw.Dispose();
             return RedirectToAction(nameof(Index), new

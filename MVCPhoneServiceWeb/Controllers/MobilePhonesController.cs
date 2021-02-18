@@ -110,7 +110,7 @@ namespace MVCPhoneServiceWeb.Controllers
             StreamWriter stw = new StreamWriter(Path.Combine(uploads, "mobilePhone " + time + ".csv"));
             string httpSessionName = SD.HttpSessionString(new List<string> { "MobilePhone", page.ToString(), iMEI, model, iMEICheck.ToString(), modelCheck.ToString() });
 
-            string csv = HttpContext.Session.GetString(SD.csv);
+            string csv = HttpContext.Session.GetString(httpSessionName);
             stw.Write(csv);
             stw.Dispose();
             return RedirectToAction(nameof(Index), new
